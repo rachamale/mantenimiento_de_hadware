@@ -29,12 +29,16 @@
   
                     <div class="nav-item dropdown " >
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                            <i class="bi bi-gear me-2"></i>Dropdown
-                        </a>
+                            <i class="bi bi-gear me-2"></i>Dropdown</a>
                         <ul class="dropdown-menu  dropdown-menu-dark "id="dropwdownRevision" style="margin: 0;">
                             <!-- <h6 class="dropdown-header">Información</h6> -->
                             <li>
-                                <a class="dropdown-item nav-link text-white " href="/aplicaciones/nueva"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Subitem</a>
+                                <a class="dropdown-item nav-link text-white " href="/mantenimiento_de_hardware/equipo"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Formulario de Ingreso de datos</a>
+                                <a class="dropdown-item nav-link text-white " href="/mantenimiento_de_hardware/marca"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Marca</a>
+                                <a class="dropdown-item nav-link text-white " href="/mantenimiento_de_hardware/equipo_estado"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>estado del esquipo</a>
+                                <a class="dropdown-item nav-link text-white " href="/mantenimiento_de_hardware/tipo_equipo"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>tipo de equipos</a>
+                                <a class="dropdown-item nav-link text-white " href="/mantenimiento_de_hardware/mantenimientos"><i  class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Equipo en Mantenimiento o Reparcacion</a>
+                                <!-- <a class="dropdown-item nav-link text-white " href="/mantenimiento_de_hardware/estadisticas">< iclass="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Estadistica por grado</a>   -->
                             </li>
                         
                     
@@ -52,6 +56,7 @@
             </div>
         </div>
         
+
     </nav>
     <div class="progress fixed-bottom" style="height: 6px;">
         <div class="progress-bar progress-bar-animated bg-danger" id="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>

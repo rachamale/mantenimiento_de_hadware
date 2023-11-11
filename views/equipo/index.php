@@ -1,8 +1,5 @@
-<!DOCTYPE html>
-<html>
+<div>
 
-<head>
-    <title>Formulario Militar</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -132,50 +129,55 @@
         .btn-device {
             margin-bottom: 30px;
         }
-        
+
         .btn-device {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100px; /* Establece una altura fija para los botones */
-        border: 10px solid #ccc;
-        box-shadow: 0 30px 8px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-        margin: 15px;
-        transition: background-color 0.3s;
-    }
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100px;
+            /* Establece una altura fija para los botones */
+            border: 10px solid #ccc;
+            box-shadow: 0 30px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin: 15px;
+            transition: background-color 0.3s;
+        }
 
-    .btn-device:hover {
-        background-color: #f0f0f0;
-    }
-    #equipoForm2 .container-main {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
-}
+        .btn-device:hover {
+            background-color: #f0f0f0;
+        }
 
-#equipoForm2 .btn-device {
-    width: 100%;
-    margin: 5px;
-}
+        #equipoForm2 .container-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
 
-#equipoForm2 .container-main {
-    display: flex;
-    justify-content: center; /* Alinea los div horizontalmente en el centro */
-    flex-wrap: wrap; /* Permite que los div se ajusten a la pantalla si el espacio es limitado */
-}
+        #equipoForm2 .btn-device {
+            width: 100%;
+            margin: 5px;
+        }
 
-#equipoForm2 .btn-device {
-    flex: 0 1 calc(25% - 10px); /* Distribuye en 4 columnas y ajusta el espacio entre ellos */
-    margin: 5px; /* Espacio entre los botones */
-}
+        #equipoForm2 .container-main {
+            display: flex;
+            justify-content: center;
+            /* Alinea los div horizontalmente en el centro */
+            flex-wrap: wrap;
+            /* Permite que los div se ajusten a la pantalla si el espacio es limitado */
+        }
 
-</style>
-   
-   
-   <script>
+        #equipoForm2 .btn-device {
+            flex: 0 1 calc(25% - 10px);
+            /* Distribuye en 4 columnas y ajusta el espacio entre ellos */
+            margin: 5px;
+            /* Espacio entre los botones */
+        }
+    </style>
+
+
+    <script>
         // Función para prevenir el envío del formulario al presionar "Enter"
         function disableEnterSubmit(event) {
             if (event.keyCode === 13) {
@@ -185,9 +187,7 @@
 
     </script>
 
-</head>
 
-<body>
     <form id="formularioEquipo" onkeypress="disableEnterSubmit(event)">
         <div id="equipoForm1">
             <h1 class="text-center">FORMULARIO DE INGRESO DE DATOS</h1>
@@ -201,10 +201,10 @@
                             <!-- Primera sección de campos -->
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="equipo_fecha">
+                                    <label for="equipo_fecha_entrega">
                                         <i class="fas fa-calendar"></i> <strong>Fecha de Ingreso</strong>
                                     </label>
-                                    <input type="date" name="equipo_fecha" id="equipo_fecha" class="form-control">
+                                    <input type="date" name="equipo_fecha_entrega" id="equipo_fecha_entrega" class="form-control">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="equipo_oficio">
@@ -217,10 +217,10 @@
                             <!-- Segunda sección de campos -->
                             <div class="form-row">
                                 <div class="form-group col-md-4">
-                                    <label for="equipo_usuario_catalgo">
+                                    <label for="equipo_usuario_cat_entrega">
                                         <i class="fas fa-cogs"></i> <strong>Catálogo del Usuario</strong>
                                     </label>
-                                    <input value="" id="equipo_usuario_catalgo" name="equipo_usuario_catalgo"
+                                    <input value="" id="equipo_usuario_cat_entrega" name="equipo_usuario_cat_entrega"
                                         class="form-control" type="number">
                                 </div>
                                 <div class="form-group col-md-4">
@@ -232,7 +232,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="equipo_usuario_numero">
-                                        <i class="fas fa-phone"></i> <strong>Número de teléfono del Usuario</strong>
+                                        <i class="fas fa-phone"></i> <strong>Número de teléfono</strong>
                                     </label>
                                     <input type="number" name="equipo_usuario_numero" id="equipo_usuario_numero"
                                         class="form-control">
@@ -284,43 +284,43 @@
 
         <!-- PARTE 2 -->
 
-    <div id="equipoForm2">
-    <h1 class="text-center">Selecciona un dispositivo</h1>
-    <div class="row justify-content-center mb-5">
-        <div class="col-lg-11 border bg-light p-5">
-            <!-- Contenedor principal -->
-            <div class="container-main p-4">
-                <!-- Parte de selección de dispositivo -->
-                <div class="row">
-                    <div class="col-md-3">
-                        <button class="btn btn-primary btn-device card device monitor" id="btn-monitor">
-                            <i class="fas fa-desktop fa-3x"></i>
-                            <p>Monitor</p>
-                        </button>
-                    </div>
-                    <div class="col-md-3">
-                        <button class="btn btn-success btn-device card device impresora" id="btn-impresora">
-                            <i class="fas fa-print fa-3x"></i>
-                            <p>Impresora</p>
-                        </button>
-                    </div>
-                    <div class="col-md-3">
-                        <button class="btn btn-danger btn-device card device cpu" id="btn-cpu">
-                            <i class="fas fa-cog fa-3x"></i>
-                            <p>CPU</p>
-                        </button>
-                    </div>
-                    <div class="col-md-3">
-                        <button class="btn btn-warning btn-device card device otros" id="btn-otros">
-                            <i class="fas fa-question-circle fa-3x"></i>
-                            <p>Otros</p>
-                        </button>
+        <div id="equipoForm2">
+            <h1 class="text-center">Selecciona un dispositivo</h1>
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-11 border bg-light p-5">
+                    <!-- Contenedor principal -->
+                    <div class="container-main p-4">
+                        <!-- Parte de selección de dispositivo -->
+                        <div class="row">
+                            <div class="col-md-3">
+                                <button class="btn btn-primary btn-device card device monitor" id="btn-monitor">
+                                    <i class="fas fa-desktop fa-3x"></i>
+                                    <p>Monitor</p>
+                                </button>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-success btn-device card device impresora" id="btn-impresora">
+                                    <i class="fas fa-print fa-3x"></i>
+                                    <p>Impresora</p>
+                                </button>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-danger btn-device card device cpu" id="btn-cpu">
+                                    <i class="fas fa-cog fa-3x"></i>
+                                    <p>CPU</p>
+                                </button>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-warning btn-device card device otros" id="btn-otros">
+                                    <i class="fas fa-question-circle fa-3x"></i>
+                                    <p>Otros</p>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
 
         <!-- PARTE 3 -->
@@ -385,7 +385,6 @@
                                 <i class="fas fa-puzzle-piece"></i> <strong>Drivers del Equipo</strong>
                             </label>
                             <select name="equipo_drivers" id="equipo_drivers" class="form-control">
-                                <option value="">Seleccione opción...</option>
                                 <option value="SI">SI</option>
                                 <option value="NO">NO</option>
                             </select>
@@ -423,7 +422,6 @@
                                 <?php endforeach ?>
                             </select>
                         </div>
-
                     </div>
 
                     <div class="row mb-3">
@@ -474,7 +472,7 @@
                     <tr>
                         <td style="width: 50%; padding: 10px; border: 1px solid #ccc;">
                             <strong>Fecha de Ingreso:</strong><br>
-                            <div id="equipo_fecha"></div>
+                            <div id="equipo_fecha_entrega"></div>
                         </td>
                         <td style="width: 50%; padding: 10px; border: 1px solid #ccc;">
                             <strong>Número de Oficio:</strong><br>
@@ -484,7 +482,7 @@
                     <tr>
                         <td style="width: 50%; padding: 10px; border: 1px solid #ccc;">
                             <strong>Catálogo del Usuario:</strong><br>
-                            <div id="equipo_usuario_catalgo"></div>
+                            <div id="equipo_usuario_cat_entrega"></div>
                         </td>
                         <td style="width: 50%; padding: 10px; border: 1px solid #ccc;">
                             <strong>Nombres y Apellidos del Usuario:</strong><br>
@@ -577,8 +575,4 @@
 
 
 
-</body>
-
-</html>
-
-<script src="./build/js/equipo/index.js"></script>
+</div>

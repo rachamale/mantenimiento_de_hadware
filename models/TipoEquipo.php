@@ -17,7 +17,7 @@ class TipoEquipo extends ActiveRecord {
     }
 
     public function getTiposEquipo(){
-        $sql = "SELECT * from m_tipo_equipo where tipo_equipo_detalle_situacion = 1 and tipo_equipo_codigo > 2";
+        $sql = "SELECT * from m_tipo_equipo where tipo_equipo_detalle_situacion = 1";
         return $this->fetchArray($sql);
     }
 }

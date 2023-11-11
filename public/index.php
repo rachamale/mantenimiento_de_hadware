@@ -9,6 +9,8 @@ use Controllers\MarcaController;
 use Controllers\TipoEquipoController;
 use Controllers\Equipo_EstadoController;
 use Controllers\ MantenimientoController;
+use Controllers\ Mantenimiento2Controller;
+use Controllers\ ReporteController;
 
 $router = new Router();
 $router->setBaseURL('/' . $_ENV['APP_NAME']);
@@ -42,7 +44,18 @@ $router->post('/API/equipo_estado/eliminar', [Equipo_EstadoController::class,'el
 $router->get('/API/equipo_estado/buscar', [Equipo_EstadoController::class,'buscarAPI'] );
 
 $router->get('/mantenimientos', [MantenimientoController::class,'index'] );
-$router->get('API/equipo/buscar', [MantenimientoController::class,'buscarAPI'] );
+$router->get('/API/mantenimientos/buscar', [MantenimientoController::class,'buscarAPI'] );
+
+$router->get('/mantenimientos2', [Mantenimiento2Controller::class,'index'] );
+$router->get('/API/mantenimientos2/buscar', [Mantenimiento2Controller::class,'buscarAPI'] );
+$router->post('/API/mantenimientos2/guardar', [Mantenimiento2Controller::class,'guardarAPI'] );
+
+
+
+//reporte
+$router->get('/pdf', [ReporteController::class,'pdf']);
+$router->get('/reporte', [ReporteController::class, 'index']);
+$router->get('/API/reporte/generar', [ReporteController::class, 'pdf']);
 // $router->post('/API/equipo_estado/guardar', [Equipo_EstadoController::class,'guardarAPI'] );
 // $router->post('/API/equipo_estado/modificar', [Equipo_EstadoController::class,'modificarAPI'] );
 // $router->post('/API/equipo_estado/eliminar', [Equipo_EstadoController::class,'eliminarAPI'] );

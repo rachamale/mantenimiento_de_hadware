@@ -6,10 +6,11 @@ class Equipo extends ActiveRecord
 {
     protected static $tabla = 'm_equipo';
     protected static $columnasDB = [
-        'equipo_fecha',
+        'equipo_fecha_entrega',
+        'equipo_fecha_recibe',
         'equipo_oficio',
-        'equipo_usuario_catalgo',
-        'equipo_usuario_nombre',
+        'equipo_usuario_cat_entrega',
+        'equipo_usuario_cat_recibe',
         'equipo_usuario_numero',
         'equipo_dependencia',
         'equipo_motivo',
@@ -34,9 +35,11 @@ class Equipo extends ActiveRecord
     protected static $idTabla = 'equipo_codigo';
     
     public $equipo_codigo;
-    public $equipo_fecha;
+    public $equipo_fecha_entrega;
+    public $equipo_fecha_recibe;
     public $equipo_oficio;
-    public $equipo_usuario_catalgo;
+    public $equipo_usuario_cat_entrega;
+    public $equipo_usuario_cat_recibe;
     public $equipo_usuario_nombre;
     public $equipo_usuario_numero;
     public $equipo_dependencia;
@@ -62,10 +65,11 @@ class Equipo extends ActiveRecord
     public function __construct($args = [])
     {
         $this->equipo_codigo = $args['equipo_codigo'] ?? null;
-        $this->equipo_fecha = $args['equipo_fecha'] ?? '';
+        $this->equipo_fecha_recibe = $args['equipo_fecha_recibe'] ?? '';
+        $this->equipo_fecha_entrega = $args['equipo_fecha_entrega'] ?? '';
         $this->equipo_oficio = $args['equipo_oficio'] ?? '';
-        $this->equipo_usuario_catalgo = $args['equipo_usuario_catalgo'] ?? '';
-        $this->equipo_usuario_nombre = $args['equipo_usuario_nombre'] ?? '';
+        $this->equipo_usuario_cat_recibe = $args['equipo_usuario_cat_recibe'] ?? '';
+        $this->equipo_usuario_cat_entrega = $args['equipo_usuario_cat_entrega'] ?? '';
         $this->equipo_usuario_numero = $args['equipo_usuario_numero'] ?? '';
         $this->equipo_dependencia = $args['equipo_dependencia'] ?? '';
         $this->equipo_motivo = $args['equipo_motivo'] ?? '';

@@ -9,9 +9,11 @@ document.addEventListener('DOMContentLoaded', (e)=> {
     items.forEach(item => {
         if(item.href == location.href){
             item.classList.add('active')
-            if(item.classList.contains('dropdown-item')){
-               item.parentElement.parentElement.previousElementSibling.classList.add('active')
+            if (item && item.classList.contains('dropdown-item')) {
+                
+                item.parentElement.parentElement.previousElementSibling.classList.add('active');
             }
+            
         }
     });
 

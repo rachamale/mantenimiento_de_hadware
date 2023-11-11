@@ -12,6 +12,8 @@ module.exports = {
     'js/tipoequipo/index' : './src/js/tipoequipo/index.js',
     'js/equipo_estado/index' : './src/js/equipo_estado/index.js',
     'js/mantenimiento/index' : './src/js/mantenimiento/index.js',
+    'js/mantenimiento2/index' : './src/js/mantenimiento2/index.js',
+    // 'js/reporte/index' : './src/js/reporte/index.js',
   },
   output: {
     filename: '[name].js',

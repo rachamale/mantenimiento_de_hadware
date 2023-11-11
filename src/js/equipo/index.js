@@ -22,7 +22,7 @@ const btnGuardar = document.getElementById('btnGuardar');
 
 
 const tipoSelect = document.getElementById('equipo_tipo');
-
+console.log(tipoSelect)
 const tituloFormEquipo = document.getElementById('tituloFormEquipo');
 
 const camposCPU1 = document.getElementById('camposCPU1');
@@ -33,7 +33,7 @@ const detalleCPU = document.getElementsByClassName('detalleCPU');
 
 
 
-const catalogo = document.getElementById('equipo_usuario_catalgo');
+const catalogo = document.getElementById('equipo_usuario_cat_entrega');
 //console.log(catalogo)
 const nombre = document.getElementById('equipo_usuario_nombre');
 
@@ -402,11 +402,12 @@ const eliminar = async (e) => {
 
 const guardarFormulario = async () => {
     if (await confirmacion('warning', 'Desea guardar los datos del formulario?')) {
-        console.log(FormEquipoFull)
+        console.log(tipoSelect.value)
         const body = new FormData(FormEquipoFull);
         body.delete('equipo_tecnico_nombre')
         body.delete('equipo_nombre_dependencia')
-        if (tipoForm !== 2) {
+        body.delete('equipo_usuario_nombre')
+        if (tipoForm !== 3) {
             body.delete('equipo_almacenamiento')
             body.delete('equipo_lector_cd')
             body.delete('equipo_tarjeta_sonido')
@@ -414,6 +415,8 @@ const guardarFormulario = async () => {
             body.delete('equipo_tarjeta_grafica')
             body.delete('equipo_fuente_poder')
         }
+
+
 
         for (var pair of body.entries()) {
             console.log('*' + pair[0] + '*|*' + pair[1] + '*');
@@ -495,27 +498,39 @@ function actualizarTabla() {
 
 
 btnSiguiente.addEventListener('click', getFormSecuencial)
-btnMonitor.addEventListener('click', (e) => {
-    tipoForm = 1;
-    tipoSelect.value = 1
-    parametroTitulo = 'MONITOR';
 
-    getFormSecuencial(e);
-})
 btnImpresora.addEventListener('click', (e) => {
     tipoForm = 2;
-    tipoSelect.value = 2
+    tipoSelect.value = tipoForm
+
     parametroTitulo = 'IMPRESORA';
     getFormSecuencial(e);
 })
 btnCPU.addEventListener('click', (e) => {
     tipoForm = 3;
-    tipoSelect.value = 3
+    tipoSelect.value = tipoForm
+
     parametroTitulo = 'CPU';
     getFormSecuencial(e);
 })
+btnMonitor.addEventListener('click', (e) => {
+    tipoForm = 1;
+    tipoSelect.value = tipoForm
+
+    parametroTitulo = 'MONITOR';
+
+    getFormSecuencial(e);
+})
+
 btnOtros.addEventListener('click', (e) => {
     tipoForm = 4;
+
+    for (const item of tipoSelect.children) {
+        if (item.value === '1' || item.value === '2' || item.value === '3') {
+            item.style.display = 'none'
+        }
+    }
+
     parametroTitulo = 'OTROS';
     getFormSecuencial(e);
 })

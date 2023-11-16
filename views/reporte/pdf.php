@@ -1,178 +1,318 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zziy2YFZ5rPqFMPPpjBRBoxDx2PbAKL3LO9QGHvZ56z25UNR/lvO+ebBqISQSmF5" crossorigin="anonymous">
+    <title>Formulario de Entrega de Equipo</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f2f2f2;
+            background-color: #f8f9fa;
             margin: 0;
             padding: 0;
         }
 
-        h1 {
-            text-align: center;
-            font-size: 32px;
-            margin: 20px 0;
-            color: #333;
+        .container {
+            max-width: 800px;
+            margin: 50px auto 20px;
+            /* Aumentar el margen inferior y reducir el margen superior */
         }
 
-        .table {
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin: 20px 0;
+            color: #343a40;
+        }
+
+        table {
             width: 100%;
-            margin: 0 auto;
-            background-color: #fff;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            /* Aumentar el margen superior de la tabla */
+            margin-bottom: 20px;
+            /* Aumentar el margen inferior de la tabla */
+            border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            border: 1px solid #dee2e6;
+            padding: 8px;
+            text-align: left;
+            font-size: 12px;
         }
 
         th {
-            background-color: #333;
-            color: #fff;
-            font-size: 30px;
             font-weight: bold;
-            text-align: left;
         }
 
-        .table tbody tr:nth-child(even) {
+        tr:nth-child(even) {
             background-color: #f2f2f2;
         }
 
-        .table tbody tr:hover {
+        tr:hover {
             background-color: #e0e0e0;
         }
 
         .data-label {
             font-weight: bold;
-            font-size: 35px;
-            color: #333;
+            font-size: 12px;
+            color: #343a40;
         }
 
         .data-label::after {
             content: ":";
-            margin-right: 5px;
-        }
-
-        .data-label,
-        td {
-            text-align: left;
-        }
-
-        .table tbody td,
-        .table tbody th {
-            border: 5px solid #555;
-            border-spacing: 2;
+            margin-right: 3px;
         }
 
         .center-row th {
             text-align: center;
+        }
+
+        .hr-divider {
+            border: none;
+            height: 2px;
+            background-color: #ddd;
+            margin: 10px 0;
+        }
+
+        .form-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .form-box {
+            width: 45%;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 12px;
+        }
+
+        /* Nuevos estilos para la fila de descripción del equipo */
+        .description-row {
+            background-color: #ffd700;
+            font-weight: bold;
+            color: #343a40;
+        }
+
+        .description-row td {
+            padding: 8px;
+            text-align: left;
+            font-size: 12px;
+            border: 1px solid #dee2e6;
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1 class="text-center mt-5">Formulario de Entrega de Equipo</h1>
-
-        <!-- Primera tabla -->
-        <table class="table table-bordered table-striped mt-4">
+        <h1>FORMULARIO DE ENTREGA DE EQUIPO</h1>
+        <table class="table table-bordered table-striped">
             <tbody>
                 <tr>
-                    <td class="data-label" colspan="1">Fecha:</td>
-                    <td colspan="2"><?= $equipo['equipo_fecha'] ?></td>
-                    <td class="data-label" colspan="1">Registro:</td>
-                    <td colspan="2"><?= $equipo['equipo_registro'] ?></td>
+                    <td class="data-label">FECHA:</td>
+                    <td colspan="2">
+                        <?= $equipo['fecha'] ?>
+                    </td>
+                    <td class="data-label">REGISTRO:</td>
+                    <td colspan="2">
+                        <?= $equipo['registro'] ?>
+                    </td>
                 </tr>
                 <tr>
-                    <th colspan="12">Oficio:</th>
+                    <th colspan="6">OFICIO:
+                        <?= $equipo['oficio'] ?>
+                    </th>
                 </tr>
                 <tr>
-                    <td class="data-label">Catálogo del Usuario:</td>
-                    <td><?= $equipo['equipo_usuario_catalogo'] ?></td>
-                    <td class="data-label">Nombre del Usuario:</td>
-                    <td><?= $equipo['equipo_usuario_nombre'] ?></td>
-                    <td class="data-label">Teléfono:</td>
-                    <td><?= $equipo['equipo_telefono_usuario'] ?></td>
+                    <td class="data-label">CATÁLOGO DEL USUARIO:</td>
+                    <td>
+                        <?= $equipo['catalogo_usuario'] ?>
+                    </td>
+                    <td class="data-label">NOMBRE DEL USUARIO:</td>
+                    <td>
+                        <?= $equipo['usuario'] ?>
+                    </td>
+                    <td class="data-label">TELÉFONO:</td>
+                    <td>
+                        <?= $equipo['telefono'] ?>
+                    </td>
                 </tr>
                 <tr>
-                    <th colspan="12">Dependencia:</th>
+                    <th colspan="6">DEPENDENCIA:
+                        <?= $equipo['dependencia'] ?>
+                    </th>
                 </tr>
                 <tr>
-                    <td class="data-label" colspan="1">Catálogo del técnico entrega:</td>
-                    <td colspan="2"><?= $equipo['equipo_tecnico_entrega'] ?></td>
-                    <td class="data-label" colspan="1">Nombre del técnico:</td>
-                    <td colspan="2"><?= $equipo['equipo_usuario_nombre'] ?></td>
+                    <td class="data-label">CATÁLOGO DEL TÉCNICO ENTREGA:</td>
+                    <td colspan="2">
+                        <?= $equipo['catalogo_tecnico'] ?>
+                    </td>
+                    <td class="data-label">NOMBRES DEL TÉCNICO:</td>
+                    <td colspan="2">
+                        <?= $equipo['tecnico'] ?>
+                    </td>
                 </tr>
                 <tr class="center-row">
-                    <th colspan="12">Características del Equipo</th>
+                    <th colspan="6">CARACTERISTICAS DEL EQUIPO</th>
                 </tr>
                 <tr>
-                    <td class="data-label">Marca:</td>
-                    <td><?= $equipo['equipo_marca'] ?></td>
-                    <td class="data-label">Modelo:</td>
-                    <td><?= $equipo['equipo_modelo'] ?></td>
-                    <td class="data-label">No. de Serie:</td>
-                    <td><?= $equipo['equipo_numero_serie'] ?></td>
+                    <td class="data-label">MARCA:</td>
+                    <td>
+                        <?= $equipo['marca'] ?>
+                    </td>
+                    <td class="data-label">MODELO:</td>
+                    <td>
+                        <?= $equipo['modelo'] ?>
+                    </td>
+                    <td class="data-label">No. DE SERIE:</td>
+                    <td>
+                        <?= $equipo['serie'] ?>
+                    </td>
                 </tr>
                 <tr>
-                    <td class="data-label">Trabajo Realizado:</td>
-                    <td colspan="12"><?= $equipo['equipo_trabajo_realizado'] ?></td>
+                    <td class="data-label">TRABAJO REALIZADO:</td>
+                    <td colspan="6">
+                        <?= $equipo['trabajo'] ?>
+                    </td>
                 </tr>
             </tbody>
         </table>
 
-        <!-- Agregar espacio entre las dos tablas si es necesario -->
-        <div style="margin-top: 20px;"></div>
-        <hr>
-        <!-- Segunda tabla (igual a la primera) -->
-        <table class="table table-bordered table-striped mt-4">
+        <table class="table table-bordered table-striped">
             <tbody>
                 <tr>
-                    <td class="data-label" colspan="1">Fecha:</td>
-                    <td colspan="2"><?= $equipo['equipo_fecha'] ?></td>
-                    <td class="data-label" colspan="1">Registro:</td>
-                    <td colspan="2"><?= $equipo['equipo_registro'] ?></td>
+                    <td class="data-label">FIRMA:</td>
+                    <td colspan="2" style='color: white;'>
+                        ______________________________________
+                    </td>
+                    <td class="data-label">FIRMA:</td>
+                    <td colspan="2" style='color: white;'>
+                        ______________________________________
+                    </td>
                 </tr>
                 <tr>
-                    <th colspan="12">Oficio:</th>
+                    <td class="data-label">ENTREGA:</td>
+                    <td colspan="2">
+                        <?= $equipo['usuario'] ?>
+                    </td>
+                    <td class="data-label">RECIBE:</td>
+                    <td colspan="2">
+                        <?= $equipo['tecnico'] ?>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <hr class="hr-divider">
+        <br>
+        <table class="table table-bordered table-striped">
+            <tbody>
+                <tr>
+                    <td class="data-label">FECHA:</td>
+                    <td colspan="2">
+                        <?= $equipo['fecha'] ?>
+                    </td>
+                    <td class="data-label">REGISTRO:</td>
+                    <td colspan="2">
+                        <?= $equipo['registro'] ?>
+                    </td>
                 </tr>
                 <tr>
-                    <td class="data-label">Catálogo del Usuario:</td>
-                    <td><?= $equipo['equipo_usuario_catalogo'] ?></td>
-                    <td class="data-label">Nombre del Usuario:</td>
-                    <td><?= $equipo['equipo_usuario_nombre'] ?></td>
-                    <td class="data-label">Teléfono:</td>
-                    <td><?= $equipo['equipo_telefono_usuario'] ?></td>
+                    <th colspan="6">Oficio:
+                        <?= $equipo['oficio'] ?>
+                    </th>
                 </tr>
                 <tr>
-                    <th colspan="12">Dependencia:</th>
+                    <td class="data-label">CATÁLOGO DEL USUARIO:</td>
+                    <td>
+                        <?= $equipo['catalogo_usuario'] ?>
+                    </td>
+                    <td class="data-label">NOMBRE DEL USUARIO:</td>
+                    <td>
+                        <?= $equipo['usuario'] ?>
+                    </td>
+                    <td class="data-label">TELÉFONO:</td>
+                    <td>
+                        <?= $equipo['telefono'] ?>
+                    </td>
                 </tr>
                 <tr>
-                    <td class="data-label" colspan="1">Catálogo del técnico entrega:</td>
-                    <td colspan="2"><?= $equipo['equipo_tecnico_entrega'] ?></td>
-                    <td class="data-label" colspan="1">Nombre del técnico:</td>
-                    <td colspan="2"><?= $equipo['equipo_usuario_nombre'] ?></td>
+                    <th colspan="6">DEPENDENCIA:
+                        <?= $equipo['dependencia'] ?>
+                    </th>
+                </tr>
+                <tr>
+                    <td class="data-label">CATÁLOGO DEL TÉCNICO ENTREGA:</td>
+                    <td colspan="2">
+                        <?= $equipo['catalogo_tecnico'] ?>
+                    </td>
+                    <td class="data-label">NOMBRE DEL TÉCNICO:</td>
+                    <td colspan="2">
+                        <?= $equipo['tecnico'] ?>
+                    </td>
                 </tr>
                 <tr class="center-row">
-                    <th colspan="12">Características del Equipo</th>
+                    <th colspan="6">CARACTERISTICAS DEL EQUIPO</th>
                 </tr>
                 <tr>
-                    <td class="data-label">Marca:</td>
-                    <td><?= $equipo['equipo_marca'] ?></td>
-                    <td class="data-label">Modelo:</td>
-                    <td><?= $equipo['equipo_modelo'] ?></td>
-                    <td class="data-label">No. de Serie:</td>
-                    <td><?= $equipo['equipo_numero_serie'] ?></td>
+                    <td class="data-label">MARCA:</td>
+                    <td>
+                        <?= $equipo['marca'] ?>
+                    </td>
+                    <td class="data-label">MODELO:</td>
+                    <td>
+                        <?= $equipo['modelo'] ?>
+                    </td>
+                    <td class="data-label">NO. DE SERIE:</td>
+                    <td>
+                        <?= $equipo['serie'] ?>
+                    </td>
                 </tr>
                 <tr>
-                    <td class="data-label">Trabajo Realizado:</td>
-                    <td colspan="12"><?= $equipo['equipo_trabajo_realizado'] ?></td>
+                    <td class="data-label">TRABAJO REALIZADO:</td>
+                    <td colspan="6">
+                        <?= $equipo['trabajo'] ?>
+                    </td>
                 </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-bordered table-striped">
+            <tbody>
+                <tr>
+                    <td class="data-label">FIRMA:</td>
+                    <td colspan="2" style='color: white;'>
+                        ______________________________________
+                    </td>
+                    <td class="data-label">FIRMA:</td>
+                    <td colspan="2" style='color: white;'>
+                        ______________________________________
+                    </td>
+                </tr>
+                <tr>
+                    <td class="data-label">ENTREGA:</td>
+                    <td colspan="2">
+                        <?= $equipo['usuario'] ?>
+                    </td>
+                    <td class="data-label">RECIBE:</td>
+                    <td colspan="2">
+                        <?= $equipo['tecnico'] ?>
+                    </td>
+                </tr>
+
             </tbody>
         </table>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

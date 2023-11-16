@@ -4,26 +4,26 @@ require_once __DIR__ . '/../includes/app.php';
 
 use MVC\Router;
 use Controllers\AppController;
-use Controllers\EquipoController;
+use Controllers\SolicitudController;
 use Controllers\MarcaController;
 use Controllers\TipoEquipoController;
 use Controllers\Equipo_EstadoController;
 use Controllers\ MantenimientoController;
 use Controllers\ Mantenimiento2Controller;
 use Controllers\ ReporteController;
+use Controllers\Mantenimiento3Controller;
 
 $router = new Router();
 $router->setBaseURL('/' . $_ENV['APP_NAME']);
 
 $router->get('/', [AppController::class,'index']);
-$router->get('/equipo', [EquipoController::class,'index']);
-
-$router->post('/API/equipo/guardar', [EquipoController::class,'guardarAPI'] );
 
 
-$router->get('/equipo', [EquipoController::class,'index']);
-$router->get('/API/equipo/buscarCatalogo', [EquipoController::class,'buscarCatalogoApi']);
-$router->get('/API/equipo/buscarCatalogo2', [EquipoController::class,'buscarCatalogo2Api']);
+
+
+$router->get('/solicitud', [SolicitudController::class,'index']);
+$router->post('/API/solicitud/guardar', [SolicitudController::class,'guardarAPI'] );
+$router->get('/API/solicitud/buscarCatalogo', [SolicitudController::class,'buscarCatalogoApi']);
 
 $router->get('/marca', [MarcaController::class,'index'] );
 $router->post('/API/marca/guardar', [MarcaController::class,'guardarAPI'] );
@@ -45,11 +45,20 @@ $router->get('/API/equipo_estado/buscar', [Equipo_EstadoController::class,'busca
 
 $router->get('/mantenimientos', [MantenimientoController::class,'index'] );
 $router->get('/API/mantenimientos/buscar', [MantenimientoController::class,'buscarAPI'] );
+$router->post('/API/mantenimientos/guardar', [MantenimientoController::class,'guardarAPI'] );
+$router->get('/API/mantenimientos/buscarCatalogo2', [MantenimientoController::class,'buscarCatalogo2API'] );
 
 $router->get('/mantenimientos2', [Mantenimiento2Controller::class,'index'] );
 $router->get('/API/mantenimientos2/buscar', [Mantenimiento2Controller::class,'buscarAPI'] );
+$router->get('/API/mantenimientos2/buscarCatalogo', [Mantenimiento2Controller::class,'buscarCatalogoAPI'] );
+$router->get('/API/mantenimientos2/buscarCatalogo2', [Mantenimiento2Controller::class,'buscarCatalogo2API'] );
 $router->post('/API/mantenimientos2/guardar', [Mantenimiento2Controller::class,'guardarAPI'] );
 
+$router->get('/mantenimientos3', [Mantenimiento3Controller::class,'index'] );
+$router->get('/API/mantenimiento3/buscar', [Mantenimiento3Controller::class,'buscarAPI'] );
+// $router->get('/API/mantenimientos2/buscarCatalogo', [Mantenimiento2Controller::class,'buscarCatalogoAPI'] );
+// $router->get('/API/mantenimientos2/buscarCatalogo2', [Mantenimiento2Controller::class,'buscarCatalogo2API'] );
+// $router->post('/API/mantenimientos2/guardar', [Mantenimiento2Controller::class,'guardarAPI'] );
 
 
 //reporte

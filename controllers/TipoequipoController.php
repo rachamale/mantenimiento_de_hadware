@@ -3,7 +3,8 @@
 namespace Controllers;
 
 use Exception;
-use Model\TipoEquipo; 
+use Model\TipoEquipo;
+use Model\Solicitud;
 use MVC\Router;
 
 class TipoequipoController { 
@@ -101,8 +102,12 @@ class TipoequipoController {
             $sql .= " AND tipo_equipo_descripcion LIKE '%$tipo_equipo_descripcion%' ";
         }
         try {
-            $tiposEquipo = TipoEquipo::fetchArray($sql); 
-            echo json_encode($tiposEquipo);
+            if (empty(Solicitud::consultarSQL($sql))) {
+                echo json_encode([]);
+            } else {
+                $equipos = Solicitud::fetchArray($sql);
+                echo json_encode($equipos);
+            }
         } catch (Exception $e) {
             echo json_encode([
                 'detalle' => $e->getMessage(),

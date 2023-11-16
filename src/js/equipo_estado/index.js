@@ -60,7 +60,7 @@ const buscar = async () => {
         const data = await respuesta.json();
         datatable.clear().draw();
         console.log(data);
-        if (data) {
+        if (data.length >0) {
             contador = 1;
             datatable.rows.add(data).draw();
         } else {

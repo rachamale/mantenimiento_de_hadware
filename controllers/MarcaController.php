@@ -2,6 +2,8 @@
 namespace Controllers;
 
 use Exception;
+use Model\ActiveRecord;
+use Model\Solicitud;
 use Model\MarcaEquipo; // Cambio de Modelo
 use MVC\Router;
 
@@ -99,9 +101,15 @@ class MarcaController {
         if ($marca_equipo_descripcion != '') {
             $sql .= " AND marca_equipo_descripcion LIKE '%$marca_equipo_descripcion%' "; // Cambio de columna
         }
+        
         try {
-            $marcas = MarcaEquipo::fetchArray($sql); // Cambio de Modelo
-            echo json_encode($marcas);
+        if (empty(Solicitud::consultarSQL($sql))) {
+            echo json_encode([]);
+        } else {
+            $equipos = Solicitud::fetchArray($sql);
+            echo json_encode($equipos);
+        }
+
         } catch (Exception $e) {
             echo json_encode([
                 'detalle' => $e->getMessage(),

@@ -6,11 +6,12 @@ import { validarFormulario, Toast, confirmacion } from "../funciones";
 
 
 const FormEquipoFull = document.getElementById('formularioEquipo')
-
+const agregarDatos = document.getElementById('subir')
 const FormOficio = document.getElementById('equipoForm1')
 const FormTipo = document.getElementById('equipoForm2');
 const FormEquipo = document.getElementById('equipoForm3');
 const FormDetalle = document.getElementById('equipoForm4');
+// const  = document.getElementById('equipo_fecha_entrega')
 
 const btnSiguiente = document.getElementById('btnSiguiente');
 const btnAnterior = document.getElementById('btnAnterior');
@@ -19,6 +20,7 @@ const btnImpresora = document.getElementById('btn-impresora');
 const btnCPU = document.getElementById('btn-cpu');
 const btnOtros = document.getElementById('btn-otros');
 const btnGuardar = document.getElementById('btnGuardar');
+
 
 
 const tipoSelect = document.getElementById('equipo_tipo');
@@ -33,7 +35,7 @@ const detalleCPU = document.getElementsByClassName('detalleCPU');
 
 
 
-const catalogo = document.getElementById('equipo_usuario_cat_entrega');
+const catalogo = document.getElementById('sol_usuario_catalogo');
 //console.log(catalogo)
 const nombre = document.getElementById('equipo_usuario_nombre');
 
@@ -41,7 +43,7 @@ const comando = document.getElementById('equipo_nombre_dependencia');
 
 const dependencia = document.getElementById('equipo_dependencia');
 
-const catalogoDelTecnico = document.getElementById('equipo_tecnico_recibe');
+const catalogoDelTecnico = document.getElementById('sol_tecnico_catalogo');
 const nombreDelTecnico = document.getElementById('equipo_tecnico_nombre');
 // const foto = document.getElementById('foto');
 
@@ -138,14 +140,49 @@ const showDetalleForm = (e) => {
 
 
 }
-
+////pendiente de arreglar 
 const getFormSecuencial = (e) => {
     e.preventDefault()
     if (posicionForm === 0) {
+        if (!validarFormulario(FormOficio, ['equipo_dependencia'])) {
+            Toast.fire({
+                icon: 'info',
+                text: 'Debe llenar todos los datos'
+            });
+            return;
+        }
         showTipoForm(e)
     } else if (posicionForm === 1) {
         showEquipoForm(e)
     } else if (posicionForm === 2) {
+        if (tipoForm === 3) {
+            if (!validarFormulario(FormTipo, [])) {
+                Toast.fire({
+                    icon: 'info',
+                    text: 'Debe llenar todos los datos'
+                });
+                return;
+            }
+        }
+        else if (tipoForm === 4) {
+            if (!validarFormulario(FormEquipo, [''])) {
+                Toast.fire({
+                    icon: 'info',
+                    text: 'Debe llenar todos los datos'
+                });
+                return;
+            }
+        }
+        else {
+            if (!validarFormulario(FormDetalle, [])) {
+                Toast.fire({
+                    icon: 'info',
+                    text: 'Debe llenar todos los datos'
+                });
+                return;
+            }
+        }
+
         showDetalleForm(e)
     }
 }
@@ -180,7 +217,7 @@ const buscarCatalogo = async () => {
     }
 
     // let per_catalogo = formulario.per_catalogo.value;
-    const url = `/mantenimiento_de_hardware/API/equipo/buscarCatalogo?per_catalogo=${validarCatalogo}`;
+    const url = `/mantenimiento_de_hardware/API/solicitud/buscarCatalogo?per_catalogo=${validarCatalogo}`;
 
 
     const config = {
@@ -242,7 +279,7 @@ const buscarCatalogo2 = async () => {
         return;
     }
 
-    const url = `/mantenimiento_de_hardware/API/equipo/buscarCatalogo2?per_catalogo=${validarCatalogo2}`;
+    const url = `/mantenimiento_de_hardware/API/solicitud/buscarCatalogo?per_catalogo=${validarCatalogo2}`;
 
     const config = {
         method: 'GET',
@@ -398,8 +435,6 @@ const eliminar = async (e) => {
 
 }
 
-
-
 const guardarFormulario = async () => {
     if (await confirmacion('warning', 'Desea guardar los datos del formulario?')) {
         console.log(tipoSelect.value)
@@ -415,7 +450,7 @@ const guardarFormulario = async () => {
             body.delete('equipo_tarjeta_grafica')
             body.delete('equipo_fuente_poder')
         }
-
+        formularioEquipo
 
 
         for (var pair of body.entries()) {
@@ -423,7 +458,7 @@ const guardarFormulario = async () => {
         }
 
 
-        const url = '/mantenimiento_de_hardware/API/equipo/guardar';
+        const url = '/mantenimiento_de_hardware/API/solicitud/guardar';
         const headers = new Headers();
         headers.append("X-Requested-With", "fetch");
 
@@ -438,6 +473,25 @@ const guardarFormulario = async () => {
             console.log(data)
             const { codigo, mensaje, detalle } = data;
             let icon = 'info';
+            switch (codigo) {
+                case 1:
+                    formularioEquipo.reset();
+                    icon = 'success';
+                    break;
+
+                case 0:
+                    icon = 'error';
+                    console.log(detalle);
+                    break;
+
+                default:
+                    break;
+            }
+
+            Toast.fire({
+                icon,
+                text: mensaje
+            });
 
         } catch (error) {
             console.log(error);
@@ -446,53 +500,6 @@ const guardarFormulario = async () => {
     }
 }
 
-let fechaIngreso = "";
-let numeroOficio = "";
-let catalogoUsuario = "";
-let nombresUsuario = "";
-let telefonoUsuario = "";
-let dependenciaEquipo = "";
-let catalogoTecnico = "";
-let nombresTecnico = "";
-let motivoIngreso = "";
-let modeloEquipo = "";
-let serieEquipo = "";
-let almacenamientoEquipo = "";
-let marcaEquipo = "";
-let descripcionEquipo = "";
-
-// Función para avanzar al siguiente formulario
-function avanzarAlSiguienteFormulario() {
-    // Obtener los valores de los campos del formulario actual
-    fechaIngreso = document.getElementById("equipo_fecha").value;
-    numeroOficio = document.getElementById("equipo_oficio").value;
-    catalogoUsuario = document.getElementById("equipo_usuario_catalgo").value;
-    nombresUsuario = document.getElementById("equipo_usuario_nombre").value;
-    telefonoUsuario = document.getElementById("equipo_usuario_numero").value;
-
-    // Avanzar al siguiente formulario (código para hacerlo)
-
-    // Actualizar la tabla con los datos ingresados
-    actualizarTabla();
-}
-
-// Función para actualizar la tabla con los datos ingresados
-function actualizarTabla() {
-    document.getElementById("equipo_fecha").textContent = fechaIngreso;
-    document.getElementById("equipo_oficio").textContent = numeroOficio;
-    document.getElementById("equipo_usuario_catalgo").textContent = catalogoUsuario;
-    document.getElementById("equipo_usuario_nombre").textContent = nombresUsuario;
-    document.getElementById("equipo_usuario_numero").textContent = telefonoUsuario;
-    document.getElementById("equipo_dependencia").textContent = dependenciaEquipo;
-    document.getElementById("equipo_tecnico_catalogo").textContent = catalogoTecnico;
-    document.getElementById("equipo_tecnico_nombre").textContent = nombresTecnico;
-    document.getElementById("equipo_motivo").textContent = motivoIngreso;
-    document.getElementById("equipo_modelo").textContent = modeloEquipo;
-    document.getElementById("equipo_serial").textContent = serieEquipo;
-    document.getElementById("equipo_almacenamiento").textContent = almacenamientoEquipo;
-    document.getElementById("equipo_marca").textContent = marcaEquipo;
-    document.getElementById("equipo_descripcion").textContent = descripcionEquipo;
-}
 
 
 
@@ -524,7 +531,7 @@ btnMonitor.addEventListener('click', (e) => {
 
 btnOtros.addEventListener('click', (e) => {
     tipoForm = 4;
-
+    tipoSelect.value = ""
     for (const item of tipoSelect.children) {
         if (item.value === '1' || item.value === '2' || item.value === '3') {
             item.style.display = 'none'
@@ -535,6 +542,56 @@ btnOtros.addEventListener('click', (e) => {
     getFormSecuencial(e);
 })
 
+function onFormSubmit(e) {
+    e.preventDefault();
+    const data = new FormData(FormEquipoFull)
+    const verDatos = Object.fromEntries(data.entries());
+    console.log(verDatos)
+
+    FormEquipoFull.equipo_fecha_entrega.value = verDatos.sol_fecha;
+
+    FormEquipoFull.equipo_oficio1.value = verDatos.equipo_oficio;
+
+    FormEquipoFull.equipo_usuario_cat_entrega.value = verDatos.sol_usuario_catalogo;
+
+    FormEquipoFull.equipo_almacenamiento1.value = verDatos.equipo_almacenamiento
+
+    FormEquipoFull.equipo_usuario_numero.value = verDatos.sol_usuario_telefono;
+
+    FormEquipoFull.equipo_usuario_nombre1.value = verDatos.equipo_usuario_nombre;
+
+    FormEquipoFull.equipo_dependencia1.value = verDatos.equipo_nombre_dependencia;
+
+    FormEquipoFull.equipo_tecnico_catalogo.value = verDatos.sol_tecnico_catalogo;
+
+    FormEquipoFull.equipo_tecnico_nombre1.value = verDatos.equipo_tecnico_nombre;
+
+    FormEquipoFull.equipo_modelo1.value = verDatos.equipo_modelo;
+
+    FormEquipoFull.equipo_serial1.value = verDatos.equipo_serial;
+
+    FormEquipoFull.equipo_motivo1.value = verDatos.equipo_motivo;
+
+    FormEquipoFull.equipo_descripcion1.value = verDatos.equipo_descripcion;
+
+    FormEquipoFull.equipo_marca1.value = verDatos.equipo_marca;
+
+    FormEquipoFull.equipo_lector_cd1.value = verDatos.equipo_lector_cd;
+
+    FormEquipoFull.equipo_tarjeta_sonido1.value = verDatos.equipo_tarjeta_sonido;
+
+    FormEquipoFull.equipo_drivers1.value = verDatos.equipo_drivers;
+
+    FormEquipoFull.equipo_tarjeta_grafica1.value = verDatos.equipo_tarjeta_grafica;
+
+    FormEquipoFull.equipo_fuente_poder1.value = verDatos.equipo_fuente_poder;
+
+
+}
+
 btnAnterior.addEventListener('click', getFormSecuencialBack)
 
 btnGuardar.addEventListener('click', guardarFormulario)
+
+
+agregarDatos.addEventListener("click", onFormSubmit);

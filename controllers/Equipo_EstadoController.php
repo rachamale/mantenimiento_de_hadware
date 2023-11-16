@@ -4,6 +4,7 @@ namespace Controllers;
 
 use Exception;
 use Model\Equipo_Estado;
+use Model\Solicitud;
 use MVC\Router;
 
 class Equipo_EstadoController {
@@ -101,8 +102,12 @@ class Equipo_EstadoController {
             $sql .= " AND equipo_estado_descripcion LIKE '%$equipo_estado_descripcion%' ";
         }
         try {
-            $estados = Equipo_Estado::fetchArray($sql);
-            echo json_encode($estados);
+            if (empty(Solicitud::consultarSQL($sql))) {
+                echo json_encode([]);
+            } else {
+                $equipos = Solicitud::fetchArray($sql);
+                echo json_encode($equipos);
+            }
         } catch (Exception $e) {
             echo json_encode([
                 'detalle' => $e->getMessage(),

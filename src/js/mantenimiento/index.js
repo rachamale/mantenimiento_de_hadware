@@ -5,21 +5,38 @@ import { lenguaje } from "../lenguaje";
 import { validarFormulario, Toast, confirmacion } from "../funciones";
 
 const formulario = document.getElementById('formularioMantenimiento');
+const formularioGuarda = document.getElementById('formularioGuarda');
+
 const btnBuscar = document.getElementById('btnBuscar');
-const btnModificar = document.getElementById('btnModificar');
-const btnGuardar = document.getElementById('btnGuardar');
-const btnCancelar = document.getElementById('btnCancelar');
+
+const tipoEquipo = document.getElementById('tipo_equipo');
+
+const equipo_codigo = document.getElementById('rep_equipo_codigo');
+
+const asignarOficialModal = document.getElementById('asignarOficialModal');
+
+const botonCerrarModal = document.querySelector('.modal-header .close');
+
+const rep_tecnico_catalogo = document.getElementById('rep_tecnico_catalogo');
+
+const nombres = [];
 
 
+const tablaEquipos2 = document.getElementById('tablaEquipos2');
 
-btnModificar.disabled = true;
-btnModificar.parentElement.style.display = 'none';
-btnCancelar.disabled = true;
-btnCancelar.parentElement.style.display = 'none';
+tablaEquipos2.addEventListener('click', async function (event) {
+    if (event.target.classList.contains('btn-detalle-codigo')) {
+        asignarOficialModal.classList.add('show');
+        asignarOficialModal.style.display = 'block';
+        document.body.classList.add('modal-open');
+    }
+});
+
+
 
 let contador = 1;
 
-const datatable = new DataTable('#tablaEquipos', {
+const datatable = new DataTable('#tablaEquipos2', {
     language: lenguaje,
     data: null,
     columns: [
@@ -36,12 +53,16 @@ const datatable = new DataTable('#tablaEquipos', {
             data: 'nombre_usuario'
         },
         {
-            title: 'NÚMERO USUARIO',
-            data: 'numero_usuario'
+            title: 'NOMBRE TECNICO',
+            data: 'nombre_tecnico'
         },
         {
-            title: 'TECNICO RECIBE',
-            data: 'tecnico_recibe'
+            title: 'TELEFONO USUARIO',
+            data: 'telefono_usuario'
+        },
+        {
+            title: 'TIPO DE EQUIPO',
+            data: 'tipo_equipo'
         },
         {
             title: 'MOTIVO',
@@ -56,27 +77,23 @@ const datatable = new DataTable('#tablaEquipos', {
             data: 'estado'
         },
         {
-            title: 'MODIFICAR',
+            title: "FORMULARIO DE EQUIPO REPARADO",
             data: 'equipo_codigo',
             searchable: false,
             orderable: false,
-            render: (data, type, row, meta) => `<button class="btn btn-warning" data-codigo='${data}' data-marca='${row.marca_equipo_descripcion}'>Modificar</button>`
-        },
-        {
-            title: 'ELIMINAR',
-            data: 'equipo_codigo',
-            searchable: false,
-            orderable: false,
-            render: (data, type, row, meta) => `<button class="btn btn-danger" data-codigo='${data}'>Eliminar</button>`
-        },
-        
+            render: (data, type, row, meta) => {
+                equipo_codigo.value = data
+                return `<button class='btn btn-success btn-detalle-codigo' data-codigo='${data}'>FINALIZAR</button>`
+            }
+        }
     ]
+
 });
 
+
 const buscar = async () => {
-    
-    const url = `/mantenimiento_de_hardware/API/mantenimientos/buscar`; 
-    
+    const tipo = tipoEquipo.value
+    const url = `/mantenimiento_de_hardware/API/mantenimientos/buscar?tipo_equipo=${tipo}`;
     const config = {
         method: 'GET'
     };
@@ -84,11 +101,13 @@ const buscar = async () => {
     try {
         const respuesta = await fetch(url, config);
         const data = await respuesta.json();
-     
         datatable.clear().draw();
-        if (data) {
+        console.log(data)
+        if (data.length >0){
             contador = 1;
             datatable.rows.add(data).draw();
+
+
         } else {
             Toast.fire({
                 title: 'No se encontraron registros',
@@ -98,14 +117,53 @@ const buscar = async () => {
     } catch (error) {
         console.log(error);
     }
-};  
+};
+
+const buscarCatalogo2 = async () => {
+   
+    let rep_tecnico_catalogo = formularioGuarda.rep_tecnico_catalogo.value;
+    //clearTimeout(typingTimeout); // Limpiar el temporizador anterior (si existe)  
+
+    // Función que se ejecutará después del retraso
+ 
+        const url = `/mantenimiento_de_hardware/API/mantenimientos/buscarCatalogo2?rep_tecnico_catalogo=${rep_tecnico_catalogo}`;
+        const config = {
+            method: 'GET'
+        };
+
+        try {
+            const respuesta = await fetch(url, config);
+            const data = await respuesta.json();
+            console.log(data);
+
+            if (data && data.length > 0) {
+                const guardaNombre = data[0].nombres;
+                tecnico_nombre.value = guardaNombre;
+                Toast.fire({
+                    icon: 'success',
+                    title: 'El catálogo ingresado es correcto, se muestran los siguientes datos.'
+                });
+            } else {
+                nombres.value = '';
+                Toast.fire({
+                    icon: 'info',
+                    title: 'Ingrese un catálogo válido.'
+                });
+            }
+        } catch (error) {
+            console.log(error);
+            Toast.fire({
+                icon: 'error',
+                title: 'Ocurrió un error al buscar los datos.'
+            });
+        }
+    };
 
 
 
-
-const guardar = async (evento) => {
-    evento.preventDefault();
-    if (!validarFormulario(formulario, ['equipo_codigo', 'equipo_descripcion'])) {
+const guardar = async (e) => {
+    e.preventDefault()
+    if (!validarFormulario(formularioGuarda)) {
         Toast.fire({
             icon: 'info',
             text: 'Debe llenar todos los datos'
@@ -113,51 +171,14 @@ const guardar = async (evento) => {
         return;
     }
 
-    const body = new FormData(formulario);
-    const url = '/mantenimiento_de_hardware/API/equipo/guardar';
-    const config = {
-        method: 'POST',
-        body
-    };
+    if (await confirmacion('warning', '¿Estás seguro de que el equipo ha sido reparado?')) {
+        const body = new FormData(formularioGuarda);
+        body.delete('equipo_tecnico_nombre')
 
-    try {
-        const respuesta = await fetch(url, config);
-        const data = await respuesta.json();
-        const { codigo, mensaje, detalle } = data;
-        let icon = 'info';
-        switch (codigo) {
-            case 1:
-                formulario.reset();
-                icon = 'success';
-                buscar();
-                break;
-
-            case 0:
-                icon = 'error';
-                console.log(detalle);
-                break;
-
-            default:
-                break;
+        for (var pair of body.entries()) {
+            console.log('*' + pair[0] + '*|*' + pair[1] + '*');
         }
-
-        Toast.fire({
-            icon,
-            text: mensaje
-        });
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-const eliminar = async (e) => {
-    const button = e.target;
-    const id = button.dataset.codigo;
-
-    if (await confirmacion('warning', '¿Desea eliminar este registro?')) {
-        const body = new FormData();
-        body.append('equipo_codigo', id);
-        const url = '/mantenimiento_de_hardware/API/equipo/eliminar';
+        const url = '/mantenimiento_de_hardware/API/mantenimientos/guardar';
         const config = {
             method: 'POST',
             body
@@ -174,6 +195,7 @@ const eliminar = async (e) => {
                 case 1:
                     icon = 'success';
                     buscar();
+                    asignarOficialModal.style.display = 'none';
                     break;
 
                 case 0:
@@ -195,96 +217,30 @@ const eliminar = async (e) => {
     }
 };
 
-const modificar = async () => {
-    if (!validarFormulario(formulario, ['equipo_codigo', 'equipo_descripcion'])) {
-        alert('Debe llenar todos los campos');
-        return;
-    }
+//////////evento para cerrar el modal haciendo clic
 
-    const body = new FormData(formulario);
-    const url = '/mantenimiento_de_hardware/API/equipo/modificar';
-    const config = {
-        method: 'POST',
-        body
-    };
-
-    try {
-        const respuesta = await fetch(url, config);
-        const data = await respuesta.json();
-        console.log(data);
-        const { codigo, mensaje, detalle } = data;
-        let icon = 'info';
-
-        switch (codigo) {
-            case 1:
-                formulario.reset();
-                icon = 'success';
-                buscar();
-                cancelarAccion();
-                break;
-
-            case 0:
-                icon = 'error';
-                console.log(detalle);
-                break;
-
-            default:
-                break;
-        }
-
-        Toast.fire({
-            icon,
-            text: mensaje
-        });
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-const traeDatos = (e) => {
-    const button = e.target;
-    const codigo = button.dataset.codigo;
-    const marca = button.dataset.marca;
-
-    const dataset = {
-        codigo,
-        marca,
-    };
-
-    colocarDatos(dataset);
-};
-
-const colocarDatos = (dataset) => {
-    formulario.equipo_codigo.value = dataset.codigo;
-    formulario.equipo_descripcion.value = dataset.marca;
-
-    btnGuardar.disabled = true;
-    btnGuardar.parentElement.style.display = 'none';
-    btnBuscar.disabled = true;
-    btnBuscar.parentElement.style.display = 'none';
-    btnModificar.disabled = false;
-    btnModificar.parentElement.style.display = '';
-    btnCancelar.disabled = false;
-    btnCancelar.parentElement.style.display = '';
-};
-
-const cancelarAccion = () => {
+botonCerrarModal.addEventListener('click', function () {
+    // Cierra el modal
+    asignarOficialModal.style.display = 'none';
+    document.body.classList.remove('modal-open');
     formulario.reset();
-    btnGuardar.disabled = false;
-    btnGuardar.parentElement.style.display = '';
-    btnBuscar.disabled = false;
-    btnBuscar.parentElement.style.display = '';
-    btnModificar.disabled = true;
-    btnModificar.parentElement.style.display = 'none';
-    btnCancelar.disabled = true;
-    btnCancelar.parentElement.style.display = 'none';
-};
+    //cancelarAccionAsignar();
+    //actualizarDependencia();
 
+});
+
+////cerrar el modal cuando se hace clic fuera del modal...
+asignarOficialModal.addEventListener('click', function (event) {
+    if (event.target === asignarOficialModal) {
+        asignarOficialModal.style.display = 'none';
+        document.body.classList.remove('modal-open');
+        formulario.reset();
+        //cancelarAccion();
+        //actualizarDependencia();
+        //buscarDependencia();
+    }
+});
 buscar();
-
-formulario.addEventListener('submit', guardar);
+formularioGuarda.addEventListener('submit', guardar);
 btnBuscar.addEventListener('click', buscar);
-datatable.on('click', '.btn-warning', traeDatos);
-datatable.on('click', '.btn-danger', eliminar);
-btnCancelar.addEventListener('click', cancelarAccion);
-btnModificar.addEventListener('click', modificar);
+rep_tecnico_catalogo.addEventListener('change', buscarCatalogo2);

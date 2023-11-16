@@ -1,10 +1,10 @@
-<h1 class="text-center">EQUIPOS REPARADOS</h1>
+<h1 class="text-center">HISTORIAL DE EQUIPOS ENTREGADOS Y REPARADOS</h1>
 <div class="row justify-content-center mb-5">
-    <form class="col-lg-8 border bg-light p-3" id="formularioMantenimiento">
+    <form class="col-lg-8 border bg-light p-3" id="formularioMantenimiento3">
         <div class="row mb-3">
             <div class="col">
                 <label for="tipo_equipo">
-                    <i class="fas fa-puzzle-piece"></i> <strong>EQUIPOS A ENTREGAR</strong>
+                    <i class="fas fa-puzzle-piece"></i> <strong>EQUIPOS ENTREGADOS Y REPARADOS</strong>
                 </label>
                 <select name="tipo_equipo" id="tipo_equipo" class="form-control">
                     <option value="">Selecione tipo de equipo...</option>
@@ -95,4 +95,5 @@
 </div>
 
 
-<script src="<?= asset('./build/js/mantenimiento2/index.js') ?>"></script>
+<script src="<?= asset('./build/js/mantenimiento3/index.js') ?>"></script>
+

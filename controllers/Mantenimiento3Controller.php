@@ -11,13 +11,13 @@ use Model\TipoEquipo; // Cambio de "equipo" a "Equipo"
 use MVC\Router;
 
 
-class Mantenimiento2Controller
+class Mantenimiento3Controller
 {
 
     public static function index(Router $router)
     {
         $TipoEquipo = static::TipoEquipo();
-        $router->render('mantenimientos2/index', [
+        $router->render('mantenimientos3/index', [
             'TipoEquipo' => $TipoEquipo,
 
         ]);
@@ -40,24 +40,30 @@ class Mantenimiento2Controller
         try {
             $tipo_equipo = $_GET['tipo_equipo'];
 
-            $sql = "SELECT
-                        e.equipo_codigo AS EQUIPO_CODIGO,
-                        s.sol_fecha AS FECHA,
-                        trim(per.per_nom1) ||' '||trim(per.per_nom2)||' '||trim(per.per_ape1)||' '||trim(per.per_ape2) AS NOMBRE_USUARIO,
-                        trim(per2.per_nom1) ||' '||trim(per2.per_nom2)||' '||trim(per2.per_ape1)||' '||trim(per2.per_ape2) AS NOMBRE_TECNICO,
-                        s.sol_usuario_telefono AS TELEFONO_USUARIO,
-                        s.sol_tecnico_catalogo AS TECNICO_RECIBIO,
+            $sql = "SELECT                        
+                        s.sol_fecha AS FECHA_INGRESO,
+                        trim(per.per_nom1) ||' '||trim(per.per_nom2)||' '||trim(per.per_ape1)||' '||trim(per.per_ape2) AS USUARIO_ENTREGA,
+                        trim(per2.per_nom1) ||' '||trim(per2.per_nom2)||' '||trim(per2.per_ape1)||' '||trim(per2.per_ape2) AS TECNICO_RECIBE,
+                        me.ent_fecha AS FECHA_EGRESO,
+                        dep.dep_desc_lg AS DEPENDENCIA,
+                        trim(per3.per_nom1) ||' '||trim(per3.per_nom2)||' '||trim(per3.per_ape1)||' '||trim(per3.per_ape2) AS USUARIO_RECIBE,
+                        trim(per4.per_nom1) ||' '||trim(per4.per_nom2)||' '||trim(per4.per_ape1)||' '||trim(per4.per_ape2) AS TECNICO_ENTREGA,                        
                         e.equipo_motivo AS MOTIVO,
                         te.tipo_equipo_descripcion AS TIPO_EQUIPO,
                         e.equipo_descripcion AS DESCRIPCION,
-                        UPPER(es.equipo_estado_descripcion) AS ESTADO
+                        UPPER(es.equipo_estado_descripcion) AS ESTADO,
+                        e.equipo_codigo AS equipo_codigo                  
                     FROM m_equipo e
                     LEFT JOIN m_equipo_estado es ON e.equipo_estado = es.equipo_estado_codigo
+                    LEFT JOIN m_entrega me ON me.ent_equipo_codigo=e.equipo_codigo
                     LEFT JOIN m_solicitud s ON s.sol_equipo_codigo = e.equipo_codigo
                     LEFT JOIN mper per ON per.per_catalogo = s.sol_usuario_catalogo
                     LEFT JOIN mper per2 ON per2.per_catalogo = s.sol_tecnico_catalogo
-                    LEFT JOIN m_tipo_equipo te ON te.tipo_equipo_codigo=e.equipo_tipo
-                    WHERE e.equipo_estado = 2";
+                    LEFT JOIN mper per3 ON per3.per_catalogo = me.ent_usuario_catalogo
+                    LEFT JOIN mper per4 ON per4.per_catalogo = me.ent_tecnico_catalogo
+                    LEFT JOIN m_tipo_equipo te ON te.tipo_equipo_codigo=e.equipo_tipo 
+                    LEFT JOIN mdep dep ON dep.dep_llave = e.equipo_dependencia        
+                    WHERE e.equipo_estado = 3";
             if ($tipo_equipo != "") {
                 $sql .= " and te.tipo_equipo_codigo = $tipo_equipo";
             }

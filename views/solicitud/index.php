@@ -1,7 +1,5 @@
 <div>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
         /* Estilos para la parte de ingreso de monitores */
@@ -201,10 +199,10 @@
                             <!-- Primera sección de campos -->
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="equipo_fecha_entrega">
+                                    <label for="sol_fecha">
                                         <i class="fas fa-calendar"></i> <strong>Fecha de Ingreso</strong>
                                     </label>
-                                    <input type="date" name="equipo_fecha_entrega" id="equipo_fecha_entrega" class="form-control">
+                                    <input type="date" name="sol_fecha" id="sol_fecha" class="form-control">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="equipo_oficio">
@@ -217,10 +215,10 @@
                             <!-- Segunda sección de campos -->
                             <div class="form-row">
                                 <div class="form-group col-md-4">
-                                    <label for="equipo_usuario_cat_entrega">
+                                    <label for="sol_usuario_catalogo">
                                         <i class="fas fa-cogs"></i> <strong>Catálogo del Usuario</strong>
                                     </label>
-                                    <input value="" id="equipo_usuario_cat_entrega" name="equipo_usuario_cat_entrega"
+                                    <input value="" id="sol_usuario_catalogo" name="sol_usuario_catalogo"
                                         class="form-control" type="number">
                                 </div>
                                 <div class="form-group col-md-4">
@@ -228,13 +226,13 @@
                                         <i class="fas fa-user"></i> <strong>Nombres del Usuario</strong>
                                     </label>
                                     <input type="text" name="equipo_usuario_nombre" id="equipo_usuario_nombre"
-                                        class="form-control">
+                                        class="form-control" readonly>
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <label for="equipo_usuario_numero">
+                                    <label for="sol_usuario_telefono">
                                         <i class="fas fa-phone"></i> <strong>Número de teléfono</strong>
                                     </label>
-                                    <input type="number" name="equipo_usuario_numero" id="equipo_usuario_numero"
+                                    <input type="number" name="sol_usuario_telefono" id="sol_usuario_telefono"
                                         class="form-control">
                                 </div>
                             </div>
@@ -247,7 +245,7 @@
                                     <i class="fas fa-building"></i> <strong>Dependencia del Equipo</strong>
                                 </label>
                                 <input type="text" name="equipo_nombre_dependencia" id="equipo_nombre_dependencia"
-                                    class="form-control">
+                                    class="form-control" readonly>
                             </div>
                         </div>
                     </div>
@@ -261,10 +259,10 @@
                         <div class="col-md-9">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="equipo_tecnico_recibe">
+                                    <label for="sol_tecnico_catalogo">
                                         <i class="fas fa-cogs"></i> <strong>Catálogo del Técnico</strong>
                                     </label>
-                                    <input type="number" name="equipo_tecnico_recibe" id="equipo_tecnico_recibe"
+                                    <input type="number" name="sol_tecnico_catalogo" id="sol_tecnico_catalogo"
                                         class="form-control">
                                 </div>
                                 <div class="form-group col-md-6">
@@ -272,7 +270,7 @@
                                         <i class="fas fa-user"></i> <strong>Nombres y Apellidos del Técnico</strong>
                                     </label>
                                     <input type="text" name="equipo_tecnico_nombre" id="equipo_tecnico_nombre"
-                                        class="form-control">
+                                        class="form-control" readonly>
                                 </div>
                             </div>
                         </div>
@@ -285,7 +283,7 @@
         <!-- PARTE 2 -->
 
         <div id="equipoForm2">
-            <h1 class="text-center">Selecciona un dispositivo</h1>
+            <h1 class="text-center">SELECCIONA UN DISPOSITIVO</h1>
             <div class="row justify-content-center mb-5">
                 <div class="col-lg-11 border bg-light p-5">
                     <!-- Contenedor principal -->
@@ -457,92 +455,122 @@
                         </div>
 
                     </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <button type="button" id='subir' class="form-control">Listo</button>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- PARTE 4 -->
-        <div id="equipoForm4" class="table-container">
-            <div class="container p-4">
-                <h1 style="text-align: center; background-color: #343a40; color: #ffffff; padding: 10px;">Chequeo de
-                    Datos
-                </h1>
-                <table id="tablaDatos" style="width: 100%; border-collapse;">
+        <div id="equipoForm4" class="form-container">
+            <div class="container p-4 shadow-lg"> <!-- Agregado shadow-lg para box-shadow -->
+                <h1 class="form-title">Chequeo de Datos</h1>
 
-                    <tr>
-                        <td style="width: 50%; padding: 10px; border: 1px solid #ccc;">
-                            <strong>Fecha de Ingreso:</strong><br>
-                            <div id="equipo_fecha_entrega"></div>
-                        </td>
-                        <td style="width: 50%; padding: 10px; border: 1px solid #ccc;">
-                            <strong>Número de Oficio:</strong><br>
-                            <div id="equipo_oficio"></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 50%; padding: 10px; border: 1px solid #ccc;">
-                            <strong>Catálogo del Usuario:</strong><br>
-                            <div id="equipo_usuario_cat_entrega"></div>
-                        </td>
-                        <td style="width: 50%; padding: 10px; border: 1px solid #ccc;">
-                            <strong>Nombres y Apellidos del Usuario:</strong><br>
-                            <div id="equipo_usuario_nombre"></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 50%; padding: 10px; border: 1px solid #ccc;">
-                            <strong>Número de teléfono del Usuario:</strong><br>
-                            <div id="equipo_usuario_numero"></div>
-                        </td>
-                        <td style="width: 50%; padding: 10px; border: 1px solid #ccc;">
-                            <strong>Dependencia del Equipo:</strong><br>
-                            <div id="equipo_dependencia"></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 50%; padding: 10px; border: 1px solid #ccc;">
-                            <strong>Catálogo del Técnico:</strong><br>
-                            <div id="equipo_tecnico_catalogo"></div>
-                        </td>
-                        <td style="width: 50%; padding: 10px; border: 1px solid #ccc;">
-                            <strong>Nombres y Apellidos del Técnico:</strong><br>
-                            <div id="equipo_tecnico_nombre"></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 50%; padding: 10px; border: 1px solid #ccc;">
-                            <strong>Modelo del Equipo:</strong><br>
-                            <div id="equipo_modelo"></div>
-                        </td>
-                        <td style="width: 50%; padding: 10px; border: 1px solid #ccc;">
-                            <strong>Serie del Equipo:</strong><br>
-                            <div id="equipo_serial"></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="padding: 10px; border: 1px solid #ccc;">
-                            <strong>Motivo de Ingreso:</strong><br>
-                            <div id="equipo_motivo"></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="padding: 10px; border: 1px solid #ccc;">
-                            <strong>Descripción del Equipo:</strong><br>
-                            <div id="equipo_descripcion"></div>
-                        </td>
-                    </tr>
+                <form id="formularioDatos" class="datos-form">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="equipo_fecha_entrega" class="titulo-nombre">Fecha de Ingreso:</label>
+                            <input type='date' id='equipo_fecha_entrega' class="form-control" value="">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="equipo_oficio1" class="titulo-nombre">Número de Oficio:</label>
+                            <input type='text' id='equipo_oficio1' class="form-control" value="">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="equipo_usuario_cat_entrega">Catálogo del Usuario:</label>
+                            <input type='number' id='equipo_usuario_cat_entrega' class="form-control" value="">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="equipo_usuario_nombre1">Nombres y Apellidos del Usuario:</label>
+                            <input type='text' id='equipo_usuario_nombre1' class="form-control" value="">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="equipo_usuario_numero">Número de teléfono del Usuario:</label>
+                            <input type='number' id='equipo_usuario_numero' class="form-control" value="">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="equipo_dependencia1">Dependencia del Equipo:</label>
+                            <input type='text' id='equipo_dependencia1' class="form-control" value="">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="equipo_tecnico_catalogo">Catálogo del Técnico:</label>
+                            <input type='number' id='equipo_tecnico_catalogo' class="form-control" value="">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="equipo_tecnico_nombre1">Nombres y Apellidos del Técnico:</label>
+                            <input type='text' id='equipo_tecnico_nombre1' class="form-control" value="">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="equipo_modelo1">Modelo del Equipo:</label>
+                            <input type='text' id='equipo_modelo1' class="form-control" value="">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="equipo_serial1">Serie del Equipo:</label>
+                            <input type='text' id='equipo_serial1' class="form-control" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="equipo_motivo1">Motivo de Ingreso:</label>
+                        <input type='text' id='equipo_motivo1' class="form-control" value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="equipo_descripcion1" class="titulo-nombre">Descripción del Equipo:</label>
+                        <input type='text' id='equipo_descripcion1' class="form-control" value="">
+                    </div>
 
-                    <tr class="detalleCPU">
-                        <td style="width: 50%; padding: 10px; border: 1px solid #ccc;">
-                            <strong>Almacenamiento del Equipo:</strong><br>
-                            <div id="equipo_almacenamiento"></div>
-                        </td>
-                        <td style="width: 50%; padding: 10px; border: 1px solid #ccc;">
-                            <strong>Marca del Equipo:</strong><br>
-                            <div id="equipo_marca"></div>
-                        </td>
-                    </tr>
-                </table>
+                    <div class="form-row detalleCPU">
+                        <div class="form-group col-md-6">
+                            <label for="equipo_almacenamiento1" class="titulo-nombre">Almacenamiento del Equipo:</label>
+                            <input type='text' id='equipo_almacenamiento1' class="form-control" value="">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="equipo_marca1" class="titulo-nombre">Marca del Equipo:</label>
+                            <input type='number' id='equipo_marca1' class="form-control" value="">
+                        </div>
+                    </div>
+
+                    <!-- Campo para 'equipo_lector_cd' -->
+                    <div class="form-group col-md-6">
+                        <label for="equipo_lector_cd1" class="titulo-nombre">Lector de CD:</label>
+                        <input type='text' id='equipo_lector_cd1' class="form-control" value="">
+                    </div>
+
+                    <!-- Campo para 'equipo_tarjeta_sonido' -->
+                    <div class="form-group col-md-6">
+                        <label for="equipo_tarjeta_sonido1" class="titulo-nombre">Tarjeta de Sonido:</label>
+                        <input type='text' id='equipo_tarjeta_sonido1' class="form-control" value="">
+                    </div>
+                    <!-- Campo para 'equipo_drivers' -->
+                    <div class="form-group col-md-6">
+                        <label for="equipo_drivers1" class="titulo-nombre">Drivers:</label>
+                        <input type='text' id='equipo_drivers1' class="form-control" value="">
+                    </div>
+
+                    <!-- Campo para 'equipo_tarjeta_grafica' -->
+                    <div class="form-group col-md-6">
+                        <label for="equipo_tarjeta_grafica1" class="titulo-nombre">Tarjeta Gráfica:</label>
+                        <input type='text' id='equipo_tarjeta_grafica1' class="form-control" value="">
+                    </div>
+
+                    <!-- Campo para 'equipo_fuente_poder' -->
+                    <div class="form-group col-md-6">
+                        <label for="equipo_fuente_poder1" class="titulo-nombre">Fuente de Poder:</label>
+                        <input type='text' id='equipo_fuente_poder1' class="form-control" value="">
+                    </div>
+
+                </form>
             </div>
         </div>
 
@@ -571,7 +599,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="<?= asset('./build/js/equipo/index.js') ?>"></script>
+    <script src="<?= asset('./build/js/solicitud/index.js') ?>"></script>
 
 
 

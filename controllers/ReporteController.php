@@ -2,19 +2,21 @@
 
 namespace Controllers;
 
+use Model\Equipo;
 use Mpdf\Mpdf;
 use MVC\Router;
 
+
+
+
 class ReporteController {
+    
     public static function pdf (Router $router){
-        $saludo = $_GET['variable'];
-
-        //consulta a la BD 
-
-
-        $data = [1,3,4,3,9];
-        $userData = "DANIEL FUENTES";
-        $grado = "Alférez";
+        $equipo_id= $_GET['equipo_codigo'];  
+        
+        $objetoEquipo= new Equipo();
+        $equipo = $objetoEquipo->getEquipo($equipo_id);
+      
         $mpdf = new Mpdf([
             "orientation" => "P",
             "default_font_size" => 12,
@@ -25,15 +27,10 @@ class ReporteController {
         $mpdf->SetMargins(30,35,25);
 
         $html = $router->load('reporte/pdf',[
-            'userData' => $userData,
-            'grado' => $grado,
-            "data" => $data
+            'equipo'=> $equipo[0],
         ]);
-        $htmlHeader = $router->load('reporte/header', [
-            'saludo' => $saludo
-        ]);
+
         $htmlFooter = $router->load('reporte/footer');
-        $mpdf->SetHTMLHeader($htmlHeader);
         $mpdf->SetHTMLFooter($htmlFooter);
         $mpdf->WriteHTML($html);
         $mpdf->Output();

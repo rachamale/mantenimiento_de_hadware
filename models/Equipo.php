@@ -6,12 +6,7 @@ class Equipo extends ActiveRecord
 {
     protected static $tabla = 'm_equipo';
     protected static $columnasDB = [
-        'equipo_fecha_entrega',
-        'equipo_fecha_recibe',
         'equipo_oficio',
-        'equipo_usuario_cat_entrega',
-        'equipo_usuario_cat_recibe',
-        'equipo_usuario_numero',
         'equipo_dependencia',
         'equipo_motivo',
         'equipo_modelo',
@@ -26,8 +21,6 @@ class Equipo extends ActiveRecord
         'equipo_marca',
         'equipo_tipo',
         'equipo_descripcion',
-        'equipo_tecnico_recibe',
-        'equipo_tecnico_entrega',
         'equipo_estado',
         'equipo_detalle_situacion',
     ];
@@ -35,13 +28,7 @@ class Equipo extends ActiveRecord
     protected static $idTabla = 'equipo_codigo';
     
     public $equipo_codigo;
-    public $equipo_fecha_entrega;
-    public $equipo_fecha_recibe;
     public $equipo_oficio;
-    public $equipo_usuario_cat_entrega;
-    public $equipo_usuario_cat_recibe;
-    public $equipo_usuario_nombre;
-    public $equipo_usuario_numero;
     public $equipo_dependencia;
     public $equipo_motivo;
     public $equipo_modelo;
@@ -56,8 +43,6 @@ class Equipo extends ActiveRecord
     public $equipo_marca;
     public $equipo_tipo;
     public $equipo_descripcion;
-    public $equipo_tecnico_recibe;
-    public $equipo_tecnico_entrega;
     public $equipo_estado;
     public $equipo_detalle_situacion;
     
@@ -65,12 +50,7 @@ class Equipo extends ActiveRecord
     public function __construct($args = [])
     {
         $this->equipo_codigo = $args['equipo_codigo'] ?? null;
-        $this->equipo_fecha_recibe = $args['equipo_fecha_recibe'] ?? '';
-        $this->equipo_fecha_entrega = $args['equipo_fecha_entrega'] ?? '';
         $this->equipo_oficio = $args['equipo_oficio'] ?? '';
-        $this->equipo_usuario_cat_recibe = $args['equipo_usuario_cat_recibe'] ?? '';
-        $this->equipo_usuario_cat_entrega = $args['equipo_usuario_cat_entrega'] ?? '';
-        $this->equipo_usuario_numero = $args['equipo_usuario_numero'] ?? '';
         $this->equipo_dependencia = $args['equipo_dependencia'] ?? '';
         $this->equipo_motivo = $args['equipo_motivo'] ?? '';
         $this->equipo_modelo = $args['equipo_modelo'] ?? '';
@@ -85,9 +65,35 @@ class Equipo extends ActiveRecord
         $this->equipo_marca = $args['equipo_marca'] ?? '';
         $this->equipo_tipo = $args['equipo_tipo'] ?? '';
         $this->equipo_descripcion = $args['equipo_descripcion'] ?? '';
-        $this->equipo_tecnico_recibe = $args['equipo_tecnico_recibe'] ?? null;
-        $this->equipo_tecnico_entrega = $args['equipo_tecnico_entrega'] ?? null;
         $this->equipo_estado = $args['equipo_estado'] ?? 1;
         $this->equipo_detalle_situacion = $args['equipo_detalle_situacion'] ?? 1;
+    }
+
+    public function getEquipo($equipo_codigo){
+        $sql = "    SELECT                            
+                        me.ent_fecha AS FECHA,
+                        e.equipo_codigo AS REGISTRO,
+                        e.equipo_oficio AS OFICIO,
+                        me.ent_usuario_catalogo AS CATALOGO_USUARIO,
+                        trim(per.per_nom1) ||' '||trim(per.per_nom2)||' '||trim(per.per_ape1)||' '||trim(per.per_ape2) AS USUARIO,
+                        s.sol_usuario_telefono AS TELEFONO,
+                        me.ent_tecnico_catalogo AS CATALOGO_TECNICO,
+                        trim(tec.per_nom1) ||' '||trim(tec.per_nom2)||' '||trim(tec.per_ape1)||' '||trim(tec.per_ape2) AS TECNICO,
+                        mar.marca_equipo_descripcion AS MARCA,
+                        e.equipo_modelo AS MODELO,
+                        e.equipo_serial AS SERIE,
+                        rep.rep_descripcion TRABAJO,
+                        dep.dep_desc_lg AS DEPENDENCIA
+                    FROM m_equipo e
+                    LEFT JOIN m_entrega me ON me.ent_equipo_codigo=e.equipo_codigo
+                    LEFT JOIN m_solicitud s ON s.sol_equipo_codigo = e.equipo_codigo
+                    LEFT JOIN m_reparacion rep ON rep.rep_equipo_codigo=e.equipo_codigo
+                    LEFT JOIN mper per ON per.per_catalogo = me.ent_usuario_catalogo
+                    LEFT JOIN mper tec ON tec.per_catalogo = me.ent_tecnico_catalogo
+                    LEFT JOIN m_marca_equipo mar ON e.equipo_marca = mar.marca_equipo_codigo
+                    LEFT JOIN mdep dep ON dep.dep_llave = e.equipo_dependencia  
+                    WHERE e.equipo_estado = 3
+                    AND e.equipo_codigo = $equipo_codigo";
+        return $this->fetchArray($sql);
     }
 }

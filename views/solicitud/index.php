@@ -541,8 +541,8 @@
                             <input type='text' id='equipo_tecnico_nombre1' class="form-control resaltar-rojo" readonly value="">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="equipo_modelo1" class="titulo-nombre">Modelo del Equipo:</label>
-                            <input type='text' id='equipo_modelo1' class="form-control resaltar-rojo" readonly value="">
+                            <label for="equipo_con_cable" class="titulo-nombre">Equipo con cable:</label>
+                            <input type='text' id='equipo_con_cable1' class="form-control resaltar-rojo" readonly value="">
                         </div>
                     </div>
 
@@ -552,27 +552,27 @@
                             <input type='text' id='equipo_serial1' class="form-control resaltar-rojo" readonly value="">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="equipo_motivo1">Motivo de Ingreso:</label>
-                            <input type='text' id='equipo_motivo1' class="form-control resaltar-rojo" readonly value="">
+                            <label for="equipo_modelo1" class="titulo-nombre">Modelo del Equipo:</label>
+                            <input type='text' id='equipo_modelo1' class="form-control resaltar-rojo" readonly value="">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="equipo_descripcion1" class="titulo-nombre">Descripción del Equipo:</label>
-                            <input type='text' id='equipo_descripcion1' class="form-control resaltar-rojo" readonly value="">
-                        </div>
-                    </div>
-
-                    <div class="form-row detalleCPU">
-                        <div class="form-group col-md-6">
-                            <label for="equipo_almacenamiento1" class="titulo-nombre">Almacenamiento del Equipo:</label>
-                            <input type='text' id='equipo_almacenamiento1' class="form-control resaltar-rojo" readonly value="">
-                        </div>
-                        <div class="form-group col-md-6">
                             <label for="equipo_marca1" class="titulo-nombre">Marca del Equipo:</label>
                             <input type='number' id='equipo_marca1' class="form-control resaltar-rojo" readonly value="">
                         </div>
                     </div>
 
                     <div class="form-row">
+                    <div class="form-group col-md-6">
+                            <label for="equipo_motivo1">Motivo de Ingreso:</label>
+                            <input type='text' id='equipo_motivo1' class="form-control resaltar-rojo" readonly value="">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="equipo_descripcion1" class="titulo-nombre">Descripción del Equipo:</label>
+                            <input type='text' id='equipo_descripcion1' class="form-control resaltar-rojo" readonly value="">
+                        </div>
+                    </div>
+
+                    <div class="form-row detalleCPU">
                         <div class="form-group col-md-4">
                             <label for="equipo_lector_cd1" class="titulo-nombre">Lector de CD:</label>
                             <input type='text' id='equipo_lector_cd1' class="form-control resaltar-rojo" readonly value="">
@@ -587,14 +587,18 @@
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
+                    <div class="form-row detalleCPU" >
+                        <div class="form-group col-md-4" >
                             <label for="equipo_tarjeta_grafica1" class="titulo-nombre">Tarjeta Gráfica:</label>
                             <input type='text' id='equipo_tarjeta_grafica1' class="form-control resaltar-rojo" readonly value="">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="equipo_fuente_poder1" class="titulo-nombre">Fuente de Poder:</label>
                             <input type='text' id='equipo_fuente_poder1' class="form-control resaltar-rojo" readonly value="">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="equipo_almacenamiento1" class="titulo-nombre">Almacenamiento del Equipo:</label>
+                            <input type='text' id='equipo_almacenamiento1' class="form-control resaltar-rojo" readonly value="">
                         </div>
                     </div>
                 </form>

@@ -47,7 +47,12 @@ const catalogoDelTecnico = document.getElementById('sol_tecnico_catalogo');
 const nombreDelTecnico = document.getElementById('equipo_tecnico_nombre');
 // const foto = document.getElementById('foto');
 
-
+const tipoFormDiccionario = {
+	1: "Monitor",
+	2: "Impresora",
+	3: "CPU",
+	4: "Otros"
+}
 FormOficio.style.display = ''
 FormTipo.style.display = 'none'
 FormEquipo.style.display = 'none'
@@ -156,7 +161,7 @@ const getFormSecuencial = (e) => {
         showEquipoForm(e)
     } else if (posicionForm === 2) {
         if (tipoForm === 3) {
-            if (!validarFormulario(FormTipo, [])) {
+            if (!validarFormulario(FormEquipo, ['equipo_tipo'])) {
                 Toast.fire({
                     icon: 'info',
                     text: 'Debe llenar todos los datos'
@@ -165,7 +170,15 @@ const getFormSecuencial = (e) => {
             }
         }
         else if (tipoForm === 4) {
-            if (!validarFormulario(FormEquipo, [''])) {
+            if (!validarFormulario(FormEquipo,
+                [
+                    'equipo_fuente_poder',
+                    'equipo_tarjeta_grafica',
+                    'equipo_drivers',
+                    'equipo_tarjeta_sonido',
+                    'equipo_lector_cd',
+                    'equipo_almacenamiento'
+                ])) {
                 Toast.fire({
                     icon: 'info',
                     text: 'Debe llenar todos los datos'
@@ -174,7 +187,15 @@ const getFormSecuencial = (e) => {
             }
         }
         else {
-            if (!validarFormulario(FormDetalle, [])) {
+            if (!validarFormulario(FormEquipo,
+                ['equipo_fuente_poder',
+                    'equipo_tarjeta_grafica',
+                    'equipo_drivers',
+                    'equipo_tarjeta_sonido',
+                    'equipo_lector_cd',
+                    'equipo_almacenamiento',
+                    'equipo_tipo'
+                ])) {
                 Toast.fire({
                     icon: 'info',
                     text: 'Debe llenar todos los datos'
@@ -585,6 +606,8 @@ function onFormSubmit(e) {
     FormEquipoFull.equipo_tarjeta_grafica1.value = verDatos.equipo_tarjeta_grafica;
 
     FormEquipoFull.equipo_fuente_poder1.value = verDatos.equipo_fuente_poder;
+
+    FormEquipoFull.equipo_con_cable1.value = verDatos.equipo_con_cable;
 
 
 }

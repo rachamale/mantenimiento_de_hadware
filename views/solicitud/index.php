@@ -75,7 +75,7 @@
         .border {
             border: 15px solid #dcdcdc;
             border-radius: 5px;
-            box-shadow: 0 10px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 50px 15px rgba(0, 0, 0, 0.1);
             padding: 20px;
             margin: 10px;
             background-color: #fff;
@@ -92,7 +92,7 @@
         .table-container {
             border: 1px solid #ccc;
             border-radius: 5px;
-            box-shadow: 0 15px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 100px 30px rgba(0, 0, 0, 0.1);
             padding: 20px;
             margin: 10px;
             background-color: #fff;
@@ -172,6 +172,32 @@
             margin: 5px;
             /* Espacio entre los botones */
         }
+
+        #subir {
+            border: 3px solid #8BA3C9;
+            border-radius: 8px;
+            width: 80px;
+            /* Aumentado el ancho */
+            height: 60px;
+            /* Aumentado el alto */
+            background-color: #336699;
+            color: #ffffff;
+            font-size: 16px;
+            /* Aumentado el tamaño de la fuente */
+            margin: 10px;
+            /* Ajuste de margen */
+            cursor: pointer;
+            outline: none;
+            position: absolute;
+            bottom: 20px;
+            /* Ajustado la distancia desde la parte inferior */
+            right: 10px;
+            /* Ajustado la distancia desde la derecha */
+        }
+
+        #subir:hover {
+            background-color: #001F3F;
+        }
     </style>
 
 
@@ -190,7 +216,7 @@
         <div id="equipoForm1">
             <h1 class="text-center">FORMULARIO DE INGRESO DE DATOS</h1>
             <div class="row justify-content-center mb-5">
-                <div class="col-lg-8 border bg-light p-3">
+                <div class="container p-4 shadow-lg">
                     <div class="row">
                         <div class="col-md-3">
                             <img src="./images/rac2.jpeg" id="foto" alt="Fotografía">
@@ -287,7 +313,7 @@
             <div class="row justify-content-center mb-5">
                 <div class="col-lg-11 border bg-light p-5">
                     <!-- Contenedor principal -->
-                    <div class="container-main p-4">
+                    <div class="container p-4 shadow-lg">
                         <!-- Parte de selección de dispositivo -->
                         <div class="row">
                             <div class="col-md-3">
@@ -326,7 +352,7 @@
         <div id="equipoForm3">
             <h1 class="text-center" id="tituloFormEquipo">FORMULARIO DE INGRESO </h1>
             <div class="row justify-content-center mb-5">
-                <div class="col-lg-8 border bg-light p-3">
+                <div class="container p-4 shadow-lg">
                     <div class="row mb-3">
 
                         <div class="col">
@@ -446,20 +472,20 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row mb-3">
-                        <div class="col">
+                    <div class="form-row mb-3">
+                        <div class="form-group col-md-9">
                             <label for="equipo_descripcion">
                                 <i class="fas fa-comment"></i> <strong>Descripción del Equipo</strong>
                             </label>
                             <input type="text" name="equipo_descripcion" id="equipo_descripcion" class="form-control">
                         </div>
-
                     </div>
-                    <div class="row mb-3">
-                        <div class="col">
-                            <button type="button" id='subir' class="form-control">Listo</button>
+                    <div class="input-group">
+                        <div class="mr-2">
+                            <button type="button" id='subir' class="form-control">
+                                <i class="fas fa-arrow-circle-up"></i> Listo
+                            </button>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -467,109 +493,110 @@
 
         <!-- PARTE 4 -->
         <div id="equipoForm4" class="form-container">
-            <div class="container p-4 shadow-lg"> <!-- Agregado shadow-lg para box-shadow -->
+            <div class="container p-4 shadow-lg">
                 <h1 class="form-title">Chequeo de Datos</h1>
 
                 <form id="formularioDatos" class="datos-form">
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="equipo_fecha_entrega" class="titulo-nombre">Fecha de Ingreso:</label>
-                            <input type='date' id='equipo_fecha_entrega' class="form-control" value="">
+                            <input type='date' id='equipo_fecha_entrega' class="form-control resaltar-rojo" readonly value="">
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="equipo_oficio1" class="titulo-nombre">Número de Oficio:</label>
-                            <input type='text' id='equipo_oficio1' class="form-control" value="">
+                            <input type='text' id='equipo_oficio1' class="form-control resaltar-rojo" readonly value="">
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="equipo_usuario_cat_entrega">Catálogo del Usuario:</label>
-                            <input type='number' id='equipo_usuario_cat_entrega' class="form-control" value="">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="equipo_usuario_nombre1">Nombres y Apellidos del Usuario:</label>
-                            <input type='text' id='equipo_usuario_nombre1' class="form-control" value="">
+                            <input type='number' id='equipo_usuario_cat_entrega' class="form-control resaltar-rojo" readonly 
+                                value="">
                         </div>
                     </div>
+
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
+                            <label for="equipo_usuario_nombre1" class="titulo-nombre">Nombres y Apellidos del
+                                Usuario:</label>
+                            <input type='text' id='equipo_usuario_nombre1' class="form-control resaltar-rojo" readonly value="">
+                        </div>
+                        <div class="form-group col-md-4">
                             <label for="equipo_usuario_numero">Número de teléfono del Usuario:</label>
-                            <input type='number' id='equipo_usuario_numero' class="form-control" value="">
+                            <input type='number' id='equipo_usuario_numero' class="form-control resaltar-rojo" readonly value="">
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="equipo_dependencia1">Dependencia del Equipo:</label>
-                            <input type='text' id='equipo_dependencia1' class="form-control" value="">
+                            <input type='text' id='equipo_dependencia1' class="form-control resaltar-rojo" readonly value="">
                         </div>
                     </div>
+
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="equipo_tecnico_catalogo">Catálogo del Técnico:</label>
-                            <input type='number' id='equipo_tecnico_catalogo' class="form-control" value="">
+                            <input type='number' id='equipo_tecnico_catalogo' class="form-control resaltar-rojo" readonly 
+                                value="">
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="equipo_tecnico_nombre1">Nombres y Apellidos del Técnico:</label>
-                            <input type='text' id='equipo_tecnico_nombre1' class="form-control" value="">
+                        <div class="form-group col-md-4">
+                            <label for="equipo_tecnico_nombre1" class="titulo-nombre">Nombres y Apellidos del
+                                Técnico:</label>
+                            <input type='text' id='equipo_tecnico_nombre1' class="form-control resaltar-rojo" readonly value="">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="equipo_modelo1" class="titulo-nombre">Modelo del Equipo:</label>
+                            <input type='text' id='equipo_modelo1' class="form-control resaltar-rojo" readonly value="">
                         </div>
                     </div>
+
                     <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="equipo_modelo1">Modelo del Equipo:</label>
-                            <input type='text' id='equipo_modelo1' class="form-control" value="">
+                        <div class="form-group col-md-4">
+                            <label for="equipo_serial1" class="titulo-nombre">Serie del Equipo:</label>
+                            <input type='text' id='equipo_serial1' class="form-control resaltar-rojo" readonly value="">
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="equipo_serial1">Serie del Equipo:</label>
-                            <input type='text' id='equipo_serial1' class="form-control" value="">
+                        <div class="form-group col-md-4">
+                            <label for="equipo_motivo1">Motivo de Ingreso:</label>
+                            <input type='text' id='equipo_motivo1' class="form-control resaltar-rojo" readonly value="">
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="equipo_motivo1">Motivo de Ingreso:</label>
-                        <input type='text' id='equipo_motivo1' class="form-control" value="">
-                    </div>
-                    <div class="form-group">
-                        <label for="equipo_descripcion1" class="titulo-nombre">Descripción del Equipo:</label>
-                        <input type='text' id='equipo_descripcion1' class="form-control" value="">
+                        <div class="form-group col-md-4">
+                            <label for="equipo_descripcion1" class="titulo-nombre">Descripción del Equipo:</label>
+                            <input type='text' id='equipo_descripcion1' class="form-control resaltar-rojo" readonly value="">
+                        </div>
                     </div>
 
                     <div class="form-row detalleCPU">
                         <div class="form-group col-md-6">
                             <label for="equipo_almacenamiento1" class="titulo-nombre">Almacenamiento del Equipo:</label>
-                            <input type='text' id='equipo_almacenamiento1' class="form-control" value="">
+                            <input type='text' id='equipo_almacenamiento1' class="form-control resaltar-rojo" readonly value="">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="equipo_marca1" class="titulo-nombre">Marca del Equipo:</label>
-                            <input type='number' id='equipo_marca1' class="form-control" value="">
+                            <input type='number' id='equipo_marca1' class="form-control resaltar-rojo" readonly value="">
                         </div>
                     </div>
 
-                    <!-- Campo para 'equipo_lector_cd' -->
-                    <div class="form-group col-md-6">
-                        <label for="equipo_lector_cd1" class="titulo-nombre">Lector de CD:</label>
-                        <input type='text' id='equipo_lector_cd1' class="form-control" value="">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="equipo_lector_cd1" class="titulo-nombre">Lector de CD:</label>
+                            <input type='text' id='equipo_lector_cd1' class="form-control resaltar-rojo" readonly value="">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="equipo_tarjeta_sonido1" class="titulo-nombre">Tarjeta de Sonido:</label>
+                            <input type='text' id='equipo_tarjeta_sonido1' class="form-control resaltar-rojo" readonly value="">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="equipo_drivers1" class="titulo-nombre">Drivers:</label>
+                            <input type='text' id='equipo_drivers1' class="form-control resaltar-rojo" readonly value="">
+                        </div>
                     </div>
 
-                    <!-- Campo para 'equipo_tarjeta_sonido' -->
-                    <div class="form-group col-md-6">
-                        <label for="equipo_tarjeta_sonido1" class="titulo-nombre">Tarjeta de Sonido:</label>
-                        <input type='text' id='equipo_tarjeta_sonido1' class="form-control" value="">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="equipo_tarjeta_grafica1" class="titulo-nombre">Tarjeta Gráfica:</label>
+                            <input type='text' id='equipo_tarjeta_grafica1' class="form-control resaltar-rojo" readonly value="">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="equipo_fuente_poder1" class="titulo-nombre">Fuente de Poder:</label>
+                            <input type='text' id='equipo_fuente_poder1' class="form-control resaltar-rojo" readonly value="">
+                        </div>
                     </div>
-                    <!-- Campo para 'equipo_drivers' -->
-                    <div class="form-group col-md-6">
-                        <label for="equipo_drivers1" class="titulo-nombre">Drivers:</label>
-                        <input type='text' id='equipo_drivers1' class="form-control" value="">
-                    </div>
-
-                    <!-- Campo para 'equipo_tarjeta_grafica' -->
-                    <div class="form-group col-md-6">
-                        <label for="equipo_tarjeta_grafica1" class="titulo-nombre">Tarjeta Gráfica:</label>
-                        <input type='text' id='equipo_tarjeta_grafica1' class="form-control" value="">
-                    </div>
-
-                    <!-- Campo para 'equipo_fuente_poder' -->
-                    <div class="form-group col-md-6">
-                        <label for="equipo_fuente_poder1" class="titulo-nombre">Fuente de Poder:</label>
-                        <input type='text' id='equipo_fuente_poder1' class="form-control" value="">
-                    </div>
-
                 </form>
             </div>
         </div>

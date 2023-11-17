@@ -21,12 +21,22 @@
             /* Aumentar el margen inferior y reducir el margen superior */
         }
 
-
         h1 {
             text-align: center;
-            font-size: 24px;
-            margin: 20px 0;
-            color: #343a40;
+            font-size: 25px;
+            /* Aumenta el tamaño de la fuente para un impacto visual */
+            margin: 40px 0;
+            /* Incrementa el margen para más espacio alrededor del título */
+            color: black;
+            /* Cambia el color del texto a un tono azul */
+            text-transform: uppercase;
+            /* Convierte el texto a mayúsculas */
+            letter-spacing: 1px;
+            /* Agrega un espaciado entre las letras */
+            font-weight: bold;
+            /* Acentúa la negrita para un mayor énfasis */
+            font-family: 'Arial', sans-serif;
+            /* Especifica la fuente, también puedes probar otras fuentes */
         }
 
         table {
@@ -42,14 +52,22 @@
 
         th,
         td {
-            border: 1px solid #dee2e6;
+            border: 1px solid gray;
             padding: 8px;
             text-align: left;
             font-size: 12px;
         }
 
+        /* Anula los estilos de Bootstrap para filas y celdas */
+        .table-bordered tbody tr,
+        .table-bordered th,
+        .table-bordered td {
+            border: 1px solid black !important;
+        }
+
         th {
             font-weight: bold;
+            background-color: #f2f2f2;
         }
 
         tr:nth-child(even) {
@@ -213,6 +231,8 @@
 
             </tbody>
         </table>
+
+        <!-- Agregar espacio entre las dos tablas si es necesario -->
         <hr class="hr-divider">
         <br>
         <table class="table table-bordered table-striped">

@@ -13,6 +13,8 @@ use Controllers\ ReporteController;
 use Controllers\Mantenimiento3Controller;
 use Controllers\EstadisticaController;
 use Controllers\Reporte2Controller;
+use Controllers\Reporte3Controller;
+use Controllers\HistorialController;
 
 $router = new Router();
 $router->setBaseURL('/' . $_ENV['APP_NAME']);
@@ -54,6 +56,13 @@ $router->get('/API/mantenimientos2/buscarCatalogo2', [Mantenimiento2Controller::
 $router->post('/API/mantenimientos2/guardar', [Mantenimiento2Controller::class,'guardarAPI'] );
 $router->post('/API/mantenimientos2/notificaciones', [Mantenimiento2Controller::class,'agregarNotificaciones']);
 
+$router->get('/historial', [HistorialController::class,'index'] );
+$router->post('/API/historial/guardar', [HistorialController::class,'guardarAPI'] );
+$router->post('/API/historial/modificar', [HistorialController::class,'modificarAPI'] );
+$router->post('/API/historial/eliminar', [HistorialController::class,'eliminarAPI'] );
+$router->get('/API/historial/buscar', [HistorialController::class,'buscarAPI'] );
+
+
 $router->get('/mantenimientos3', [Mantenimiento3Controller::class,'index'] );
 $router->get('/API/mantenimiento3/buscar', [Mantenimiento3Controller::class,'buscarAPI'] );
 // $router->get('/API/mantenimientos2/buscarCatalogo', [Mantenimiento2Controller::class,'buscarCatalogoAPI'] );
@@ -70,6 +79,10 @@ $router->get('/pdf2', [Reporte2Controller::class,'pdf2']);
 $router->get('/informacion', [Reporte2Controller::class, 'pdf2']);
 // $router->get('/API/reporte2/generar', [Reporte2Controller::class, 'pdf2']);
 
+$router->get('/pdf3', [Reporte3Controller::class,'pdf3']);
+$router->get('/informacion3', [Reporte3Controller::class, 'pdf3']);
+// $router->get('/API/reporte2/generar', [Reporte2Controller::class, 'pdf2']);
+
 //estadistica
 $router->get('/estadisticas', [EstadisticaController::class, 'index']);
 $router->get('/API/estadisticas/getEstadisticas', [EstadisticaController::class, 'getDataAPI']);
@@ -79,7 +92,13 @@ $router->get('/API/estadisticas/buscarDatosEntregas', [EstadisticaController::cl
 $router->get('/API/estadisticas/buscarDatosEquiposDependencia', [EstadisticaController::class, 'buscarDatosEquiposDependencia']);
 $router->get('/API/estadisticas/buscarDatosMarcasEquipos', [EstadisticaController::class, 'buscarDatosMarcasEquipos']);
 $router->get('/API/estadisticas/EstadisticaEntregasGeneral', [EstadisticaController::class, 'EstadisticaEntregasGeneral']);
+$router->get('/API/estadisticas/buscarDatosEquiposPorEstado', [EstadisticaController::class, 'buscarDatosEquiposPorEstado']);
+$router->get('/API/estadisticas/buscarDatosEquiposPorTipo', [EstadisticaController::class, 'buscarDatosEquiposPorTipo']);
 
+
+//HISTORIAL API/historial/buscar
+
+$router->get('/API/historial/buscar', [HistorialController::class, 'buscarAPI']);
 
 // $router->get('/dispositivos', [DispositivoController::class,'index']);
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador

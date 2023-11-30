@@ -13,12 +13,6 @@
             padding: 0;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
         .reporte-titulo {
             font-size: 36px;
             font-weight: bold;
@@ -63,19 +57,21 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: box-shadow 0.3s ease, transform 0.3s ease;
             margin-bottom: 30px;
-            flex: 0 0 calc(30% - 20px);
+            flex: 0 0 calc(35% - 20px);
+            /* Ajusta el valor aquí para cambiar el ancho */
             border-radius: 10px;
             box-sizing: border-box;
         }
 
-        @media screen and (max-width: 768px) {
+        @media screen and (max-width: 1000px) {
             .card {
-                flex-basis: calc(50% - 20px);
+                flex-basis: calc(100% - 50px);
+                /* Ajusta el valor aquí para cambiar el ancho en pantallas más pequeñas */
             }
         }
 
         .card:hover {
-            box-shadow: 0 10px 20px rgba(33, 150, 243, 0.5);
+            box-shadow: 0 30px 50px rgba(33, 150, 243, 0.5);
             transform: translateY(-10px);
         }
 
@@ -88,10 +84,37 @@
     </style>
 </head>
 
+<div class="container mt-3">
+    <div class="row justify-content-center">
+        <div class="col-lg-6"> <!-- Reduje el ancho del contenedor a col-lg-6 -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center mb-3">Estadísticas</h5>
+                    <form id="formularioFiltros" class="text-center"> <!-- Centré el formulario en el contenedor -->
+                        <div class="mb-3 d-inline-flex align-items-center">
+                            <!-- Utilicé d-inline-flex y align-items-center para centrar los elementos horizontalmente -->
+                            <div class="me-3">
+                                <label for="fechaInicio" class="form-label">Inicio</label>
+                                <input type="date" class="form-control" id="fechaInicio" name="fechaInicio">
+                            </div>
+                            <div>
+                                <label for="fechaFin" class="form-label">Fin</label>
+                                <input type="date" class="form-control" id="fechaFin" name="fechaFin">
+                            </div>
+                        </div>
+                        <button id="btnActualizar" class="btn btn-info mt-2" style="width: 50%;"
+                            type="button">Actualizar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <body>
     <div class="container">
         <h1 class="reporte-titulo">ESTADISTICAS DE MANTENIMIENTO DE SOFTWARE</h1>
-        <button id="btnActualizar">Actualizar</button>
         <div class="row">
             <div class="card">
                 <h4>Equipos</h4>
@@ -120,6 +143,14 @@
             <div class="card">
                 <h4>Entregas Generales</h4>
                 <canvas id="chartEntregasGeneral"></canvas>
+            </div>
+            <div class="card">
+                <h4>Datos Equipos por estado</h4>
+                <canvas id="chartBuscarDatosEquiposPorEstado"></canvas>
+            </div>
+            <div class="card">
+                <h4>Tipo Equipos Por Dependencia</h4>
+                <canvas id="chartBuscarDatosEquiposPorTipo"></canvas>
             </div>
         </div>
     </div>

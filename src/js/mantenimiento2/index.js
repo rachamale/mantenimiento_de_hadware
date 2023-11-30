@@ -70,6 +70,10 @@ const datatable = new DataTable('#tablaEquipos2', {
             data: 'descripcion'
         },
         {
+            title: 'DEPENDENCIA',
+            data: 'dependencia'
+        },
+        {
             title: 'USUARIO NOTIFICADO',
             data: 'notificacion'
         },
@@ -442,6 +446,7 @@ const agregarNotificaciones = async (e) => {
             const respuesta = await fetch(url, config);
             const data = await respuesta.json();
             console.log(data)
+            
             const { codigo, mensaje, detalle } = data;
             let icon = 'info';
 

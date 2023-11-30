@@ -72,6 +72,10 @@ const datatable = new DataTable('#tablaEquipos2', {
             data: 'descripcion'
         },
         {
+            title: 'DEPENDENCIA',
+            data: 'dependencia'
+        },
+        {
             title: 'OBSERVACIÓN',
             data: 'observacion'
         },

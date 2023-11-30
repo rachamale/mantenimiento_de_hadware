@@ -4,6 +4,7 @@ namespace Controllers;
 
 use Exception;
 use Model\Equipo;
+use Model\Historial;
 use Model\MarcaEquipo;
 use Model\Solicitud;
 use Model\TipoEquipo;
@@ -68,13 +69,32 @@ class SolicitudController
                 $resultado_solicitud = $solicitud->crear();
 
                 if ($resultado_solicitud['resultado'] == 1) {
-                    echo json_encode([
-                        'mensaje' => 'Registro guardado correctamente',
-                        'codigo' => 1,
-                        'equipo' => $equipo_codigo
-                    ]);
+                    $arrayHistorial = array(
+                        'equi_his_codigo_equipo' => $equipo_codigo,
+                        'equi_his_estado' => 1
+                    );
+
+
+                    $historial = new Historial($arrayHistorial);
+                    $resultado_historial = $historial->crear();
+
+
+                    if ($resultado_historial['resultado'] == 1) {
+                        echo json_encode([
+                            'mensaje' => 'Registro guardado correctamente',
+                            'codigo' => 1,
+                            'equipo' => $equipo_codigo
+                        ]);
+                    } else {
+                        $equipo::SQL("DELETE m_equipo WHERE equipo_codigo = $equipo_codigo");
+                        $solicitud::SQL("DELETE m_solicitud WHERE equipo_codigo = " . $resultado_solicitud['resultado']);
+                        echo json_encode([
+                            'mensaje' => 'Ocurrió un error',
+                            'codigo' => 0
+                        ]);
+                    }
                 } else {
-                    // $equipo::SQL("DELETE m_equipo WHERE equipo_codigo = $equipo_codigo");
+                    $equipo::SQL("DELETE m_equipo WHERE equipo_codigo = $equipo_codigo");
                     echo json_encode([
                         'mensaje' => 'Ocurrió un error',
                         'codigo' => 0
@@ -82,7 +102,8 @@ class SolicitudController
                 }
             }
         } catch (Exception $e) {
-            // $equipo::SQL("DELETE m_equipo WHERE equipo_codigo = $equipo_codigo");
+            $equipo::SQL("DELETE m_equipo WHERE equipo_codigo = $equipo_codigo");
+            $solicitud::SQL("DELETE m_solicitud WHERE equipo_codigo = " . $resultado_solicitud['resultado']);
             echo json_encode([
                 'detalle' => $e->getMessage(),
                 'mensaje' => 'Ocurrió un error',

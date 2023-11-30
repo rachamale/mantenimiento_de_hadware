@@ -594,6 +594,8 @@
             </div>
         </div>
 
+        
+
         <!-- PARTE 4 -->
         <div id="equipoForm4" class="form-container">
             <div class="container p-4 shadow-lg">
@@ -601,16 +603,11 @@
 
                 <form id="formularioDatos" class="datos-form">
                     <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label for="equipo_fecha_entrega" class="titulo-nombre"><strong>Fecha de Ingreso:</strong></label>
-                            <input type='date' id='equipo_fecha_entrega' class="form-control resaltar-rojo" readonly
-                                value="">
-                        </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
                             <label for="equipo_oficio1" class="titulo-nombre"><strong>Número de Oficio:</strong></label>
                             <input type='text' id='equipo_oficio1' class="form-control resaltar-rojo" readonly value="">
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
                             <label for="equipo_usuario_cat_entrega"><strong>Catálogo del Usuario:</strong></label>
                             <input type='number' id='equipo_usuario_cat_entrega' class="form-control resaltar-rojo"
                                 readonly value="">

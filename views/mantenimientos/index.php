@@ -50,12 +50,13 @@
 
 <div class="row justify-content-center">
     <div class="col table-responsive"
-        style="max-width: 80%; padding: 20px; background-color: #f8f9fa; box-shadow: 0 4px 8px rgba(0, 128, 255, 0.3), 0 6px 20px rgba(0, 0, 0, 0.1); margin-top: 20px;">
+        style="max-width: 92%; padding: 20px; background-color: #f8f9fa; box-shadow: 0 4px 8px rgba(0, 128, 255, 0.3), 0 6px 20px rgba(0, 0, 0, 0.1); margin-top: 20px;">
         <table id="tablaEquipos2" class="container p-4 shadow-lg style, table table-bordered table-hover"
             style="width: 100%; border-collapse: collapse;">
         </table>
     </div>
 </div>
+
 
 <div class="modal fade" id="asignarOficialModal" name="asignarOficialModal" tabindex="-1" role="dialog"
     aria-labelledby="asignarOficialModalLabel" aria-hidden="true">
@@ -70,43 +71,36 @@
             </div>
             <div class="modal-body" id="asignarOficialModalBody">
                 <h3 class="text-center mt-4 mb-4 p-3 rounded bg-light">FORMULARIO DE EQUIPO REPARADO</h3>
-
                 <form class="col-lg-10 border rounded bg-light p-3 container" id="formularioGuarda">
                     <div class="container">
                         <div class="row justify-content-center mb-5">
                             <input type="input" name="rep_equipo_codigo" id="rep_equipo_codigo" hidden>
-                            <div class="row mb-3">
-                                <div class="col">
-                                    <label for="rep_fecha">FECHA</label>
-                                    <input type="date" name="rep_fecha" id="rep_fecha" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col">
-                                    <label for="rep_tecnico_catalogo">CATÁLOGO DEL TÉCNICO REPARO</label>
-                                    <input type="number" name="rep_tecnico_catalogo" id="rep_tecnico_catalogo"
-                                        class="form-control">
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="rep_tecnico_catalogo">CATÁLOGO DEL TÉCNICO REPARO</label>
+                                <input type="number" name="rep_tecnico_catalogo" id="rep_tecnico_catalogo"
+                                    class="form-control">
 
-                                </div>
-                                <div class="col">
-                                    <label for="tecnico_nombre">NOMBRES DEL TÉCNICO</label>
-                                    <input type="text" name="tecnico_nombre" id="tecnico_nombre" class="form-control"
-                                        readonly>
-                                </div>
                             </div>
-                            <div class="row mb-3">
-                                <div class="col">
-                                    <label for="rep_descripcion">TRABAJO REALIZADO</label>
-                                    <input type="text" name="rep_descripcion" id="rep_descripcion" class="form-control">
-                                </div>
+                            <div class="col">
+                                <label for="tecnico_nombre">NOMBRES DEL TÉCNICO</label>
+                                <input type="text" name="tecnico_nombre" id="tecnico_nombre" class="form-control"
+                                    readonly>
                             </div>
                         </div>
-                        <div class="my-3 text-center">
-                            <button type="submit" id="btnGuardar" form="formularioGuarda"
-                                class="btn btn-warning w-50">REPARADO</button>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="rep_descripcion">TRABAJO REALIZADO</label>
+                                <input type="text" name="rep_descripcion" id="rep_descripcion" class="form-control">
+                            </div>
                         </div>
                     </div>
-                </form>
+                </div>
+            </form>
+            <div class="my-3 text-center">
+                <button type="submit" id="btnGuardar" form="formularioGuarda"
+                    class="btn btn-warning w-50">REPARADO</button>
             </div>
         </div>
     </div>
@@ -138,12 +132,13 @@
                                     rows="5"></textarea>
                             </div>
                         </div>
-                        <div class="my-3 text-center">
-                            <button type="submit" id="btnGuardarObservacion" form="formularioObservacion"
-                                class="btn btn-warning w-50">AGREGAR</button>
-                        </div>
+
                     </div>
                 </form>
+                <div class="my-3 text-center">
+                    <button type="submit" id="btnGuardarObservacion" form="formularioObservacion"
+                        class="btn btn-warning w-50">AGREGAR</button>
+                </div>
             </div>
         </div>
     </div>

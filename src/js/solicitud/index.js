@@ -4,6 +4,7 @@ import DataTable from "datatables.net-bs5";
 import { lenguaje } from "../lenguaje";
 import { validarFormulario, Toast, confirmacion } from "../funciones";
 
+var CamposSubidos = false
 
 const FormEquipoFull = document.getElementById('formularioEquipo')
 const agregarDatos = document.getElementById('subir')
@@ -20,6 +21,7 @@ const btnImpresora = document.getElementById('btn-impresora');
 const btnCPU = document.getElementById('btn-cpu');
 const btnOtros = document.getElementById('btn-otros');
 const btnGuardar = document.getElementById('btnGuardar');
+
 
 
 
@@ -103,7 +105,7 @@ const showEquipoForm = (e) => {
     btnSiguiente.style.display = ''
     btnGuardar.style.display = 'none'
 
-  //VALIDAR SI ES EQUIPO CPU
+    //VALIDAR SI ES EQUIPO CPU
     if (tipoForm !== 3) {
         camposCPU1.style.display = 'none';
         camposCPU2.style.display = 'none';
@@ -113,7 +115,7 @@ const showEquipoForm = (e) => {
         camposCPU2.style.display = '';
     }
 
-      //VALIDAR SI ES EQUIPO OTROS
+    //VALIDAR SI ES EQUIPO OTROS
     if (tipoForm !== 4) {
         camposOtros.style.display = 'none';
     } else {
@@ -182,7 +184,7 @@ const showDetalleForm = (e) => {
             item.style.display = '';
         }
     }
-    
+
     if (tipoForm !== 2) {
         for (const item of detalleImpresora) {
             item.style.display = 'none';
@@ -247,7 +249,7 @@ const getFormSecuencial = (e) => {
 
         else {
             if (!validarFormulario(FormEquipo,
-                [   
+                [
                     'equipo_tipo',
                     'equipo_lector_cd',
                     'equipo_tarjeta_sonido',
@@ -272,6 +274,13 @@ const getFormSecuencial = (e) => {
                 });
                 return;
             }
+        }
+        if (!CamposSubidos) {
+            Toast.fire({
+                icon:"info",
+                text: 'Debe dar click en el boton "Listo" '
+            });
+            return
         }
 
         showDetalleForm(e)
@@ -425,7 +434,7 @@ const cancelarAccion = () => {
     btnCancelar.disabled = true
     btnCancelar.parentElement.style.display = 'none'
     divTabla.style.display = ''
-    formulario.reset(); f
+    formulario.reset();
 }
 
 const modificar = async (evento) => {
@@ -541,7 +550,6 @@ const guardarFormulario = async () => {
             body.delete('equipo_tarjeta_grafica')
             body.delete('equipo_fuente_poder')
         }
-        formularioEquipo
 
 
         for (var pair of body.entries()) {
@@ -562,21 +570,22 @@ const guardarFormulario = async () => {
             const respuesta = await fetch(url, config);
             const data = await respuesta.json();
             console.log(data)
-            const { codigo, mensaje, detalle, equipo} = data;
+            const { codigo, mensaje, detalle, equipo } = data;
 
             console.log(equipo)
             let icon = 'info';
             switch (codigo) {
                 case 1:
-                    
 
 
 
-                    
+
+
                     formularioEquipo.reset();
                     icon = 'success';
                     pdf2(equipo);
                     console.log('Esperando PDF')
+                    resetFormulario()
                     break;
 
                 case 0:
@@ -600,6 +609,21 @@ const guardarFormulario = async () => {
     }
 }
 
+const resetFormulario = () => {
+
+    posicionForm = 0
+    tipoForm = null
+    parametroTitulo = ""
+    CamposSubidos = false
+
+    FormOficio.style.display = ''
+    FormTipo.style.display = 'none'
+    FormEquipo.style.display = 'none'
+    FormDetalle.style.display = 'none'
+    btnAnterior.style.display = 'none'
+    btnGuardar.style.display = 'none'
+    FormEquipoFull.reset()
+}
 
 btnSiguiente.addEventListener('click', getFormSecuencial)
 
@@ -641,11 +665,10 @@ btnOtros.addEventListener('click', (e) => {
 
 function onFormSubmit(e) {
     e.preventDefault();
+
     const data = new FormData(FormEquipoFull)
     const verDatos = Object.fromEntries(data.entries());
     console.log(verDatos)
-
-    FormEquipoFull.equipo_fecha_entrega.value = verDatos.sol_fecha;
 
     FormEquipoFull.equipo_oficio1.value = verDatos.equipo_oficio;
 
@@ -702,6 +725,7 @@ function onFormSubmit(e) {
     FormEquipoFull.equipo_targeta_red1.value = verDatos.equipo_targeta_red;
 
     FormEquipoFull.equipo_tipo_impresora1.value = verDatos.equipo_tipo_impresora;
+    CamposSubidos = true
 
 }
 
@@ -711,33 +735,36 @@ const pdf2 = async (id) => {
     const url = `/mantenimiento_de_hardware/pdf2?equipo_codigo=${id}`;
 
     const headers = new Headers();
-        headers.append("X-Requested-With", "fetch");
-        const config = {
-            method: 'GET',
-            headers,
-        };
+    headers.append("X-Requested-With", "fetch");
+    const config = {
+        method: 'GET',
+        headers,
+    };
 
-        try {
-            const respuesta = await fetch(url, config)
-            if (respuesta.ok) {
-                const blob = await respuesta.blob();
+    try {
+        const respuesta = await fetch(url, config)
+        if (respuesta.ok) {
+            const blob = await respuesta.blob();
 
-                if (blob) {
-                    const urlBlob = window.URL.createObjectURL(blob);
+            if (blob) {
+                const urlBlob = window.URL.createObjectURL(blob);
 
-                    // Abre el PDF en una nueva ventana o pestaña
-                    window.open(urlBlob, '_blank');
-                } else {
-                    console.error('No se pudo obtener el blob del PDF.');
-                }
+                // Abre el PDF en una nueva ventana o pestaña
+                window.open(urlBlob, '_blank');
             } else {
-                console.error('Error al generar el PDF.');
+                console.error('No se pudo obtener el blob del PDF.');
             }
-        } catch (error) {
-            console.error(error);
+        } else {
+            console.error('Error al generar el PDF.');
         }
+    } catch (error) {
+        console.error(error);
+    }
 };
+
+
 
 btnAnterior.addEventListener('click', getFormSecuencialBack)
 btnGuardar.addEventListener('click', guardarFormulario)
 agregarDatos.addEventListener("click", onFormSubmit);
+

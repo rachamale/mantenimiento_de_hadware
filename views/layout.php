@@ -92,7 +92,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <a class="navbar-brand" href="/mantenimiento_de_hardware/"> <img src="<?= asset('./images/cit.png') ?>"
-                    width="35px'" alt="cit">Aplicaciones</a>
+                    width="35px'" alt="cit">SOPORTE TÉCNICO</a>
             <div class="collapse navbar-collapse" id="navbarToggler">
 
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin: 0;">
@@ -100,90 +100,101 @@
                         <a class="nav-link" aria-current="page" href="/mantenimiento_de_hardware/"><i
                                 class="bi bi-house-fill me-2"></i>Inicio</a>
                     </li>
+                    <ul class="navbar-nav">
+                        <div class="nav-item dropdown">
+                            <a class="dropdown-item nav-link bg-dark text-white" href="#" data-bs-toggle="dropdown">
+                                <img src="./images/mantenimiento.png" alt="Ícono Formulario" class="menu-icon"
+                                    style="width: 1cm; height: 1cm;">
+                                <span style="font-size: 0.9em;">MANTENIMIENTOS</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark" id="dropwdownRevision" style="margin: 0;">
+                                <li>
+                                    <a class="dropdown-item nav-link bg-primary text-white"
+                                        href="/mantenimiento_de_hardware/marca">
+                                        <img src="./images/marca.png" alt="Ícono Formulario" class="menu-icon"
+                                            style="width: 1cm; height: 1cm;">
+                                        <span style="font-size: 0.9em;">MARCA</span>
+                                    </a>
 
-                    <div class="nav-item dropdown">
-                        <a class="dropdown-item nav-link bg-dark text-white" href="#" data-bs-toggle="dropdown">
-                            <img src="./images/mantenimiento.png" alt="Ícono Formulario" class="menu-icon"
-                                style="width: 1cm; height: 1cm;">
-                            MANTENIMIENTOS
+                                    <a class="dropdown-item nav-link bg-primary text-white"
+                                        href="/mantenimiento_de_hardware/equipo_estado">
+                                        <img src="./images/estado.png" alt="Ícono Formulario" class="menu-icon"
+                                            style="width: 1cm; height: 1cm;">
+                                        <span style="font-size: 0.9em;">ESTADO DEL EQUIPO</span>
+                                    </a>
+
+                                    <a class="dropdown-item nav-link bg-primary text-white"
+                                        href="/mantenimiento_de_hardware/tipo_equipo">
+                                        <img src="./images/dispositivos.png" alt="Ícono Formulario" class="menu-icon"
+                                            style="width: 1cm; height: 1cm;">
+                                        <span style="font-size: 0.9em;">TIPO DE EQUIPOS</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="nav-item d-flex">
+                            <a class="dropdown-item nav-link bg-dark text-white"
+                                href="/mantenimiento_de_hardware/solicitud">
+                                <img src="./images/registro.png" alt="Ícono Formulario" class="menu-icon"
+                                    style="width: 1cm; height: 1cm;">
+                                <span style="font-size: 0.9em;">INGRESO DATOS</span>
+                            </a>
+                        </div>
+
+                        <div class="nav-item d-flex">
+                            <a class="dropdown-item nav-link bg-dark text-white"
+                                href="/mantenimiento_de_hardware/mantenimientos">
+                                <img src="./images/reparacion.png" alt="Ícono Formulario" class="menu-icon"
+                                    style="width: 1cm; height: 1cm;">
+                                <span style="font-size: 0.9em;">EQUIPO MANTENIMIENTO</span>
+                            </a>
+                        </div>
+
+                        <div class="nav-item d-flex">
+                            <a class="dropdown-item nav-link bg-dark text-white"
+                                href="/mantenimiento_de_hardware/mantenimientos2">
+                                <img src="./images/entregar.png" alt="Ícono Formulario" class="menu-icon"
+                                    style="width: 1cm; height: 1cm;">
+                                <span style="font-size: 0.9em;">EQUIPO A ENTREGAR</span>
+                            </a>
+                        </div>
+
+                        <div class="nav-item d-flex">
+                            <a class="dropdown-item nav-link bg-dark text-white"
+                                href="/mantenimiento_de_hardware/mantenimientos3">
+                                <img src="./images/entrega.png" alt="Ícono Formulario" class="menu-icon"
+                                    style="width: 1cm; height: 1cm;">
+                                <span style="font-size: 0.9em;">EQUIPOS ENTREGADOS</span>
+                            </a>
+                        </div>
+
+                        <div class="nav-item d-flex">
+                            <a class="dropdown-item nav-link bg-dark text-white"
+                                href="/mantenimiento_de_hardware/historial">
+                                <img src="./images/historial.png" alt="Ícono Formulario" class="menu-icon"
+                                    style="width: 1cm; height: 1cm;">
+                                <span style="font-size: 0.9em;">HISTORIAL</span>
+                            </a>
+                        </div>
+
+                        <div class="nav-item d-flex">
+                            <a class="dropdown-item nav-link bg-dark text-white"
+                                href="/mantenimiento_de_hardware/estadisticas">
+                                <img src="./images/estadistica.png" alt="Ícono Formulario" class="menu-icon"
+                                    style="width: 1cm; height: 1cm;">
+                                <span style="font-size: 0.9em;">ESTADISTICAS</span>
+                            </a>
+                        </div>
+                    </ul>
+
+                    <div class="col-lg-1 d-flex mb-lg-0 mb-2 ms-auto">
+                        <a href="/menu/" class="btn btn-danger">
+                            <i class="bi bi-arrow-bar-left"></i>MENÚ
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-dark" id="dropwdownRevision" style="margin: 0;">
-                            <li>
-                                <a class="dropdown-item nav-link bg-primary text-white"
-                                    href="/mantenimiento_de_hardware/marca">
-                                    <img src="./images/marca.png" alt="Ícono Formulario" class="menu-icon"
-                                        style="width: 1cm; height: 1cm;">
-                                    MARCA
-                                </a>
-
-                                <a class="dropdown-item nav-link bg-primary text-white"
-                                    href="/mantenimiento_de_hardware/equipo_estado">
-                                    <img src="./images/estado.png" alt="Ícono Formulario" class="menu-icon"
-                                        style="width: 1cm; height: 1cm;">
-                                    ESTADO DEL EQUIPO
-                                </a>
-
-                                <a class="dropdown-item nav-link bg-primary text-white"
-                                    href="/mantenimiento_de_hardware/tipo_equipo">
-                                    <img src="./images/dispositivos.png" alt="Ícono Formulario" class="menu-icon"
-                                        style="width: 1cm; height: 1cm;">
-                                    TIPO DE EQUIPOS
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="nav-item d-flex">
-                        <a class="dropdown-item nav-link bg-dark text-white"
-                            href="/mantenimiento_de_hardware/solicitud">
-                            <img src="./images/registro.png" alt="Ícono Formulario" class="menu-icon"
-                                style="width: 1cm; height: 1cm;">
-                            INGRESO DATOS
-                        </a>
                     </div>
 
-                    <div class="nav-item d-flex">
-                        <a class="dropdown-item nav-link bg-dark text-white"
-                            href="/mantenimiento_de_hardware/mantenimientos">
-                            <img src="./images/reparacion.png" alt="Ícono Formulario" class="menu-icon"
-                                style="width: 1cm; height: 1cm;">
-                            EQUIPO MANTENIMIENTO
-                        </a>
-                    </div>
 
-                    <div class="nav-item d-flex">
-                        <a class="dropdown-item nav-link bg-dark text-white"
-                            href="/mantenimiento_de_hardware/mantenimientos2">
-                            <img src="./images/entregar.png" alt="Ícono Formulario" class="menu-icon"
-                                style="width: 1cm; height: 1cm;">
-                            EQUIPO ENTREGAR
-                        </a>
-                    </div>
-
-                    <div class="nav-item d-flex">
-                        <a class="dropdown-item nav-link bg-dark text-white"
-                            href="/mantenimiento_de_hardware/mantenimientos3">
-                            <img src="./images/historial.png" alt="Ícono Formulario" class="menu-icon"
-                                style="width: 1cm; height: 1cm;">
-                            HISTORIAL EQUIPOS
-                        </a>
-                    </div>
-
-                    <div class="nav-item d-flex">
-                        <a class="dropdown-item nav-link bg-dark text-white"
-                            href="/mantenimiento_de_hardware/estadisticas">
-                            <img src="./images/estadistica.png" alt="Ícono Formulario" class="menu-icon"
-                                style="width: 1cm; height: 1cm;">
-                            ESTADISTICAS
-                        </a>
-                    </div>
-                </ul>
-
-
-                <div class="col-lg-1 d-flex mb-lg-0 mb-2">
-                    <a href="/menu/" class="btn btn-danger">
-                        <i class="bi bi-arrow-bar-left"></i>MENÚ
-                    </a>
-                </div>
             </div>
         </div>
     </nav>

@@ -80,6 +80,7 @@ const datatable = new DataTable('#tablaEquipos2', {
             title: 'ESTADO',
             data: 'estado'
         },
+        
         {
             title: "OFICIO DE ENTREGA",
             data: 'equipo_codigo',
@@ -90,23 +91,10 @@ const datatable = new DataTable('#tablaEquipos2', {
                 return `<button class="btn btn-success" data-codigo='${data}'>PDF</button>`;
             }
         }
+        
     ]
 
 });
-
-// {
-//     title: "OFICIO DE ENTREGA",
-//     data: 'equipo_codigo',
-//     searchable: false,
-//     orderable: false,
-//     render: (data, type, row, meta) => {
-//         equipo_codigo.value = data;
-//         return `<button class="btn btn-success" data-codigo='${data}' style="background-color: #333; color: #fff; border: 1px solid #00f; padding: 10px; border-radius: 10px;">
-//                     <img src="./images/imprimir.png" alt="Texto alternativo de la imagen" style="width: 40px; height: 40px; margin-right: 5px;">
-//                     PDF
-//                 </button>`;
-//     }
-// }
 
 
 
@@ -177,8 +165,11 @@ const pdf = async (e) => {
 };
 
 
+
 buscar();
 
 btnBuscar.addEventListener('click', buscar);
 
 datatable.on('click', '.btn-success', pdf);
+
+

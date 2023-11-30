@@ -5,6 +5,7 @@ namespace Controllers;
 use Exception;
 use Model\Entrega;
 use Model\Equipo;
+use Model\Historial;
 use Model\Solicitud;
 use Model\Reparacion;
 use Model\Personal;
@@ -46,6 +47,7 @@ class Mantenimiento2Controller
                         s.sol_fecha AS FECHA,
                         r.rep_codigo AS REPARACION_CODIGO,
                         r.rep_notificacion AS NOTIFICACION,
+                        dep.dep_desc_lg AS DEPENDENCIA,
                         trim(per.per_nom1) ||' '||trim(per.per_nom2)||' '||trim(per.per_ape1)||' '||trim(per.per_ape2) AS NOMBRE_USUARIO,
                         trim(per2.per_nom1) ||' '||trim(per2.per_nom2)||' '||trim(per2.per_ape1)||' '||trim(per2.per_ape2) AS NOMBRE_TECNICO,
                         s.sol_usuario_telefono AS TELEFONO_USUARIO,
@@ -60,6 +62,7 @@ class Mantenimiento2Controller
                     LEFT JOIN mper per ON per.per_catalogo = s.sol_usuario_catalogo
                     LEFT JOIN mper per2 ON per2.per_catalogo = s.sol_tecnico_catalogo
                     LEFT JOIN m_tipo_equipo te ON te.tipo_equipo_codigo=e.equipo_tipo
+                    LEFT JOIN mdep dep ON dep.dep_llave = e.equipo_dependencia
                     INNER JOIN m_reparacion r on r.rep_equipo_codigo = e.equipo_codigo
                     WHERE e.equipo_estado = 2";
             if ($tipo_equipo != "") {
@@ -148,6 +151,7 @@ class Mantenimiento2Controller
             $entrega = new Entrega($_POST);
             $resultado_entrega = $entrega->crear();
             $id_resultado_entrega = $resultado_entrega['id'];
+
             if ($resultado_entrega['resultado'] == 1) {
                 $rep_equipo = $_POST['ent_equipo_codigo'];
                 $equipo = Equipo::find($rep_equipo);
@@ -156,11 +160,30 @@ class Mantenimiento2Controller
 
 
                 if ($resultado_equipo['resultado'] == 1) {
+                    $arrayHistorial = array(
+                        'equi_his_codigo_equipo' => $rep_equipo,
+                        'equi_his_estado' => 3
+                    );
 
-                    echo json_encode([
-                        'mensaje' => 'El equipo ha sido entregado exitosamente.',
-                        'codigo' => 1
-                    ]);
+
+                    $historial = new Historial($arrayHistorial);
+                    $resultado_historial = $historial->crear();
+
+
+                    if ($resultado_historial['resultado'] == 1) {
+
+                        echo json_encode([
+                            'mensaje' => 'El equipo ha sido entregado exitosamente.',
+                            'codigo' => 1
+                        ]);
+                    } else {
+                        $entrega::SQL("DELETE m_entrega WHERE rep_codigo = $id_resultado_entrega");
+                        $equipo::SQL("UPDATE m_equipo SET equipo_estado = 2 WHERE equipo_codigo = $rep_equipo");
+                        echo json_encode([
+                            'mensaje' => 'Ocurrió un error',
+                            'codigo' => 0
+                        ]);
+                    }
                 } else {
                     $entrega::SQL("DELETE m_entrega WHERE rep_codigo = $id_resultado_entrega");
                     echo json_encode([
@@ -170,8 +193,8 @@ class Mantenimiento2Controller
                 }
             }
         } catch (Exception $e) {
-
             $entrega::SQL("DELETE m_entrega WHERE rep_codigo = $id_resultado_entrega");
+            $equipo::SQL("UPDATE m_equipo SET equipo_estado = 2 WHERE equipo_codigo = $rep_equipo");
             echo json_encode([
                 'detalle' => $e->getMessage(),
                 'mensaje' => 'Ocurrió un error',
@@ -180,25 +203,45 @@ class Mantenimiento2Controller
         }
     }
 
-    public static function agregarNotificaciones() {
+    public static function agregarNotificaciones()
+    {
         try {
-            $reperacion_codigo = $_POST['rep_codigo']; // Cambio de columna
-            $Reperacion = Reparacion::find($reperacion_codigo); // Cambio de Modelo
-            $Reperacion->rep_notificacion = $_POST['rep_notificacion'];; // Cambio de columna
-            $resultado = $Reperacion->actualizar();
+
+           
+            $reparacion_codigo = $_POST['rep_codigo']; // Cambio de columna
+            $reparacion = Reparacion::find($reparacion_codigo); // Cambio de Modelo
+            $notificacion_anterior = $reparacion->rep_notificacion;
+            $reparacion->rep_notificacion = $_POST['rep_notificacion'];
+            $equipo_codigo = $reparacion->rep_equipo_codigo; // Cambio de columna
+            $resultado = $reparacion->actualizar();
 
             if ($resultado['resultado'] == 1) {
-                echo json_encode([
-                    'mensaje' => 'Observación agregado correctamente',
-                    'codigo' => 1
-                ]);
-            } else {
-                echo json_encode([
-                    'mensaje' => 'Ocurrió un error',
-                    'codigo' => 0
-                ]);
+                $arrayHistorial = array(
+                    'equi_his_codigo_equipo' => $equipo_codigo,
+                    'equi_his_estado' => 4
+                );
+
+
+                $historial = new Historial($arrayHistorial);
+                $resultado_historial = $historial->crear();
+
+
+                if ($resultado_historial['resultado'] == 1) {
+                    echo json_encode([
+                        'mensaje' => 'Observación agregado correctamente',
+                        'codigo' => 1
+                    ]);
+                } else {
+                    $reparacion::SQL("UPDATE m_reparacion SET rep_notificacion = '$notificacion_anterior' WHERE rep_codigo = $reparacion_codigo");
+                    echo json_encode([
+                        'mensaje' => 'Ocurrió un error',
+                        'codigo' => 0
+                    ]);
+                }
             }
         } catch (Exception $e) {
+            $reparacion::SQL("UPDATE m_reparacion SET rep_notificacion = '$notificacion_anterior' WHERE rep_codigo = $reparacion_codigo");
+
             echo json_encode([
                 'detalle' => $e->getMessage(),
                 'mensaje' => 'Ocurrió un error',

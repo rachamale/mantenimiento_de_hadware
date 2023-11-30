@@ -42,6 +42,8 @@ class MantenimientoController
 
             $sql = "SELECT
                         e.equipo_codigo AS EQUIPO_CODIGO,
+                        s.sol_codigo SOLICITUD_CODIGO,
+                        s.sol_observacion OBSERVACION,
                         s.sol_fecha AS FECHA,
                         trim(per.per_nom1) ||' '||trim(per.per_nom2)||' '||trim(per.per_ape1)||' '||trim(per.per_ape2) AS NOMBRE_USUARIO,
                         trim(per2.per_nom1) ||' '||trim(per2.per_nom2)||' '||trim(per2.per_ape1)||' '||trim(per2.per_ape2) AS NOMBRE_TECNICO,
@@ -53,7 +55,7 @@ class MantenimientoController
                         UPPER(es.equipo_estado_descripcion) AS ESTADO
                     FROM m_equipo e
                     LEFT JOIN m_equipo_estado es ON e.equipo_estado = es.equipo_estado_codigo
-                    LEFT JOIN m_solicitud s ON s.sol_equipo_codigo = e.equipo_codigo
+                    INNER JOIN m_solicitud s ON s.sol_equipo_codigo = e.equipo_codigo
                     LEFT JOIN mper per ON per.per_catalogo = s.sol_usuario_catalogo
                     LEFT JOIN mper per2 ON per2.per_catalogo = s.sol_tecnico_catalogo
                     LEFT JOIN m_tipo_equipo te ON te.tipo_equipo_codigo=e.equipo_tipo
@@ -141,6 +143,32 @@ class MantenimientoController
         } catch (Exception $e) {
 
             $reparacion::SQL("DELETE m_reparacion WHERE rep_codigo = $id_resultado_reparacion");
+            echo json_encode([
+                'detalle' => $e->getMessage(),
+                'mensaje' => 'Ocurrió un error',
+                'codigo' => 0
+            ]);
+        }
+    }
+    public static function agregarObservacion() {
+        try {
+            $solicitud_codigo = $_POST['sol_codigo']; // Cambio de columna
+            $Solicitud = Solicitud::find($solicitud_codigo); // Cambio de Modelo
+            $Solicitud->sol_observacion = $_POST['sol_observacion'];; // Cambio de columna
+            $resultado = $Solicitud->actualizar();
+
+            if ($resultado['resultado'] == 1) {
+                echo json_encode([
+                    'mensaje' => 'Observación agregado correctamente',
+                    'codigo' => 1
+                ]);
+            } else {
+                echo json_encode([
+                    'mensaje' => 'Ocurrió un error',
+                    'codigo' => 0
+                ]);
+            }
+        } catch (Exception $e) {
             echo json_encode([
                 'detalle' => $e->getMessage(),
                 'mensaje' => 'Ocurrió un error',

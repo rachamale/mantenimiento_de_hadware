@@ -25,7 +25,7 @@ class SolicitudController
         ]);
     }
 
-    
+
     public static function buscarCatalogoApi()
     {
         $validarCatalogo = $_GET['per_catalogo'];
@@ -64,13 +64,14 @@ class SolicitudController
                 $equipo_codigo = $resultado_equipo['id'];
 
                 $solicitud = new Solicitud($_POST);
-                $solicitud->sol_equipo_codigo=$equipo_codigo;
+                $solicitud->sol_equipo_codigo = $equipo_codigo;
                 $resultado_solicitud = $solicitud->crear();
 
                 if ($resultado_solicitud['resultado'] == 1) {
                     echo json_encode([
                         'mensaje' => 'Registro guardado correctamente',
-                        'codigo' => 1
+                        'codigo' => 1,
+                        'equipo' => $equipo_codigo
                     ]);
                 } else {
                     // $equipo::SQL("DELETE m_equipo WHERE equipo_codigo = $equipo_codigo");

@@ -11,7 +11,6 @@ class Equipo extends ActiveRecord
         'equipo_motivo',
         'equipo_modelo',
         'equipo_serial',
-        'equipo_almacenamiento',
         'equipo_lector_cd',
         'equipo_tarjeta_sonido',
         'equipo_drivers',
@@ -23,17 +22,25 @@ class Equipo extends ActiveRecord
         'equipo_descripcion',
         'equipo_estado',
         'equipo_detalle_situacion',
+        'equipo_tipo_disco_duro',
+        'equipo_capacidad_disco_duro',
+        'equipo_tipo_memoria_ram',
+        'equipo_capacidad_memoria_ram',
+        'equipo_velocidad_memoria_ram',
+        'equipo_tipo_procesador',
+        'equipo_velocidad_procesador',
+        'equipo_targeta_red',
+        'equipo_tipo_impresora',
     ];
-    
+
     protected static $idTabla = 'equipo_codigo';
-    
+
     public $equipo_codigo;
     public $equipo_oficio;
     public $equipo_dependencia;
     public $equipo_motivo;
     public $equipo_modelo;
     public $equipo_serial;
-    public $equipo_almacenamiento;
     public $equipo_lector_cd;
     public $equipo_tarjeta_sonido;
     public $equipo_drivers;
@@ -45,7 +52,18 @@ class Equipo extends ActiveRecord
     public $equipo_descripcion;
     public $equipo_estado;
     public $equipo_detalle_situacion;
-    
+
+    // Nuevos campos
+    public $equipo_tipo_disco_duro;
+    public $equipo_capacidad_disco_duro;
+    public $equipo_tipo_memoria_ram;
+    public $equipo_capacidad_memoria_ram;
+    public $equipo_velocidad_memoria_ram;
+    public $equipo_tipo_procesador;
+    public $equipo_velocidad_procesador;
+    public $equipo_targeta_red;
+    public $equipo_tipo_impresora;
+
     // Constructor
     public function __construct($args = [])
     {
@@ -55,7 +73,6 @@ class Equipo extends ActiveRecord
         $this->equipo_motivo = $args['equipo_motivo'] ?? '';
         $this->equipo_modelo = $args['equipo_modelo'] ?? '';
         $this->equipo_serial = $args['equipo_serial'] ?? '';
-        $this->equipo_almacenamiento = $args['equipo_almacenamiento'] ?? null;
         $this->equipo_lector_cd = $args['equipo_lector_cd'] ?? NULL;
         $this->equipo_tarjeta_sonido = $args['equipo_tarjeta_sonido'] ?? null;
         $this->equipo_drivers = $args['equipo_drivers'] ?? null;
@@ -67,9 +84,21 @@ class Equipo extends ActiveRecord
         $this->equipo_descripcion = $args['equipo_descripcion'] ?? '';
         $this->equipo_estado = $args['equipo_estado'] ?? 1;
         $this->equipo_detalle_situacion = $args['equipo_detalle_situacion'] ?? 1;
+
+        // Nuevos campos
+        $this->equipo_tipo_disco_duro = $args['equipo_tipo_disco_duro'] ?? '';
+        $this->equipo_capacidad_disco_duro = $args['equipo_capacidad_disco_duro'] ?? '';
+        $this->equipo_tipo_memoria_ram = $args['equipo_tipo_memoria_ram'] ?? '';
+        $this->equipo_capacidad_memoria_ram = $args['equipo_capacidad_memoria_ram'] ?? '';
+        $this->equipo_velocidad_memoria_ram = $args['equipo_velocidad_memoria_ram'] ?? '';
+        $this->equipo_tipo_procesador = $args['equipo_tipo_procesador'] ?? '';
+        $this->equipo_velocidad_procesador = $args['equipo_velocidad_procesador'] ?? '';
+        $this->equipo_targeta_red = $args['equipo_targeta_red'] ?? '';
+        $this->equipo_tipo_impresora = $args['equipo_tipo_impresora'] ?? '';
     }
 
-    public function getEquipo($equipo_codigo){
+    public function getEquipo($equipo_codigo)
+    {
         $sql = "    SELECT                            
                         me.ent_fecha AS FECHA,
                         e.equipo_codigo AS REGISTRO,
@@ -94,6 +123,7 @@ class Equipo extends ActiveRecord
                     LEFT JOIN mdep dep ON dep.dep_llave = e.equipo_dependencia  
                     WHERE e.equipo_estado = 3
                     AND e.equipo_codigo = $equipo_codigo";
-        return $this->fetchArray($sql);
+                    return $this->fetchArray($sql);
     }
+
 }

@@ -1,7 +1,6 @@
 <?php 
 require_once __DIR__ . '/../includes/app.php';
 
-
 use MVC\Router;
 use Controllers\AppController;
 use Controllers\SolicitudController;
@@ -12,14 +11,13 @@ use Controllers\ MantenimientoController;
 use Controllers\ Mantenimiento2Controller;
 use Controllers\ ReporteController;
 use Controllers\Mantenimiento3Controller;
+use Controllers\EstadisticaController;
+use Controllers\Reporte2Controller;
 
 $router = new Router();
 $router->setBaseURL('/' . $_ENV['APP_NAME']);
 
 $router->get('/', [AppController::class,'index']);
-
-
-
 
 $router->get('/solicitud', [SolicitudController::class,'index']);
 $router->post('/API/solicitud/guardar', [SolicitudController::class,'guardarAPI'] );
@@ -47,12 +45,14 @@ $router->get('/mantenimientos', [MantenimientoController::class,'index'] );
 $router->get('/API/mantenimientos/buscar', [MantenimientoController::class,'buscarAPI'] );
 $router->post('/API/mantenimientos/guardar', [MantenimientoController::class,'guardarAPI'] );
 $router->get('/API/mantenimientos/buscarCatalogo2', [MantenimientoController::class,'buscarCatalogo2API'] );
+$router->post('/API/mantenimientos/observacion', [MantenimientoController::class,'agregarObservacion']);
 
 $router->get('/mantenimientos2', [Mantenimiento2Controller::class,'index'] );
 $router->get('/API/mantenimientos2/buscar', [Mantenimiento2Controller::class,'buscarAPI'] );
 $router->get('/API/mantenimientos2/buscarCatalogo', [Mantenimiento2Controller::class,'buscarCatalogoAPI'] );
 $router->get('/API/mantenimientos2/buscarCatalogo2', [Mantenimiento2Controller::class,'buscarCatalogo2API'] );
 $router->post('/API/mantenimientos2/guardar', [Mantenimiento2Controller::class,'guardarAPI'] );
+$router->post('/API/mantenimientos2/notificaciones', [Mantenimiento2Controller::class,'agregarNotificaciones']);
 
 $router->get('/mantenimientos3', [Mantenimiento3Controller::class,'index'] );
 $router->get('/API/mantenimiento3/buscar', [Mantenimiento3Controller::class,'buscarAPI'] );
@@ -60,15 +60,25 @@ $router->get('/API/mantenimiento3/buscar', [Mantenimiento3Controller::class,'bus
 // $router->get('/API/mantenimientos2/buscarCatalogo2', [Mantenimiento2Controller::class,'buscarCatalogo2API'] );
 // $router->post('/API/mantenimientos2/guardar', [Mantenimiento2Controller::class,'guardarAPI'] );
 
-
 //reporte
 $router->get('/pdf', [ReporteController::class,'pdf']);
 $router->get('/reporte', [ReporteController::class, 'index']);
 $router->get('/API/reporte/generar', [ReporteController::class, 'pdf']);
-// $router->post('/API/equipo_estado/guardar', [Equipo_EstadoController::class,'guardarAPI'] );
-// $router->post('/API/equipo_estado/modificar', [Equipo_EstadoController::class,'modificarAPI'] );
-// $router->post('/API/equipo_estado/eliminar', [Equipo_EstadoController::class,'eliminarAPI'] );
-// $router->get('/API/equipo_estado/buscar', [Equipo_EstadoController::class,'buscarAPI'] );
+
+//reporte2
+$router->get('/pdf2', [Reporte2Controller::class,'pdf2']);
+$router->get('/informacion', [Reporte2Controller::class, 'pdf2']);
+// $router->get('/API/reporte2/generar', [Reporte2Controller::class, 'pdf2']);
+
+//estadistica
+$router->get('/estadisticas', [EstadisticaController::class, 'index']);
+$router->get('/API/estadisticas/getEstadisticas', [EstadisticaController::class, 'getDataAPI']);
+$router->get('/API/estadisticas/buscarDatosSolicitudes', [EstadisticaController::class, 'buscarDatosSolicitudes']);
+$router->get('/API/estadisticas/buscarDatosReparaciones', [EstadisticaController::class, 'buscarDatosReparaciones']);
+$router->get('/API/estadisticas/buscarDatosEntregas', [EstadisticaController::class, 'buscarDatosEntregas']);
+$router->get('/API/estadisticas/buscarDatosEquiposDependencia', [EstadisticaController::class, 'buscarDatosEquiposDependencia']);
+$router->get('/API/estadisticas/buscarDatosMarcasEquipos', [EstadisticaController::class, 'buscarDatosMarcasEquipos']);
+$router->get('/API/estadisticas/EstadisticaEntregasGeneral', [EstadisticaController::class, 'EstadisticaEntregasGeneral']);
 
 
 // $router->get('/dispositivos', [DispositivoController::class,'index']);

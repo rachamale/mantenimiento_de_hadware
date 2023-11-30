@@ -30,8 +30,11 @@ const tituloFormEquipo = document.getElementById('tituloFormEquipo');
 const camposCPU1 = document.getElementById('camposCPU1');
 const camposCPU2 = document.getElementById('camposCPU2');
 const camposOtros = document.getElementById('camposOtros');
+const campoimpresora = document.getElementById('campoimpresora');
+
 
 const detalleCPU = document.getElementsByClassName('detalleCPU');
+const detalleImpresora = document.querySelectorAll('.detalleImpresora');
 
 
 
@@ -48,10 +51,10 @@ const nombreDelTecnico = document.getElementById('equipo_tecnico_nombre');
 // const foto = document.getElementById('foto');
 
 const tipoFormDiccionario = {
-	1: "Monitor",
-	2: "Impresora",
-	3: "CPU",
-	4: "Otros"
+    1: "Monitor",
+    2: "Impresora",
+    3: "CPU",
+    4: "Otros"
 }
 FormOficio.style.display = ''
 FormTipo.style.display = 'none'
@@ -100,25 +103,64 @@ const showEquipoForm = (e) => {
     btnSiguiente.style.display = ''
     btnGuardar.style.display = 'none'
 
+  //VALIDAR SI ES EQUIPO CPU
     if (tipoForm !== 3) {
         camposCPU1.style.display = 'none';
+        camposCPU2.style.display = 'none';
         camposCPU2.style.display = 'none';
     } else {
         camposCPU1.style.display = '';
         camposCPU2.style.display = '';
     }
 
+      //VALIDAR SI ES EQUIPO OTROS
     if (tipoForm !== 4) {
         camposOtros.style.display = 'none';
     } else {
         camposOtros.style.display = '';
     }
+    //VALIDAR SI ES EQUIPO IMPRESORA
+    if (tipoForm === 2) {
+        campoimpresora.style.display = '';
 
+    } else {
+        campoimpresora.style.display = 'none';
+    }
 
     tituloFormEquipo.innerText = 'FORMULARIO DE ' + parametroTitulo
 
 
 }
+// const pdf = async (equipo) => {
+//     console.log(equipo)
+//     const url = `/mantenimiento_de_hardware/pdf2?equipo_codigo=${equipo}`;
+//     const headers = new Headers();
+//     headers.append("X-Requested-With", "fetch");
+//     const config = {
+//         method: 'GET',
+//         headers,
+//     };
+
+//     try {
+//         const respuesta = await fetch(url, config)
+//         if (respuesta.ok) {
+//             const blob = await respuesta.blob();
+
+//             if (blob) {
+//                 const urlBlob = window.URL.createObjectURL(blob);
+
+//                 // Abre el PDF en una nueva ventana o pestaña
+//                 window.open(urlBlob, '_blank');
+//             } else {
+//                 console.error('No se pudo obtener el blob del PDF.');
+//             }
+//         } else {
+//             console.error('Error al generar el PDF.');
+//         }
+//     } catch (error) {
+//         console.error(error);
+//     }
+// };
 
 const showDetalleForm = (e) => {
     e.preventDefault()
@@ -132,17 +174,24 @@ const showDetalleForm = (e) => {
     btnGuardar.style.display = ''
     btnGuardar.style.display = ''
     if (tipoForm !== 3) {
-
         for (const item of detalleCPU) {
-            item.style.display = 'none'
+            item.style.display = 'none';
+        }
+    } else {
+        for (const item of detalleCPU) {
+            item.style.display = '';
         }
     }
-    else {
-        for (const item of detalleCPU) {
-            item.style.display = ''
+    
+    if (tipoForm !== 2) {
+        for (const item of detalleImpresora) {
+            item.style.display = 'none';
+        }
+    } else {
+        for (const item of detalleImpresora) {
+            item.style.display = '';
         }
     }
-
 
 }
 ////pendiente de arreglar 
@@ -161,7 +210,7 @@ const getFormSecuencial = (e) => {
         showEquipoForm(e)
     } else if (posicionForm === 2) {
         if (tipoForm === 3) {
-            if (!validarFormulario(FormEquipo, ['equipo_tipo'])) {
+            if (!validarFormulario(FormEquipo, ['equipo_tipo', 'equipo_tipo_impresora'])) {
                 Toast.fire({
                     icon: 'info',
                     text: 'Debe llenar todos los datos'
@@ -172,12 +221,20 @@ const getFormSecuencial = (e) => {
         else if (tipoForm === 4) {
             if (!validarFormulario(FormEquipo,
                 [
-                    'equipo_fuente_poder',
-                    'equipo_tarjeta_grafica',
-                    'equipo_drivers',
-                    'equipo_tarjeta_sonido',
                     'equipo_lector_cd',
-                    'equipo_almacenamiento'
+                    'equipo_tarjeta_sonido',
+                    'equipo_drivers',
+                    'equipo_tarjeta_grafica',
+                    'equipo_fuente_poder',
+                    'equipo_tipo_disco_duro',
+                    'equipo_capacidad_disco_duro',
+                    'equipo_tipo_memoria_ram',
+                    'equipo_capacidad_memoria_ram',
+                    'equipo_velocidad_memoria_ram',
+                    'equipo_tipo_procesador',
+                    'equipo_velocidad_procesador',
+                    'equipo_targeta_red',
+                    'equipo_tipo_impresora',
                 ])) {
                 Toast.fire({
                     icon: 'info',
@@ -186,15 +243,28 @@ const getFormSecuencial = (e) => {
                 return;
             }
         }
+
+
         else {
             if (!validarFormulario(FormEquipo,
-                ['equipo_fuente_poder',
-                    'equipo_tarjeta_grafica',
-                    'equipo_drivers',
-                    'equipo_tarjeta_sonido',
+                [   
+                    'equipo_tipo',
                     'equipo_lector_cd',
-                    'equipo_almacenamiento',
-                    'equipo_tipo'
+                    'equipo_tarjeta_sonido',
+                    'equipo_drivers',
+                    'equipo_tarjeta_grafica',
+                    'equipo_fuente_poder',
+                    'equipo_tipo_disco_duro',
+                    'equipo_capacidad_disco_duro',
+                    'equipo_tipo_memoria_ram',
+                    'equipo_capacidad_memoria_ram',
+                    'equipo_velocidad_memoria_ram',
+                    'equipo_tipo_procesador',
+                    'equipo_velocidad_procesador',
+                    'equipo_targeta_red',
+                    'equipo_tipo_impresora',
+
+
                 ])) {
                 Toast.fire({
                     icon: 'info',
@@ -457,7 +527,7 @@ const eliminar = async (e) => {
 }
 
 const guardarFormulario = async () => {
-    if (await confirmacion('warning', 'Desea guardar los datos del formulario?')) {
+    if (await confirmacion('question', '¿Desea guardar los datos del formulario y/o imprimir PDF?')) {
         console.log(tipoSelect.value)
         const body = new FormData(FormEquipoFull);
         body.delete('equipo_tecnico_nombre')
@@ -492,12 +562,21 @@ const guardarFormulario = async () => {
             const respuesta = await fetch(url, config);
             const data = await respuesta.json();
             console.log(data)
-            const { codigo, mensaje, detalle } = data;
+            const { codigo, mensaje, detalle, equipo} = data;
+
+            console.log(equipo)
             let icon = 'info';
             switch (codigo) {
                 case 1:
+                    
+
+
+
+                    
                     formularioEquipo.reset();
                     icon = 'success';
+                    pdf2(equipo);
+                    console.log('Esperando PDF')
                     break;
 
                 case 0:
@@ -520,9 +599,6 @@ const guardarFormulario = async () => {
 
     }
 }
-
-
-
 
 
 btnSiguiente.addEventListener('click', getFormSecuencial)
@@ -575,7 +651,7 @@ function onFormSubmit(e) {
 
     FormEquipoFull.equipo_usuario_cat_entrega.value = verDatos.sol_usuario_catalogo;
 
-    FormEquipoFull.equipo_almacenamiento1.value = verDatos.equipo_almacenamiento
+    // FormEquipoFull.equipo_almacenamiento1.value = verDatos.equipo_almacenamiento
 
     FormEquipoFull.equipo_usuario_numero.value = verDatos.sol_usuario_telefono;
 
@@ -609,12 +685,59 @@ function onFormSubmit(e) {
 
     FormEquipoFull.equipo_con_cable1.value = verDatos.equipo_con_cable;
 
+    FormEquipoFull.equipo_tipo_disco_duro1.value = verDatos.equipo_tipo_disco_duro;
+
+    FormEquipoFull.equipo_capacidad_disco_duro1.value = verDatos.equipo_capacidad_disco_duro;
+
+    FormEquipoFull.equipo_tipo_memoria_ram1.value = verDatos.equipo_tipo_memoria_ram;
+
+    FormEquipoFull.equipo_capacidad_memoria_ram1.value = verDatos.equipo_capacidad_memoria_ram;
+
+    FormEquipoFull.equipo_velocidad_memoria_ram1.value = verDatos.equipo_velocidad_memoria_ram;
+
+    FormEquipoFull.equipo_tipo_procesador1.value = verDatos.equipo_tipo_procesador;
+
+    FormEquipoFull.equipo_velocidad_procesador1.value = verDatos.equipo_velocidad_procesador;
+
+    FormEquipoFull.equipo_targeta_red1.value = verDatos.equipo_targeta_red;
+
+    FormEquipoFull.equipo_tipo_impresora1.value = verDatos.equipo_tipo_impresora;
 
 }
 
+const pdf2 = async (id) => {
+
+
+    const url = `/mantenimiento_de_hardware/pdf2?equipo_codigo=${id}`;
+
+    const headers = new Headers();
+        headers.append("X-Requested-With", "fetch");
+        const config = {
+            method: 'GET',
+            headers,
+        };
+
+        try {
+            const respuesta = await fetch(url, config)
+            if (respuesta.ok) {
+                const blob = await respuesta.blob();
+
+                if (blob) {
+                    const urlBlob = window.URL.createObjectURL(blob);
+
+                    // Abre el PDF en una nueva ventana o pestaña
+                    window.open(urlBlob, '_blank');
+                } else {
+                    console.error('No se pudo obtener el blob del PDF.');
+                }
+            } else {
+                console.error('Error al generar el PDF.');
+            }
+        } catch (error) {
+            console.error(error);
+        }
+};
+
 btnAnterior.addEventListener('click', getFormSecuencialBack)
-
 btnGuardar.addEventListener('click', guardarFormulario)
-
-
 agregarDatos.addEventListener("click", onFormSubmit);

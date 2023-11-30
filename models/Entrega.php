@@ -4,11 +4,10 @@ namespace Model;
 
 class Entrega extends ActiveRecord {
     protected static $tabla = 'm_entrega';
-    protected static $columnasDB = ['ent_fecha', 'ent_usuario_catalogo', 'ent_usuario_numero', 'ent_tecnico_catalogo', 'ent_detalle_situacion', 'ent_equipo_codigo'];
+    protected static $columnasDB = [ 'ent_usuario_catalogo', 'ent_usuario_numero', 'ent_tecnico_catalogo', 'ent_detalle_situacion', 'ent_equipo_codigo'];
     protected static $idTabla = 'ent_codigo';
 
     public $ent_codigo;
-    public $ent_fecha;
     public $ent_usuario_catalogo;
     public $ent_usuario_numero;
     public $ent_tecnico_catalogo;
@@ -17,7 +16,6 @@ class Entrega extends ActiveRecord {
 
     public function __construct($args = []) {
         $this->ent_codigo = $args['ent_codigo'] ?? null;
-        $this->ent_fecha = $args['ent_fecha'] ?? '';
         $this->ent_usuario_catalogo = $args['ent_usuario_catalogo'] ?? null;
         $this->ent_usuario_numero = $args['ent_usuario_numero'] ?? null;
         $this->ent_tecnico_catalogo = $args['ent_tecnico_catalogo'] ?? null;

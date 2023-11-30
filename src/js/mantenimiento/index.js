@@ -6,6 +6,7 @@ import { validarFormulario, Toast, confirmacion } from "../funciones";
 
 const formulario = document.getElementById('formularioMantenimiento');
 const formularioGuarda = document.getElementById('formularioGuarda');
+const formularioObservacion = document.getElementById('formularioObservacion');
 
 const btnBuscar = document.getElementById('btnBuscar');
 
@@ -15,22 +16,20 @@ const equipo_codigo = document.getElementById('rep_equipo_codigo');
 
 const asignarOficialModal = document.getElementById('asignarOficialModal');
 
+
 const botonCerrarModal = document.querySelector('.modal-header .close');
+
 
 const rep_tecnico_catalogo = document.getElementById('rep_tecnico_catalogo');
 
 const nombres = [];
 
 
+
 const tablaEquipos2 = document.getElementById('tablaEquipos2');
 
-tablaEquipos2.addEventListener('click', async function (event) {
-    if (event.target.classList.contains('btn-detalle-codigo')) {
-        asignarOficialModal.classList.add('show');
-        asignarOficialModal.style.display = 'block';
-        document.body.classList.add('modal-open');
-    }
-});
+
+
 
 
 
@@ -73,8 +72,21 @@ const datatable = new DataTable('#tablaEquipos2', {
             data: 'descripcion'
         },
         {
+            title: 'OBSERVACIÓN',
+            data: 'observacion'
+        },
+        {
             title: 'ESTADO',
             data: 'estado'
+        },
+        {
+            title: "OBSERVACIONES",
+            data: 'solicitud_codigo',
+            searchable: false,
+            orderable: false,
+            render: (data, type, row, meta) => {
+                return `<button class='btn-outline-info' data-codigo='${data}'>AGREGAR OBSERVACIÓN</button>`
+            }
         },
         {
             title: "FORMULARIO DE EQUIPO REPARADO",
@@ -82,7 +94,7 @@ const datatable = new DataTable('#tablaEquipos2', {
             searchable: false,
             orderable: false,
             render: (data, type, row, meta) => {
-                equipo_codigo.value = data
+                console.log(data) 
                 return `<button class='btn btn-success btn-detalle-codigo' data-codigo='${data}'>FINALIZAR</button>`
             }
         }
@@ -103,7 +115,7 @@ const buscar = async () => {
         const data = await respuesta.json();
         datatable.clear().draw();
         console.log(data)
-        if (data.length >0){
+        if (data.length > 0) {
             contador = 1;
             datatable.rows.add(data).draw();
 
@@ -119,45 +131,46 @@ const buscar = async () => {
     }
 };
 
+
 const buscarCatalogo2 = async () => {
-   
+
     let rep_tecnico_catalogo = formularioGuarda.rep_tecnico_catalogo.value;
     //clearTimeout(typingTimeout); // Limpiar el temporizador anterior (si existe)  
 
     // Función que se ejecutará después del retraso
- 
-        const url = `/mantenimiento_de_hardware/API/mantenimientos/buscarCatalogo2?rep_tecnico_catalogo=${rep_tecnico_catalogo}`;
-        const config = {
-            method: 'GET'
-        };
 
-        try {
-            const respuesta = await fetch(url, config);
-            const data = await respuesta.json();
-            console.log(data);
+    const url = `/mantenimiento_de_hardware/API/mantenimientos/buscarCatalogo2?rep_tecnico_catalogo=${rep_tecnico_catalogo}`;
+    const config = {
+        method: 'GET'
+    };
 
-            if (data && data.length > 0) {
-                const guardaNombre = data[0].nombres;
-                tecnico_nombre.value = guardaNombre;
-                Toast.fire({
-                    icon: 'success',
-                    title: 'El catálogo ingresado es correcto, se muestran los siguientes datos.'
-                });
-            } else {
-                nombres.value = '';
-                Toast.fire({
-                    icon: 'info',
-                    title: 'Ingrese un catálogo válido.'
-                });
-            }
-        } catch (error) {
-            console.log(error);
+    try {
+        const respuesta = await fetch(url, config);
+        const data = await respuesta.json();
+        console.log(data);
+
+        if (data && data.length > 0) {
+            const guardaNombre = data[0].nombres;
+            tecnico_nombre.value = guardaNombre;
             Toast.fire({
-                icon: 'error',
-                title: 'Ocurrió un error al buscar los datos.'
+                icon: 'success',
+                title: 'El catálogo ingresado es correcto, se muestran los siguientes datos.'
+            });
+        } else {
+            nombres.value = '';
+            Toast.fire({
+                icon: 'info',
+                title: 'Ingrese un catálogo válido.'
             });
         }
-    };
+    } catch (error) {
+        console.log(error);
+        Toast.fire({
+            icon: 'error',
+            title: 'Ocurrió un error al buscar los datos.'
+        });
+    }
+};
 
 
 
@@ -171,13 +184,13 @@ const guardar = async (e) => {
         return;
     }
 
-    if (await confirmacion('warning', '¿Estás seguro de que el equipo ha sido reparado?')) {
+    if (await confirmacion('question', '¿Estás seguro de que el equipo ha sido reparado?')) {
         const body = new FormData(formularioGuarda);
         body.delete('equipo_tecnico_nombre')
-
         for (var pair of body.entries()) {
-            console.log('*' + pair[0] + '*|*' + pair[1] + '*');
+            console.log(pair[0]+ ', ' + pair[1]); 
         }
+
         const url = '/mantenimiento_de_hardware/API/mantenimientos/guardar';
         const config = {
             method: 'POST',
@@ -196,6 +209,7 @@ const guardar = async (e) => {
                     icon = 'success';
                     buscar();
                     asignarOficialModal.style.display = 'none';
+                    window.location.reload(true);
                     break;
 
                 case 0:
@@ -240,7 +254,109 @@ asignarOficialModal.addEventListener('click', function (event) {
         //buscarDependencia();
     }
 });
+
+datatable.on('click', '.btn-success', (event) => {
+    const button = event.target;
+    console.log(button.dataset.codigo)
+    formularioGuarda.rep_equipo_codigo.value = button.dataset.codigo;
+    
+    if (event.target.classList.contains('btn-detalle-codigo')) {
+        asignarOficialModal.classList.add('show');
+        asignarOficialModal.style.display = 'block';
+        document.body.classList.add('modal-open');
+    }
+});
+
+
+const modalObservaciones = document.getElementById('modalObservaciones');
+
+// Agrega un evento de clic al botón
+datatable.on('click', '.btn-outline-info', (e) => {
+    const button = e.target;
+    console.log(button.dataset.codigo)
+     formularioObservacion.sol_codigo.value = button.dataset.codigo;
+    // Abre el modal al hacer clic en el botón
+    modalObservaciones.classList.add('show');
+    modalObservaciones.style.display = 'block';
+    document.body.classList.add('modal-open');
+});
+
+
+//////////evento para cerrar el modal haciendo clic
+
+botonCerrarModal.addEventListener('click', function () {
+    // Cierra el modal
+    modalObservaciones.style.display = 'none';
+    document.body.classList.remove('modal-open');
+    //formularioGuarda.reset();
+
+});
+
+////cerrar el modal cuando se hace clic fuera del modal...
+modalObservaciones.addEventListener('click', function (event) {
+    if (event.target === modalObservaciones) {
+        modalObservaciones.style.display = 'none';
+        document.body.classList.remove('modal-open');
+        //buscarDependencia();
+    }
+});
+
+const agregarObservacion = async (e) => {
+    e.preventDefault();
+    const button = e.target
+    const id = button.dataset.id
+    console.log(id)
+    if (await confirmacion('question', '¿Desea agregar observación de la reparación?')) {
+        formularioObservacion.o
+        const body = new FormData(formularioObservacion);
+
+        for(var pair of body.entries()){
+            console.log(pair[0], pair[1]);
+        }
+        const url = '/mantenimiento_de_hardware/API/mantenimientos/observacion';
+        const config = {
+            method: 'POST',
+            body
+        };
+
+        try {
+            const respuesta = await fetch(url, config);
+            const data = await respuesta.json();
+            console.log(data)
+            const { codigo, mensaje, detalle } = data;
+            let icon = 'info';
+
+            switch (codigo) {
+                case 1:
+                    icon = 'success';
+                    buscar();
+                    modalObservaciones.style.display = 'none';
+
+                    window.location.reload(true);
+                    break;
+
+                case 0:
+                    icon = 'error';
+                    console.log(detalle);
+                    break;
+
+                default:
+                    break;
+            }
+
+            Toast.fire({
+                icon,
+                text: mensaje
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+};
+
+
 buscar();
 formularioGuarda.addEventListener('submit', guardar);
+formularioObservacion.addEventListener('submit', agregarObservacion);
 btnBuscar.addEventListener('click', buscar);
 rep_tecnico_catalogo.addEventListener('change', buscarCatalogo2);

@@ -223,14 +223,8 @@
                         </div>
                         <div class="col-md-9">
                             <!-- Primera sección de campos -->
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="sol_fecha">
-                                        <i class="fas fa-calendar"></i> <strong>Fecha de Ingreso</strong>
-                                    </label>
-                                    <input type="date" name="sol_fecha" id="sol_fecha" class="form-control">
-                                </div>
-                                <div class="col-md-6">
+                            <div class="form-row mb-3">
+                                <div class="col-md-12">
                                     <label for="equipo_oficio">
                                         <i class="fas fa-file-alt"></i> <strong>Número de Oficio</strong>
                                     </label>
@@ -240,21 +234,21 @@
 
                             <!-- Segunda sección de campos -->
                             <div class="form-row">
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-4 mb-3">
                                     <label for="sol_usuario_catalogo">
                                         <i class="fas fa-cogs"></i> <strong>Catálogo del Usuario</strong>
                                     </label>
                                     <input value="" id="sol_usuario_catalogo" name="sol_usuario_catalogo"
                                         class="form-control" type="number">
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-4 mb-3">
                                     <label for="equipo_usuario_nombre">
                                         <i class="fas fa-user"></i> <strong>Nombres del Usuario</strong>
                                     </label>
                                     <input type="text" name="equipo_usuario_nombre" id="equipo_usuario_nombre"
                                         class="form-control" readonly>
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-4 mb-3">
                                     <label for="sol_usuario_telefono">
                                         <i class="fas fa-phone"></i> <strong>Número de teléfono</strong>
                                     </label>
@@ -264,7 +258,7 @@
                             </div>
 
                             <!-- Tercera sección de campos -->
-                            <div class="form-group">
+                            <div class="form-group mb-3">
                                 <input type="hidden" name="equipo_dependencia" id="equipo_dependencia"
                                     class="form-control">
                                 <label for="equipo_nombre_dependencia" class="text-center">
@@ -375,16 +369,125 @@
                             </label>
                             <input type="text" name="equipo_serial" id="equipo_serial" class="form-control">
                         </div>
+
+                    </div>
+                    <div class="row mb-3" id="campoimpresora">
+                        <div class="col-md-6 ">
+                            <label for="equipo_tipo_impresora">
+                                <i class="fas fa-print"></i> <strong>Tipo de Impresora</strong>
+                            </label>
+                            <select name="equipo_tipo_impresora" id="equipo_tipo_impresora" class="form-control">
+                                <option value="">Seleccione el tipo de impresora</option>
+                                <option value="laser">Láser</option>
+                                <option value="tinta">Tinta</option>
+                                <option value="pines">Pines</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="row mb-3" id="camposCPU1">
-                        <div class="col-md-4">
-                            <label for="equipo_almacenamiento">
-                                <i class="fas fa-hdd"></i> <strong>Almacenamiento del Equipo</strong>
+                        <div class="col-md-6 mb-3">
+                            <label for="equipo_tipo_disco_duro">
+                                <i class="fas fa-hdd"></i> <strong> Tipos de Disco Duro</strong>
                             </label>
-                            <input type="text" name="equipo_almacenamiento" id="equipo_almacenamiento"
+                            <!-- <input type="text" name="equipo_tipo_disco_duro" id="equipo_tipo_disco_duro"
+                                class="form-control"> -->
+                            <select name="equipo_tipo_disco_duro" id="equipo_tipo_disco_duro" class="form-control">
+                                <option value="">Seleccione el tipo de disco duro</option>
+                                <option value="SSD">SSD</option>
+                                <option value="HDD">HDD</option>
+                                <option value="SERIE M">SERIE M</option>
+
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="equipo_capacidad_disco_duro">
+                                <i class="fas fa-hdd"></i> <strong> Capacidad de Disco Duro</strong>
+                            </label>
+                            <select name="equipo_capacidad_disco_duro" id="equipo_capacidad_disco_duro"
+                                class="form-control">
+                                <option value="">Seleccione la capacidad de Disco Duro</option>
+                                <option value="64 GB">64 GB</option>
+                                <option value="128 GB">128 GB</option>
+                                <option value="256 GB">256 GB</option>
+                                <option value="512 GB">512 GB</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="equipo_capacidad_memoria_ram">
+                                <i class="fas fa-hdd"></i> <strong> Tipos de Memroria Ram</strong>
+                            </label>
+                            <!-- <input type="text" name="equipo_tipo_memoria_ram" id="equipo_tipo_memoria_ram"
+                                class="form-control"> -->
+                            <select name="equipo_tipo_memoria_ram" id="equipo_tipo_memoria_ram" class="form-control">
+                                <option value="">Seleccione el tipo de memoria ram</option>
+                                <option value="DDR1">DDR1</option>
+                                <option value="DDR2">DDR2</option>
+                                <option value="DDR3">DDR3</option>
+                                <option value="DDR4">DDR4</option>
+                                <option value="DDR5">DDR5</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="equipo_capacidad_memoria_ram">
+                                <i class="fas fa-hdd"></i> <strong> Capacidad de Memoria Ram</strong>
+                            </label>
+                            <select name="equipo_capacidad_memoria_ram" id="equipo_capacidad_memoria_ram"
+                                class="form-control">
+                                <option value="">Seleccione la capaciad de memoria</option>
+                                <option value="64 GB">64 GB</option>
+                                <option value="128 GB">128 GB</option>
+                                <option value="256 GB">256 GB</option>
+                                <option value="512 GB">512 GB</option>
+
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="equipo_velocidad_memoria_ram">
+                                <i class="fas fa-barcode"></i> <strong>Velocidad Memoria Ram</strong>
+                            </label>
+                            <input type="text" name="equipo_velocidad_memoria_ram" id="equipo_velocidad_memoria_ram"
                                 class="form-control">
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 mb-3">
+                            <label for="equipo_tipo_procesador">
+                                <i class="fas fa-hdd"></i> <strong> Tipos de procesadores</strong>
+                            </label>
+                            <select name="equipo_tipo_procesador" id="equipo_tipo_procesador" class="form-control">
+                                <option value="">Seleccione el procesador</option>
+                                <option value="IntelCore">Intel Core</option>
+                                <option value="AMD Ryzen">AMD Ryzen</option>
+                                <option value="IntelXeon">Intel Xeon</option>
+                                <option value="ARM">ARM</option>
+                                <option value="Snapdragon">Qualcomm Snapdragon</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="equipo_velocidad_procesador">
+                                <i class="fas fa-hdd"></i> <strong>Velocidad del procesador</strong>
+                            </label>
+                            <select name="equipo_velocidad_procesador" id="equipo_velocidad_procesador"
+                                class="form-control">
+                                <option value="">Seleccione la velocidad</option>
+                                <option value="2.0 GHz">2.0 GHz</option>
+                                <option value="2.5 GHz">2.5 GHz</option>
+                                <option value="3.0 GHz">3.0 GHz</option>
+                                <option value="3.5 GHz">3.5 GHz</option>
+                                <option value="4.0 GHz">4.0 GHz</option>
+                                <option value="4.5 GHz">4.5 GHz</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="equipo_targeta_red">
+                                <i class="fas fa-hdd"></i> <strong>Tipos de tarjetas de red</strong>
+                            </label>
+                            <select name="equipo_targeta_red" id="equipo_targeta_red" class="form-control">
+                                <option value="">Seleccione la tarjeta de red</option>
+                                <option value="Integrada">Integrada</option>
+                                <option value="PSI">PSI</option>
+                                <option value="USB">USB</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
                             <label for="equipo_lector_cd">
                                 <i class="fas fa-compact-disc"></i> <strong>Lector CD</strong>
                             </label>
@@ -393,7 +496,7 @@
                                 <option value="NO">NO</option>
                             </select>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label for="equipo_tarjeta_sonido">
                                 <i class="fas fa-volume-up"></i> <strong>Tarjeta de Sonido</strong>
                             </label>
@@ -499,112 +602,196 @@
                 <form id="formularioDatos" class="datos-form">
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="equipo_fecha_entrega" class="titulo-nombre">Fecha de Ingreso:</label>
-                            <input type='date' id='equipo_fecha_entrega' class="form-control resaltar-rojo" readonly value="">
+                            <label for="equipo_fecha_entrega" class="titulo-nombre"><strong>Fecha de Ingreso:</strong></label>
+                            <input type='date' id='equipo_fecha_entrega' class="form-control resaltar-rojo" readonly
+                                value="">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="equipo_oficio1" class="titulo-nombre">Número de Oficio:</label>
+                            <label for="equipo_oficio1" class="titulo-nombre"><strong>Número de Oficio:</strong></label>
                             <input type='text' id='equipo_oficio1' class="form-control resaltar-rojo" readonly value="">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="equipo_usuario_cat_entrega">Catálogo del Usuario:</label>
-                            <input type='number' id='equipo_usuario_cat_entrega' class="form-control resaltar-rojo" readonly 
+                            <label for="equipo_usuario_cat_entrega"><strong>Catálogo del Usuario:</strong></label>
+                            <input type='number' id='equipo_usuario_cat_entrega' class="form-control resaltar-rojo"
+                                readonly value="">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="equipo_usuario_nombre1" class="titulo-nombre"><strong>Nombres y Apellidos del
+                                Usuario:</strong></label>
+                            <input type='text' id='equipo_usuario_nombre1' class="form-control resaltar-rojo" readonly
+                                value="">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="equipo_usuario_numero"><strong>Número de teléfono del Usuario:</strong></label>
+                            <input type='number' id='equipo_usuario_numero' class="form-control resaltar-rojo" readonly
+                                value="">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="equipo_dependencia1"><strong>Dependencia del Equipo:</strong></label>
+                            <input type='text' id='equipo_dependencia1' class="form-control resaltar-rojo" readonly
                                 value="">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="equipo_usuario_nombre1" class="titulo-nombre">Nombres y Apellidos del
-                                Usuario:</label>
-                            <input type='text' id='equipo_usuario_nombre1' class="form-control resaltar-rojo" readonly value="">
+                            <label for="equipo_tecnico_catalogo"><strong>Catálogo del Técnico:</strong></label>
+                            <input type='number' id='equipo_tecnico_catalogo' class="form-control resaltar-rojo"
+                                readonly value="">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="equipo_usuario_numero">Número de teléfono del Usuario:</label>
-                            <input type='number' id='equipo_usuario_numero' class="form-control resaltar-rojo" readonly value="">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="equipo_dependencia1">Dependencia del Equipo:</label>
-                            <input type='text' id='equipo_dependencia1' class="form-control resaltar-rojo" readonly value="">
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label for="equipo_tecnico_catalogo">Catálogo del Técnico:</label>
-                            <input type='number' id='equipo_tecnico_catalogo' class="form-control resaltar-rojo" readonly 
+                            <label for="equipo_tecnico_nombre1" class="titulo-nombre"><strong>Nombres y Apellidos del
+                                Técnico:</strong></label>
+                            <input type='text' id='equipo_tecnico_nombre1' class="form-control resaltar-rojo" readonly
                                 value="">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="equipo_tecnico_nombre1" class="titulo-nombre">Nombres y Apellidos del
-                                Técnico:</label>
-                            <input type='text' id='equipo_tecnico_nombre1' class="form-control resaltar-rojo" readonly value="">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="equipo_con_cable" class="titulo-nombre">Equipo con cable:</label>
-                            <input type='text' id='equipo_con_cable1' class="form-control resaltar-rojo" readonly value="">
+                            <label for="equipo_con_cable" class="titulo-nombre"><strong>Equipo con cable:</strong></label>
+                            <input type='text' id='equipo_con_cable1' class="form-control resaltar-rojo" readonly
+                                value="">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="equipo_serial1" class="titulo-nombre">Serie del Equipo:</label>
+                            <label for="equipo_serial1" class="titulo-nombre"><strong>Serie del Equipo:</strong></label>
                             <input type='text' id='equipo_serial1' class="form-control resaltar-rojo" readonly value="">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="equipo_modelo1" class="titulo-nombre">Modelo del Equipo:</label>
+                            <label for="equipo_modelo1" class="titulo-nombre"><strong>Modelo del Equipo:</strong></label>
                             <input type='text' id='equipo_modelo1' class="form-control resaltar-rojo" readonly value="">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="equipo_marca1" class="titulo-nombre">Marca del Equipo:</label>
-                            <input type='number' id='equipo_marca1' class="form-control resaltar-rojo" readonly value="">
+                            <label for="equipo_marca1" class="titulo-nombre"><strong>Marca del Equipo:</strong></label>
+                            <input type='number' id='equipo_marca1' class="form-control resaltar-rojo" readonly
+                                value="">
                         </div>
                     </div>
 
                     <div class="form-row">
-                    <div class="form-group col-md-6">
-                            <label for="equipo_motivo1">Motivo de Ingreso:</label>
+                        <div class="form-group col-md-6">
+                            <label for="equipo_motivo1"><strong>Motivo de Ingreso:</strong></label>
                             <input type='text' id='equipo_motivo1' class="form-control resaltar-rojo" readonly value="">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="equipo_descripcion1" class="titulo-nombre">Descripción del Equipo:</label>
-                            <input type='text' id='equipo_descripcion1' class="form-control resaltar-rojo" readonly value="">
+                            <label for="equipo_descripcion1" class="titulo-nombre"><strong>Descripción del Equipo:</strong></label>
+                            <input type='text' id='equipo_descripcion1' class="form-control resaltar-rojo" readonly
+                                value="">
                         </div>
                     </div>
 
                     <div class="form-row detalleCPU">
                         <div class="form-group col-md-4">
-                            <label for="equipo_lector_cd1" class="titulo-nombre">Lector de CD:</label>
-                            <input type='text' id='equipo_lector_cd1' class="form-control resaltar-rojo" readonly value="">
+                            <label for="equipo_lector_cd1" class="titulo-nombre"><strong>Lector de CD:</strong></label>
+                            <input type='text' id='equipo_lector_cd1' class="form-control resaltar-rojo" readonly
+                                value="">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="equipo_tarjeta_sonido1" class="titulo-nombre">Tarjeta de Sonido:</label>
-                            <input type='text' id='equipo_tarjeta_sonido1' class="form-control resaltar-rojo" readonly value="">
+                            <label for="equipo_tarjeta_sonido1" class="titulo-nombre"><strong>Tarjeta de Sonido:</strong></label>
+                            <input type='text' id='equipo_tarjeta_sonido1' class="form-control resaltar-rojo" readonly
+                                value="">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="equipo_drivers1" class="titulo-nombre">Drivers:</label>
-                            <input type='text' id='equipo_drivers1' class="form-control resaltar-rojo" readonly value="">
+                            <label for="equipo_drivers1" class="titulo-nombre"><strong>Drivers:</strong></label>
+                            <input type='text' id='equipo_drivers1' class="form-control resaltar-rojo" readonly
+                                value="">
                         </div>
                     </div>
 
-                    <div class="form-row detalleCPU" >
-                        <div class="form-group col-md-4" >
-                            <label for="equipo_tarjeta_grafica1" class="titulo-nombre">Tarjeta Gráfica:</label>
-                            <input type='text' id='equipo_tarjeta_grafica1' class="form-control resaltar-rojo" readonly value="">
+                    <div class="form-row detalleCPU">
+                        <div class="form-group col-md-6">
+                            <label for="equipo_tarjeta_grafica1" class="titulo-nombre"><strong>Tarjeta Gráfica:</strong></label>
+                            <input type='text' id='equipo_tarjeta_grafica1' class="form-control resaltar-rojo" readonly
+                                value="">
                         </div>
-                        <div class="form-group col-md-4">
-                            <label for="equipo_fuente_poder1" class="titulo-nombre">Fuente de Poder:</label>
-                            <input type='text' id='equipo_fuente_poder1' class="form-control resaltar-rojo" readonly value="">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="equipo_almacenamiento1" class="titulo-nombre">Almacenamiento del Equipo:</label>
-                            <input type='text' id='equipo_almacenamiento1' class="form-control resaltar-rojo" readonly value="">
+                        <div class="form-group col-md-6">
+                            <label for="equipo_fuente_poder1" class="titulo-nombre"><strong>Fuente de Poder:</strong></label>
+                            <input type='text' id='equipo_fuente_poder1' class="form-control resaltar-rojo" readonly
+                                value="">
                         </div>
                     </div>
+
+                    <div class="form-row detalleCPU mb-3">
+                        <div class="col-md-6">
+                            <label for="equipo_tipo_disco_duro1">
+                                <strong> Tipos de Disco Duro</strong>
+                            </label>
+                            <input type="text" name="equipo_tipo_disco_duro1" id="equipo_tipo_disco_duro1"
+                                class="form-control" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="equipo_capacidad_disco_duro1">
+                                <strong> Capacidad de Disco Duro</strong>
+                            </label>
+                            <input type="text" name="equipo_capacidad_disco_duro1" id="equipo_capacidad_disco_duro1"
+                                class="form-control" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-row detalleCPU mb-3">
+                        <div class="col-md-4">
+                            <label for="equipo_tipo_memoria_ram1">
+                                <strong> Tipos de Memoria Ram</strong>
+                            </label>
+                            <input type="text" name="equipo_tipo_memoria_ram1" id="equipo_tipo_memoria_ram1"
+                                class="form-control" readonly>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="equipo_capacidad_memoria_ram1">
+                                <strong> Capacidad de Memoria Ram</strong>
+                            </label>
+                            <input type="text" name="equipo_capacidad_memoria_ram1" id="equipo_capacidad_memoria_ram1"
+                                class="form-control" readonly>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="equipo_velocidad_memoria_ram1">
+                                <strong>Velocidad Memoria Ram</strong>
+                            </label>
+                            <input type="text" name="equipo_velocidad_memoria_ram1" id="equipo_velocidad_memoria_ram1"
+                                class="form-control" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-row detalleCPU mb-3">
+                        <div class="col-md-4">
+                            <label for="equipo_tipo_procesador1">
+                                <strong> Tipos de procesadores</strong>
+                            </label>
+                            <input type="text" name="equipo_tipo_procesador1" id="equipo_tipo_procesador1"
+                                class="form-control" readonly>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="equipo_velocidad_procesador1">
+                                <strong>Velocidad del procesador</strong>
+                            </label>
+                            <input type="text" name="equipo_velocidad_procesador1" id="equipo_velocidad_procesador1"
+                                class="form-control" readonly>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="equipo_targeta_red1">
+                                <strong>Tipos de tarjetas de red</strong>
+                            </label>
+                            <input type="text" name="equipo_targeta_red1" id="equipo_targeta_red1" class="form-control"
+                                readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-row detalleImpresora mb-3">
+                        <div class="col-md-4">
+                            <label for="equipo_tipo_impresora1">
+                                <strong>tipo de impresora</strong>
+                            </label>
+                            <input type="text" name="equipo_tipo_impresora1" id="equipo_tipo_impresora1"
+                                class="form-control" readonly>
+                        </div>
+                    </div>
+
                 </form>
             </div>
         </div>
-
 
 
         <div class="container">

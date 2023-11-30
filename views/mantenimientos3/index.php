@@ -1,12 +1,14 @@
 <h1 class="text-center">HISTORIAL DE EQUIPOS ENTREGADOS Y REPARADOS</h1>
 <div class="row justify-content-center mb-5">
-    <form class="col-lg-8 border bg-light p-3" id="formularioMantenimiento3">
+    <form class="col-lg-8 border bg-light p-3" id="formularioMantenimiento3"
+        style=" box-shadow: 0 4px 8px rgba(0, 128, 255, 0.3), 0 6px 20px rgba(0, 0, 0, 0.1);">
         <div class="row mb-3">
             <div class="col">
                 <label for="tipo_equipo">
                     <i class="fas fa-puzzle-piece"></i> <strong>EQUIPOS ENTREGADOS Y REPARADOS</strong>
                 </label>
-                <select name="tipo_equipo" id="tipo_equipo" class="form-control">
+                <select name="tipo_equipo" id="tipo_equipo" class="form-control"
+                    style=" box-shadow: 0 4px 8px rgba(0, 128, 255, 0.3), 0 6px 20px rgba(0, 0, 0, 0.1);">
                     <option value="">Selecione tipo de equipo...</option>
                     <?php foreach ($TipoEquipo as $TipoEquipo): ?>
                         <option value="<?= $TipoEquipo['tipo_equipo_codigo'] ?>">
@@ -18,15 +20,19 @@
         </div>
         <div class="row mb-3">
             <div class="col">
-                <button type="button" id="btnBuscar" class="btn btn-info w-100">BUSCAR</button>
+                <button type="button" id="btnBuscar" class="btn btn-info w-100"
+                    style=" box-shadow: 0 4px 8px rgba(0, 128, 255, 0.3), 0 6px 20px rgba(0, 0, 0, 0.1);">BUSCAR</button>
             </div>
         </div>
     </form>
 </div>
 
 <div class="row justify-content-center">
-    <div class="col table-responsive" style="max-width: 80%; padding: 10px;">
-        <table id="tablaEquipos2" class="table table-bordered table-hover">
+    <div class="col table-responsive"
+        style="max-width: 90%; padding: 20px; background-color: #f8f9fa; box-shadow: 0 4px 8px rgba(0, 128, 255, 0.3), 0 6px 20px rgba(0, 0, 0, 0.1); margin-top: 20px;"
+        style="max-width: 80%; padding: 10px;">
+        <table id="tablaEquipos2" class="container p-4 shadow-lg style, table table-bordered table-hover"
+            style="width: 100%; border-collapse:collapse;">
         </table>
     </div>
 </div>
@@ -65,7 +71,8 @@
                                 </div>
                                 <div class="col">
                                     <label for="usuario_nombre">NOMBRES DEL USUARIO</label>
-                                    <input type="text" name="usuario_nombre" id="usuario_nombre" class="form-control" readonly>
+                                    <input type="text" name="usuario_nombre" id="usuario_nombre" class="form-control"
+                                        readonly>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -76,7 +83,8 @@
                                 </div>
                                 <div class="col">
                                     <label for="tecnico_nombre">NOMBRES DEL TÉCNICO</label>
-                                    <input type="text" name="tecnico_nombre" id="tecnico_nombre" class="form-control" readonly>
+                                    <input type="text" name="tecnico_nombre" id="tecnico_nombre" class="form-control"
+                                        readonly>
                                 </div>
                             </div>
 
@@ -96,4 +104,3 @@
 
 
 <script src="<?= asset('./build/js/mantenimiento3/index.js') ?>"></script>
-

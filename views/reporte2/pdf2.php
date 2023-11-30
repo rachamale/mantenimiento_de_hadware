@@ -138,51 +138,51 @@
 
 
     <div class="container">
-        <h1>FORMULARIO DE ENTREGA DE EQUIPO</h1>
+        <h1>FORMULARIO DE RECEPCIÓN DE EQUIPO PARA REPARACIÓN</h1>
         <table class="table table-bordered table-striped">
             <tbody>
                 <tr>
                     <td class="data-label">FECHA:</td>
                     <td colspan="2">
-                        <?= $equipo['fecha'] ?>
+                        <?= $solicitud['fecha'] ?>
                     </td>
                     <td class="data-label">REGISTRO:</td>
                     <td colspan="2">
-                        <?= $equipo['registro'] ?>
+                        <?= $solicitud['registro'] ?>
                     </td>
                 </tr>
                 <tr>
                     <th colspan="6">OFICIO:
-                        <?= $equipo['oficio'] ?>
+                        <?= $solicitud['oficio'] ?>
                     </th>
                 </tr>
                 <tr>
                     <td class="data-label">CATÁLOGO DEL USUARIO:</td>
                     <td>
-                        <?= $equipo['catalogo_usuario'] ?>
+                        <?= $solicitud['catalogo_usuario'] ?>
                     </td>
                     <td class="data-label">NOMBRE DEL USUARIO:</td>
                     <td>
-                        <?= $equipo['usuario'] ?>
+                        <?= $solicitud['usuario'] ?>
                     </td>
                     <td class="data-label">TELÉFONO:</td>
                     <td>
-                        <?= $equipo['telefono'] ?>
+                        <?= $solicitud['telefono'] ?>
                     </td>
                 </tr>
                 <tr>
                     <th colspan="6">DEPENDENCIA:
-                        <?= $equipo['dependencia'] ?>
+                        <?= $solicitud['dependencia'] ?>
                     </th>
                 </tr>
                 <tr>
                     <td class="data-label">CATÁLOGO DEL TÉCNICO ENTREGA:</td>
                     <td colspan="2">
-                        <?= $equipo['catalogo_tecnico'] ?>
+                        <?= $solicitud['catalogo_tecnico'] ?>
                     </td>
                     <td class="data-label">NOMBRES DEL TÉCNICO:</td>
                     <td colspan="2">
-                        <?= $equipo['tecnico'] ?>
+                        <?= $solicitud['tecnico'] ?>
                     </td>
                 </tr>
                 <tr class="center-row">
@@ -191,21 +191,21 @@
                 <tr>
                     <td class="data-label">MARCA:</td>
                     <td>
-                        <?= $equipo['marca'] ?>
+                        <?= $solicitud['marca'] ?>
                     </td>
                     <td class="data-label">MODELO:</td>
                     <td>
-                        <?= $equipo['modelo'] ?>
+                        <?= $solicitud['modelo'] ?>
                     </td>
                     <td class="data-label">No. DE SERIE:</td>
                     <td>
-                        <?= $equipo['serie'] ?>
+                        <?= $solicitud['serie'] ?>
                     </td>
                 </tr>
                 <tr>
-                    <td class="data-label">TRABAJO REALIZADO:</td>
+                    <td class="data-label">TIPO DE EQUIPO:</td>
                     <td colspan="6">
-                        <?= $equipo['trabajo'] ?>
+                        <?= $solicitud['tipo_equipo'] ?>
                     </td>
                 </tr>
             </tbody>
@@ -226,11 +226,11 @@
                 <tr>
                     <td class="data-label">ENTREGA:</td>
                     <td colspan="2">
-                        <?= $equipo['usuario'] ?>
+                        <?= $solicitud['usuario'] ?>
                     </td>
                     <td class="data-label">RECIBE:</td>
                     <td colspan="2">
-                        <?= $equipo['tecnico'] ?>
+                        <?= $solicitud['tecnico'] ?>
                     </td>
                 </tr>
 
@@ -242,75 +242,75 @@
         <hr class="hr-divider">
         <br><br><br>
 
-        <h1>FORMULARIO DE ENTREGA DE EQUIPO</h1>
+        <h1>FORMULARIO DE RECEPCIÓN DE EQUIPO PARA REPARACIÓN</h1>
 
         <table class="table table-bordered table-striped">
             <tbody>
                 <tr>
                     <td class="data-label">FECHA:</td>
                     <td colspan="2">
-                        <?= $equipo['fecha'] ?>
+                        <?= $solicitud['fecha'] ?>
                     </td>
                     <td class="data-label">REGISTRO:</td>
                     <td colspan="2">
-                        <?= $equipo['registro'] ?>
+                        <?= $solicitud['registro'] ?>
                     </td>
                 </tr>
                 <tr>
                     <th colspan="6">Oficio:
-                        <?= $equipo['oficio'] ?>
+                        <?= $solicitud['oficio'] ?>
                     </th>
                 </tr>
                 <tr>
                     <td class="data-label">CATÁLOGO DEL USUARIO:</td>
                     <td>
-                        <?= $equipo['catalogo_usuario'] ?>
+                        <?= $solicitud['catalogo_usuario'] ?>
                     </td>
                     <td class="data-label">NOMBRE DEL USUARIO:</td>
                     <td>
-                        <?= $equipo['usuario'] ?>
+                        <?= $solicitud['usuario'] ?>
                     </td>
                     <td class="data-label">TELÉFONO:</td>
                     <td>
-                        <?= $equipo['telefono'] ?>
+                        <?= $solicitud['telefono'] ?>
                     </td>
                 </tr>
                 <tr>
                     <th colspan="6">DEPENDENCIA:
-                        <?= $equipo['dependencia'] ?>
+                        <?= $solicitud['dependencia'] ?>
                     </th>
                 </tr>
                 <tr>
                     <td class="data-label">CATÁLOGO DEL TÉCNICO ENTREGA:</td>
                     <td colspan="2">
-                        <?= $equipo['catalogo_tecnico'] ?>
+                        <?= $solicitud['catalogo_tecnico'] ?>
                     </td>
                     <td class="data-label">NOMBRE DEL TÉCNICO:</td>
                     <td colspan="2">
-                        <?= $equipo['tecnico'] ?>
+                        <?= $solicitud['tecnico'] ?>
                     </td>
                 </tr>
                 <tr class="center-row">
-                    <th colspan="6">CARACTERISTICAS DEL EQUIPO</th>
+                    <th colspan="6">CARACTERISTICAS DEL EQUIP </th>
                 </tr>
                 <tr>
                     <td class="data-label">MARCA:</td>
                     <td>
-                        <?= $equipo['marca'] ?>
+                        <?= $solicitud['marca'] ?>
                     </td>
                     <td class="data-label">MODELO:</td>
                     <td>
-                        <?= $equipo['modelo'] ?>
+                        <?= $solicitud['modelo'] ?>
                     </td>
                     <td class="data-label">NO. DE SERIE:</td>
                     <td>
-                        <?= $equipo['serie'] ?>
+                        <?= $solicitud['serie'] ?>
                     </td>
                 </tr>
                 <tr>
-                    <td class="data-label">TRABAJO REALIZADO:</td>
+                    <td class="data-label">TIPO DE EQUIPO:</td>
                     <td colspan="6">
-                        <?= $equipo['trabajo'] ?>
+                        <?= $solicitud['tipo_equipo'] ?>
                     </td>
                 </tr>
             </tbody>
@@ -331,11 +331,11 @@
                 <tr>
                     <td class="data-label">ENTREGA:</td>
                     <td colspan="2">
-                        <?= $equipo['usuario'] ?>
+                        <?= $solicitud['usuario'] ?>
                     </td>
                     <td class="data-label">RECIBE:</td>
                     <td colspan="2">
-                        <?= $equipo['tecnico'] ?>
+                        <?= $solicitud['tecnico'] ?>
                     </td>
                 </tr>
 

@@ -13,6 +13,7 @@ module.exports = {
     'js/mantenimiento/index' : './src/js/mantenimiento/index.js',
     'js/mantenimiento2/index' : './src/js/mantenimiento2/index.js',
     'js/mantenimiento3/index' : './src/js/mantenimiento3/index.js',
+    'js/estadisticas/index' : './src/js/estadisticas/index.js',
     // 'js/reporte/index' : './src/js/reporte/index.js',
   },
   output: {

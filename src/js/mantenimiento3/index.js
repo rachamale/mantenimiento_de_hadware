@@ -69,6 +69,10 @@ const datatable = new DataTable('#tablaEquipos2', {
             data: 'descripcion'
         },
         {
+            title: 'TRABAJO REALIZADO',
+            data: 'rep_descripcion'
+        },
+        {
             title: 'DEPENDENCIA',
             data: 'dependencia'
         },
@@ -141,7 +145,7 @@ const pdf = async (e) => {
     e.preventDefault()
     const button = e.target;
     const id = button.dataset.codigo;
-    if (await confirmacion('warning', 'Desea imprimir comprobante?')) {
+    if (await confirmacion('question', 'Desea imprimir comprobante?')) {
         const url = `/mantenimiento_de_hardware/pdf?equipo_codigo=${id}`;
         const headers = new Headers();
         headers.append("X-Requested-With", "fetch");

@@ -6,6 +6,7 @@ use Exception;
 use Model\Entrega;
 use Model\Equipo;
 use Model\Solicitud;
+use Model\Reparacion;
 use Model\Personal;
 use Model\TipoEquipo; // Cambio de "equipo" a "Equipo"
 use MVC\Router;
@@ -43,6 +44,8 @@ class Mantenimiento2Controller
             $sql = "SELECT
                         e.equipo_codigo AS EQUIPO_CODIGO,
                         s.sol_fecha AS FECHA,
+                        r.rep_codigo AS REPARACION_CODIGO,
+                        r.rep_notificacion AS NOTIFICACION,
                         trim(per.per_nom1) ||' '||trim(per.per_nom2)||' '||trim(per.per_ape1)||' '||trim(per.per_ape2) AS NOMBRE_USUARIO,
                         trim(per2.per_nom1) ||' '||trim(per2.per_nom2)||' '||trim(per2.per_ape1)||' '||trim(per2.per_ape2) AS NOMBRE_TECNICO,
                         s.sol_usuario_telefono AS TELEFONO_USUARIO,
@@ -57,6 +60,7 @@ class Mantenimiento2Controller
                     LEFT JOIN mper per ON per.per_catalogo = s.sol_usuario_catalogo
                     LEFT JOIN mper per2 ON per2.per_catalogo = s.sol_tecnico_catalogo
                     LEFT JOIN m_tipo_equipo te ON te.tipo_equipo_codigo=e.equipo_tipo
+                    INNER JOIN m_reparacion r on r.rep_equipo_codigo = e.equipo_codigo
                     WHERE e.equipo_estado = 2";
             if ($tipo_equipo != "") {
                 $sql .= " and te.tipo_equipo_codigo = $tipo_equipo";
@@ -168,6 +172,33 @@ class Mantenimiento2Controller
         } catch (Exception $e) {
 
             $entrega::SQL("DELETE m_entrega WHERE rep_codigo = $id_resultado_entrega");
+            echo json_encode([
+                'detalle' => $e->getMessage(),
+                'mensaje' => 'Ocurrió un error',
+                'codigo' => 0
+            ]);
+        }
+    }
+
+    public static function agregarNotificaciones() {
+        try {
+            $reperacion_codigo = $_POST['rep_codigo']; // Cambio de columna
+            $Reperacion = Reparacion::find($reperacion_codigo); // Cambio de Modelo
+            $Reperacion->rep_notificacion = $_POST['rep_notificacion'];; // Cambio de columna
+            $resultado = $Reperacion->actualizar();
+
+            if ($resultado['resultado'] == 1) {
+                echo json_encode([
+                    'mensaje' => 'Observación agregado correctamente',
+                    'codigo' => 1
+                ]);
+            } else {
+                echo json_encode([
+                    'mensaje' => 'Ocurrió un error',
+                    'codigo' => 0
+                ]);
+            }
+        } catch (Exception $e) {
             echo json_encode([
                 'detalle' => $e->getMessage(),
                 'mensaje' => 'Ocurrió un error',

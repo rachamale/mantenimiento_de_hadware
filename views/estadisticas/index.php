@@ -111,7 +111,6 @@
     </div>
 </div>
 
-
 <body>
     <div class="container">
         <h1 class="reporte-titulo">ESTADISTICAS DE MANTENIMIENTO DE SOFTWARE</h1>

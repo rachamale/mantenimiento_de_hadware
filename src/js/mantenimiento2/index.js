@@ -79,8 +79,45 @@ const datatable = new DataTable('#tablaEquipos2', {
         },
         {
             title: 'ESTADO',
-            data: 'estado'
+            data: 'estado',
+            render: function (data, type, row) {
+                if (type === 'display') {
+                    if (data === "LISTO PARA ENTREGAR") {
+                        const currentDate = new Date(); // Obtener la fecha actual
+                        const fechaEquipo = new Date(row.fecha); // Supongamos que 'equi_his_fecha' es la propiedad que contiene la fecha del historial del equipo
+                        const diffInDays = Math.floor((currentDate - fechaEquipo) / (1000 * 60 * 60 * 24)); // Diferencia en días
+
+                        // Verificar si el equipo ha estado en el estado 1 por más de un día
+                        if (diffInDays > 1) {
+                            // Puedes personalizar el mensaje de la alerta según tus necesidades
+                            Swal.fire({
+                                icon: 'info',
+                                text: "¡Alerta! ¿hay equipos listos para entregar que tiene mas de un dia.",
+                                timer: 0,
+                                showConfirmButton: true
+                            });
+                            return `
+                    <div>
+                        <img src="./images/alerta.png" alt="Ícono Formulario" class="menu-icon" style="width: 1cm; height: 1cm;"> 
+                        <span>ALERTA</span>
+                    </div>
+                    <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 66.66%;" aria-valuenow="66.66" aria-valuemin="0" aria-valuemax="100">66.66%</div>
+                    </div>`;
+                        } else {
+                            return `
+                            <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 66.66%;" aria-valuenow="66.66" aria-valuemin="0" aria-valuemax="100">66.66%</div>
+                        </div>`;
+                        }
+                    }
+                }
+
+
+                return data;
+            }
         },
+
         {
             title: "NOTIFICACIÓN",
             data: 'reparacion_codigo',
@@ -446,7 +483,7 @@ const agregarNotificaciones = async (e) => {
             const respuesta = await fetch(url, config);
             const data = await respuesta.json();
             console.log(data)
-            
+
             const { codigo, mensaje, detalle } = data;
             let icon = 'info';
 

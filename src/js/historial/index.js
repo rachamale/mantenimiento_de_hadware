@@ -1,5 +1,4 @@
 
-import { Dropdown } from "bootstrap";
 import Swal from "sweetalert2";
 import DataTable from "datatables.net-bs5";
 import { lenguaje } from "../lenguaje";
@@ -10,9 +9,7 @@ const fechaInicioInput = document.getElementById('fechaInicio');
 const fechaFinInput = document.getElementById('fechaFin');
 
 const btnPdf = document.getElementById('btnPdf');
-
 let contador = 1;
-
 const datatable = new DataTable('#tablaHistorial', {
     language: lenguaje,
     data: null,
@@ -21,57 +18,45 @@ const datatable = new DataTable('#tablaHistorial', {
             title: 'NO',
             render: () => contador++
         },
+        { title: 'FECHA', data: 'equi_his_fecha' },
+        { title: 'OFICIO', data: 'equipo_oficio' },
+        { title: 'DESCRIPCION', data: 'equipo_estado_descripcion' },
+        { title: 'TIPO_DE_EQUIPO', data: 'tipo_equipo_descripcion' },
+        { title: 'DEPENDENCIA', data: 'dep_desc_lg' },
+        { title: 'CAT_USU_ENTREGO', data: 'sol_usuario_catalogo' },
+        { title: 'CAT_TEC_RECIBE', data: 'sol_tecnico_catalogo' },
+        { title: 'CAT_TECNICO_REPARO', data: 'rep_tecnico_catalogo' },
+        { title: 'CAT_USU_RECIBE', data: 'ent_usuario_catalogo' },
+        { title: 'CAT_TEC_ENTREGA', data: 'ent_tecnico_catalogo' },
         {
-            title: 'FECHA',
-            data: 'equi_his_fecha'
-        },
-        {
-            title: 'OFICIO',
-            data: 'equipo_oficio'
-        },
-        {
-            title: 'DESCRIPCION',
-            data: 'equipo_estado_descripcion'
-        },
-        {
-            title: 'TIPO_DE_EQUIPO',
-            data: 'tipo_equipo_descripcion'
-        },
-        {
-            title: 'DEPENDENCIA',
-            data: 'dep_desc_lg'
-        },
-        {
-            title: 'CAT_USU_ENTREGO',
-            data: 'sol_usuario_catalogo'
-        },
-        {
-            title: 'CAT_TEC_RECIBE',
-            data: 'sol_tecnico_catalogo'
-        },
-        {
-            title: 'CAT_TECNICO_REPARO',
-            data: 'rep_tecnico_catalogo'
-        },
-        {
-            title: 'CAT_USU_RECIBE',
-            data: 'ent_usuario_catalogo'
-        },
-        {
-            title: 'CAT_TEC_ENTREGA',
-            data: 'ent_tecnico_catalogo'
-        },
-        // {
-        //     title: "HISTORIAL",
-        //     data: 'equipo_codigo',
-        //     searchable: false,
-        //     orderable: false,
-        //     render: (data, type, row, meta) => {
-        //         return `<button id="codigo" class="btn btn-success" data-codigo='${data}'> HISTORIAL</button>`;
-        //     }
-        // }
-        
-        
+            title: "PROGRESO",
+            data: 'estado',
+            render: function (data, type, row, meta) {
+                if (type === 'display') {
+                    if (data === "1") {
+
+                        return `<div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                        </div>`;
+                    } else if (data === "2") {
+                        return `<div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                        </div>`;
+                    } else if (data === "3") {
+                        return `<div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
+                        </div>`;
+                    } else if (data === "4") {
+                        return `<div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+                        </div>`;
+                    }                
+                    
+                    return data;
+                }
+                return data;
+            }
+        }
     ]
 });
 

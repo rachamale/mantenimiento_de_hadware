@@ -95,7 +95,6 @@ $router->get('/API/estadisticas/EstadisticaEntregasGeneral', [EstadisticaControl
 $router->get('/API/estadisticas/buscarDatosEquiposPorEstado', [EstadisticaController::class, 'buscarDatosEquiposPorEstado']);
 $router->get('/API/estadisticas/buscarDatosEquiposPorTipo', [EstadisticaController::class, 'buscarDatosEquiposPorTipo']);
 
-
 //HISTORIAL API/historial/buscar
 
 $router->get('/API/historial/buscar', [HistorialController::class, 'buscarAPI']);

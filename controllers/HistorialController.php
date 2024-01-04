@@ -53,7 +53,8 @@ class HistorialController
                         then en.ent_tecnico_catalogo
                         else null
                     END ent_tecnico_catalogo,
-                    dep.dep_desc_lg
+                    dep.dep_desc_lg,
+                    eh.equi_his_estado as estado
                 FROM m_equipo_historial eh
                 INNER JOIN m_equipo_estado ee ON eh.equi_his_estado = ee.equipo_estado_codigo
                 INNER JOIN m_equipo e ON eh.equi_his_codigo_equipo = e.equipo_codigo

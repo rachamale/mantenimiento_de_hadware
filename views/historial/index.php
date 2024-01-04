@@ -6,7 +6,7 @@
         <div class="col-lg-6">
             <div class="card" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 10px; background-color: #f8f9fa;">
                 <div class="card-body">
-                    <h5 class="card-title text-center mb-3" style="color: #007bff;">Estadísticas</h5>
+                    <h5 class="card-title text-center mb-3" style="color: #007bff;">Ingrese Fechas de Historial</h5>
                     <form id="formularioFiltros" class="text-center">
                         <div class="mb-3">
                             <div class="row">
@@ -45,9 +45,9 @@
 
 <div class="row justify-content-center">
     <div class="col table-responsive"
-        style="max-width: 95%; padding: 20px; background-color: #f8f9fa; box-shadow: 0 4px 8px rgba(0, 128, 255, 0.3), 0 6px 20px rgba(0, 0, 0, 0.1); margin-top: 20px;">
+        style="max-width: 98%; padding: 20px; background-color: #f8f9fa; box-shadow: 0 4px 8px rgba(0, 128, 255, 0.3), 0 6px 20px rgba(0, 0, 0, 0.1); margin-top: 20px;">
         <table id="tablaHistorial" class="container p-4 shadow-lg style, table table-bordered table-hover"
-            style="width: 100%; border-collapse: collapse;">
+            style="width: 50%; border-collapse: collapse;">
         </table>
     </div>
 </div>

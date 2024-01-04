@@ -81,15 +81,52 @@ const datatable = new DataTable('#tablaEquipos2', {
         },
         {
             title: 'ESTADO',
-            data: 'estado'
+            data: 'estado',
+            render: function (data, type, row) {
+                if (type === 'display') {
+                    if (data === "EN REPARACION") {
+                        const currentDate = new Date(); // Obtener la fecha actual
+                        const fechaEquipo = new Date(row.fecha); // Supongamos que 'equi_his_fecha' es la propiedad que contiene la fecha del historial del equipo
+                        const diffInDays = Math.floor((currentDate - fechaEquipo) / (1000 * 60 * 60 * 24)); // Diferencia en días
+
+                        // Verificar si el equipo ha estado en el estado 1 por más de un día
+                        if (diffInDays > 1) {
+                            // Puedes personalizar el mensaje de la alerta según tus necesidades
+                            Swal.fire({
+                                icon: 'info',
+                                text: "¡Alerta! ¿hay equipos en reparacion por más de un día y aún no han sido reparados.",
+                                timer: 0,
+                                showConfirmButton: true
+                            });
+                            return `
+                    <div>
+                        <img src="./images/alerta.png" alt="Ícono Formulario" class="menu-icon" style="width: 1cm; height: 1cm;"> 
+                        <span>ALERTA</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 33.33%;" aria-valuenow="33.33" aria-valuemin="0" aria-valuemax="100">33.33%</div>
+                    </div>`;
+                        } else {
+                            return `
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 33.33%;" aria-valuenow="33.33" aria-valuemin="0" aria-valuemax="100">33.33%</div>
+                    </div>`;
+                        }
+                    }
+                }
+
+
+                return data;
+            }
         },
+
         {
             title: "OBSERVACIONES",
             data: 'solicitud_codigo',
             searchable: false,
             orderable: false,
             render: (data, type, row, meta) => {
-                return `<button class='btn-outline-info' data-codigo='${data}'>AGREGAR OBSERVACIÓN</button>`
+                return `<button class='btn-outline-info' data-codigo='${data}'data-codigo2='${row.fecha}'>AGREGAR OBSERVACIÓN</button>`
             }
         },
         {
@@ -98,13 +135,34 @@ const datatable = new DataTable('#tablaEquipos2', {
             searchable: false,
             orderable: false,
             render: (data, type, row, meta) => {
-                console.log(data) 
+                console.log(data)
                 return `<button class='btn btn-success btn-detalle-codigo' data-codigo='${data}'>FINALIZAR</button>`
             }
         }
     ]
 
 });
+
+
+// if (type === 'display') {
+//     if (data === "1") {
+//         const currentDate = new Date(); // Obtener la fecha actual
+//         const fechaEquipo = new Date(row.equi_his_fecha); // Supongamos que 'equi_his_fecha' es la propiedad que contiene la fecha del historial del equipo
+//         const diffInDays = Math.floor((currentDate - fechaEquipo) / (1000 * 60 * 60 * 24)); // Diferencia en días
+
+//         if (diffInDays > 1) { // Verificar si el equipo ha estado en el estado 1 por más de un día
+//             // Puedes personalizar el mensaje de la alerta según tus necesidades
+//             Swal.fire({
+//                 icon: 'info',
+//                 text: "¡Alerta! El equipo ha estado en el estado 1 por más de un día.",
+//                 timer: 0, // Set timer to 0 for the alert to stay until manually closed
+//                 showConfirmButton: true
+//             });
+
+//             return `
+//                 <img src="./images/marca.png" alt="Ícono Formulario" class="menu-icon" style="width: 1cm; height: 1cm;"> 
+//                 <span>EN REPARACIÓN</span>
+//                 <div class="progress">
 
 
 const buscar = async () => {
@@ -192,7 +250,7 @@ const guardar = async (e) => {
         const body = new FormData(formularioGuarda);
         body.delete('equipo_tecnico_nombre')
         for (var pair of body.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]); 
+            console.log(pair[0] + ', ' + pair[1]);
         }
 
         const url = '/mantenimiento_de_hardware/API/mantenimientos/guardar';
@@ -263,7 +321,7 @@ datatable.on('click', '.btn-success', (event) => {
     const button = event.target;
     console.log(button.dataset.codigo)
     formularioGuarda.rep_equipo_codigo.value = button.dataset.codigo;
-    
+
     if (event.target.classList.contains('btn-detalle-codigo')) {
         asignarOficialModal.classList.add('show');
         asignarOficialModal.style.display = 'block';
@@ -278,7 +336,7 @@ const modalObservaciones = document.getElementById('modalObservaciones');
 datatable.on('click', '.btn-outline-info', (e) => {
     const button = e.target;
     console.log(button.dataset.codigo)
-     formularioObservacion.sol_codigo.value = button.dataset.codigo;
+    formularioObservacion.sol_codigo.value = button.dataset.codigo;
     // Abre el modal al hacer clic en el botón
     modalObservaciones.classList.add('show');
     modalObservaciones.style.display = 'block';
@@ -314,7 +372,7 @@ const agregarObservacion = async (e) => {
         formularioObservacion.o
         const body = new FormData(formularioObservacion);
 
-        for(var pair of body.entries()){
+        for (var pair of body.entries()) {
             console.log(pair[0], pair[1]);
         }
         const url = '/mantenimiento_de_hardware/API/mantenimientos/observacion';
